@@ -11,7 +11,7 @@ namespace WinFormsMatchingGame
         {
             InitializeComponent();
 
-            dataGridView.AccessibilityObject.Name = "Content for matching";
+            dataGridView.AccessibilityObject.Name = "Cards for matching";
 
             dataGridView.RowHeadersVisible = false;
             dataGridView.ColumnHeadersVisible = false;
@@ -19,6 +19,9 @@ namespace WinFormsMatchingGame
             dataGridView.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dataGridView.AllowUserToAddRows = false;
             dataGridView.ShowCellToolTips = false;
+
+            // Todo: Should the grid be declared as ReadOnly here?
+            //dataGridView.ReadOnly = true;
 
             dataGridView.Columns.Add(new DataGridViewButtonColumnWithCustomName());
             dataGridView.Columns.Add(new DataGridViewButtonColumnWithCustomName());
@@ -83,9 +86,21 @@ namespace WinFormsMatchingGame
             {
                 get
                 {
-                    // Add the custom accessible name, and follow that with the row information.
                     //return Resources.ResourceManager.GetString("ImageColumnAccessibleName") + base.Name;
-                    return "Unknown";
+                    return "Face down";
+                }
+            }
+
+            public override string Value 
+            {
+                get
+                {
+                    // The Name will contain all the data of interest to the customer.
+                    return null;
+                }
+                set
+                {
+
                 }
             }
 
