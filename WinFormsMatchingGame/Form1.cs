@@ -18,22 +18,22 @@ namespace WinFormsMatchingGame
 
             cardMatchingGrid.CardList = new List<Card>()
             {
-                new Card { Name = "A", },
-                new Card { Name = "A", },
-                new Card { Name = "B", },
-                new Card { Name = "B", },
-                new Card { Name = "C", },
-                new Card { Name = "C", },
-                new Card { Name = "D", },
-                new Card { Name = "D", },
-                new Card { Name = "E", },
-                new Card { Name = "E", },
-                new Card { Name = "F", },
-                new Card { Name = "F", },
-                new Card { Name = "G", },
-                new Card { Name = "G", },
-                new Card { Name = "H", },
-                new Card { Name = "H", },
+                new Card { Name = "A", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card1) },
+                new Card { Name = "A", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card1) },
+                new Card { Name = "B", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card2) },
+                new Card { Name = "B", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card2) },
+                new Card { Name = "C", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card3) },
+                new Card { Name = "C", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card3) },
+                new Card { Name = "D", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card4) },
+                new Card { Name = "D", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card4) },
+                new Card { Name = "E", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
+                new Card { Name = "E", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
+                new Card { Name = "F", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card6) },
+                new Card { Name = "F", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card6) },
+                new Card { Name = "G", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card7) },
+                new Card { Name = "G", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card7) },
+                new Card { Name = "H", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card8) },
+                new Card { Name = "H", Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card8) },
             };
 
             cardMatchingGrid.AccessibilityObject.Name = "Cards for matching";
@@ -60,7 +60,45 @@ namespace WinFormsMatchingGame
 
             this.panelCardGrid.Controls.Add(cardMatchingGrid);
 
+            cardMatchingGrid.CellPainting += CardMatchingGrid_CellPainting;
+
             ResizeGridContent();
+        }
+
+        private void CardMatchingGrid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+            var button = (this.cardMatchingGrid.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewButtonCellWithCustomName);
+            if (button.ReadOnly)
+            {
+                var columnCount = cardMatchingGrid.GridDimensions;
+                var index = ((columnCount * e.RowIndex) + e.ColumnIndex);
+                var bmp = cardMatchingGrid.CardList[index].Image;
+
+                var w = bmp.Width;
+                var h = bmp.Height;
+                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+
+                double ratio = Math.Max(
+                    (double)w / (double)e.CellBounds.Width, 
+                    (double)h / (double)e.CellBounds.Height);
+
+                var finalWidth  = (int)(w / ratio) - 4;
+                var finalHeight = (int)(h / ratio) - 4;
+
+                e.Graphics.DrawImage(bmp,
+                    new Rectangle(
+                        e.CellBounds.Left + ((e.CellBounds.Width - finalWidth) / 2),
+                        e.CellBounds.Top + ((e.CellBounds.Height - finalHeight) /2 ),
+                        finalWidth, 
+                        finalHeight),
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    GraphicsUnit.Pixel);
+            }
+
+            e.Handled = true;
         }
 
         private void Grid_SizeChanged(object sender, EventArgs e)
@@ -102,8 +140,6 @@ namespace WinFormsMatchingGame
             if (firstCardInPairAttempt == null)
             {
                 firstCardInPairAttempt = (this.cardMatchingGrid.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewButtonCellWithCustomName);
-                firstCardInPairAttempt.Style.BackColor = Color.Red;
-                
                 firstCardInPairAttempt.ReadOnly = true;
             }
             else 
@@ -122,11 +158,7 @@ namespace WinFormsMatchingGame
                 {
                     this.cardMatchingGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ReadOnly = true;
 
-                    firstCardInPairAttempt.Style.BackColor = Color.Green;
-                    this.cardMatchingGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.Green;
-
                     this.cardMatchingGrid.CardList[index].Matched = true;
-                    var secondIndex = secondCardInPairAttempt.GetCardIndex();
 
                     this.cardMatchingGrid.CardList[index].Matched = true;
                     this.cardMatchingGrid.CardList[firstIndex].Matched = true;
@@ -152,10 +184,8 @@ namespace WinFormsMatchingGame
                 }
                 else
                 {
-                    secondCardInPairAttempt.ReadOnly = true;
-
                     secondCardInPairAttempt = (this.cardMatchingGrid.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewButtonCellWithCustomName);
-                    secondCardInPairAttempt.Style.BackColor = Color.Red;
+                    secondCardInPairAttempt.ReadOnly = true;
 
                     buttonTryAgain.Enabled = true;
                 }
@@ -196,11 +226,12 @@ namespace WinFormsMatchingGame
                 {
                     var button = (this.cardMatchingGrid.Rows[r].Cells[c] as DataGridViewButtonCellWithCustomName);
                     button.ReadOnly = false;
-                    button.Style.BackColor = Color.Gray;
                 }
             }
 
             buttonTryAgain.Enabled = false;
+
+            this.cardMatchingGrid.Refresh();
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -212,14 +243,13 @@ namespace WinFormsMatchingGame
         {
             buttonTryAgain.Enabled = false;
 
-            firstCardInPairAttempt.Style.BackColor = Color.Gray;
-            secondCardInPairAttempt.Style.BackColor = Color.Gray;
-
             firstCardInPairAttempt.ReadOnly = false;
             secondCardInPairAttempt.ReadOnly = false;
 
             firstCardInPairAttempt = null;
             secondCardInPairAttempt = null;
+
+            this.cardMatchingGrid.Refresh();
         }
 
         private void buttonRestartGame_Click(object sender, EventArgs e)
@@ -258,8 +288,8 @@ namespace WinFormsMatchingGame
 
         public int GetCardIndex()
         {
-            var gridDimensions = (this.DataGridView as CardMatchingGrid).GridDimensions;
-            return ((gridDimensions * this.RowIndex) + this.ColumnIndex);
+            var columnCount = (this.DataGridView as CardMatchingGrid).GridDimensions;
+            return ((columnCount * this.RowIndex) + this.ColumnIndex);
         }
 
         protected class DataGridViewButtonCellWithCustomNameAccessibleObject : 
@@ -318,6 +348,7 @@ namespace WinFormsMatchingGame
     public class Card
     {
         public string Name { get; set; }
+        public Bitmap Image { get; set; }
         public bool Matched { get; set; }
     }
 }
