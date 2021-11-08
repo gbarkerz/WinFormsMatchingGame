@@ -53,7 +53,7 @@ namespace WinFormsMatchingGame
             this.buttonTryAgain.Name = "buttonTryAgain";
             this.buttonTryAgain.Size = new System.Drawing.Size(131, 40);
             this.buttonTryAgain.TabIndex = 1;
-            this.buttonTryAgain.Text = "&Try Again";
+            this.buttonTryAgain.Text = "&Next go";
             this.buttonTryAgain.UseVisualStyleBackColor = true;
             this.buttonTryAgain.Click += new System.EventHandler(this.buttonTryAgain_Click);
             // 
@@ -90,7 +90,7 @@ namespace WinFormsMatchingGame
             this.Controls.Add(this.panelCardGrid);
             this.MinimumSize = new System.Drawing.Size(500, 400);
             this.Name = "FormMatchingGame";
-            this.Text = "Accessible Matching Game";
+            this.Text = "Northern England Matching Game";
             this.ResumeLayout(false);
 
         }

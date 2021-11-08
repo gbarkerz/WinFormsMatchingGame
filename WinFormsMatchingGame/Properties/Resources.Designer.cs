@@ -61,6 +61,15 @@ namespace WinFormsMatchingGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Card.
+        /// </summary>
+        internal static string Card {
+            get {
+                return ResourceManager.GetString("Card", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Card1 {
