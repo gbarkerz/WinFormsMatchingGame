@@ -150,8 +150,8 @@ namespace WinFormsMatchingGame
             Rectangle rectCellImage = new Rectangle();
 
             // Is this cell showing an image?
-            var button = (this.cardMatchingGrid.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewButtonCellWithCustomName);
-            if (button.ReadOnly)
+            var card = cardMatchingGrid.GetCardFromRowColumn(e.RowIndex, e.ColumnIndex);
+            if (card.FaceUp)
             {
                 var columnCount = cardMatchingGrid.GridDimensions;
                 var index = ((columnCount * e.RowIndex) + e.ColumnIndex);
@@ -179,7 +179,7 @@ namespace WinFormsMatchingGame
             // Now paint everything but the cell image if there is one.
             e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
-            if (button.ReadOnly)
+            if (card.FaceUp)
             {
                 e.Graphics.Clip = new Region();
 
@@ -222,8 +222,9 @@ namespace WinFormsMatchingGame
                 return;
             }
 
-            // Take no action is the click is on a read-only cell.
-            if (this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex].ReadOnly)
+            // Take no action if the click is on a cell that's already face-up.
+            var card = cardMatchingGrid.GetCardFromRowColumn(rowIndex, columnIndex);
+            if (card.FaceUp)
             {
                 return;
             }
@@ -251,8 +252,8 @@ namespace WinFormsMatchingGame
 
                 if (cardNameFirst == cardNameSecond)
                 {
-                    var card = this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex] as DataGridViewButtonCellWithCustomName;
-                    card .TurnOver(true);
+                    var button = (this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex] as DataGridViewButtonCellWithCustomName);
+                    button.TurnOver(true);
 
                     this.cardMatchingGrid.CardList[index].Matched = true;
 
@@ -265,6 +266,7 @@ namespace WinFormsMatchingGame
                     // Has the game been won?
                     if (GameIsWon())
                     {
+                        // Todo: Localized this.
                         var answer = MessageBox.Show(
                             this,
                             "Congratulations! You won the game in " +
@@ -315,6 +317,7 @@ namespace WinFormsMatchingGame
 
             for (int i = 0; i < this.cardMatchingGrid.CardList.Count; i++)
             {
+                this.cardMatchingGrid.CardList[i].FaceUp = false;
                 this.cardMatchingGrid.CardList[i].Matched = false;
             }
 
@@ -365,6 +368,13 @@ namespace WinFormsMatchingGame
         public int CardCountInPlay { get; set; }
         public Bitmap FaceDownCellImage { get; set; }
 
+        public Card GetCardFromRowColumn(int rowIndex, int columnIndex)
+        {
+            var columnCount = this.GridDimensions;
+            var index = (columnCount * rowIndex) + columnIndex;
+            return this.CardList[index];
+        }
+
         public int GridDimensions
         {
             get
@@ -396,7 +406,8 @@ namespace WinFormsMatchingGame
 
         public void TurnOver(bool FaceUp)
         {
-            ReadOnly = FaceUp;
+            var card = (this.DataGridView as CardMatchingGrid).GetCardFromRowColumn(this.RowIndex, this.ColumnIndex);
+            card.FaceUp = FaceUp;
 
             var button = (this.DataGridView.Rows[this.RowIndex].Cells[this.ColumnIndex] as DataGridViewButtonCellWithCustomName);
             this.DataGridView.InvalidateCell(button);
@@ -434,10 +445,11 @@ namespace WinFormsMatchingGame
                 get
                 {
                     var button = (this.Owner as DataGridViewButtonCellWithCustomName);
-                    var index = button.GetCardIndex();
-                    
-                    string value = button.ReadOnly ?
-                        (this.Owner.DataGridView as CardMatchingGrid).CardList[index].Name :
+                    var card = (this.Owner.DataGridView as CardMatchingGrid).GetCardFromRowColumn(
+                                    button.RowIndex, button.ColumnIndex);
+
+                    string value = card.FaceUp ?
+                        card.Name :
                         Resources.ResourceManager.GetString("FaceDown");
 
                     return value;
@@ -456,7 +468,10 @@ namespace WinFormsMatchingGame
                     var index = button.GetCardIndex();
 
                     // A face down card needs no description.
-                    string description = button.ReadOnly ?
+                    var card = (this.Owner.DataGridView as CardMatchingGrid).GetCardFromRowColumn(
+                                    button.RowIndex, button.ColumnIndex);
+
+                    string description = card.FaceUp ?
                         (this.Owner.DataGridView as CardMatchingGrid).CardList[index].Description :
                         "";
 
@@ -474,6 +489,7 @@ namespace WinFormsMatchingGame
         public string Name { get; set; }
         public string Description { get; set; }
         public Bitmap Image { get; set; }
+        public bool FaceUp { get; set; }
         public bool Matched { get; set; }
     }
 
