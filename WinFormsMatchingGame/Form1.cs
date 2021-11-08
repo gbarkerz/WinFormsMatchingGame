@@ -14,6 +14,10 @@ using WinFormsMatchingGame.Properties;
 // https://www.linkedin.com/pulse/common-approaches-enhancing-programmatic-your-win32-winforms-barker/
 // https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.control.queryaccessibilityhelp?redirectedfrom=MSDN&view=windowsdesktop-5.0
 
+// Don't bother setting the DataGridViewImageCellWithCustomName's Description property.
+// That doesn't get exposed as UIA clients would expect. (Rather it gets exposed in a
+// way to support clients of a legacy Windows accessibility API.)
+
 namespace WinFormsMatchingGame
 {
     public partial class FormMatchingGame : Form
@@ -390,11 +394,9 @@ namespace WinFormsMatchingGame
                         ((this.Owner as DataGridViewImageCellWithCustomName).GetCardIndex() + 1);
 
                     // During app development, include the Value in the name.
-                    var index = (this.Owner as DataGridViewImageCellWithCustomName).GetCardIndex();
+                    // cardName += ", " + this.Value;
 
-                    string fullName = cardName + ", " + this.Value;
-
-                    return fullName;
+                    return cardName;
                 }
             }
 
