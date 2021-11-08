@@ -25,94 +25,21 @@ namespace WinFormsMatchingGame
 {
     public partial class FormMatchingGame : Form
     {
-        private CardMatchingGrid cardMatchingGrid = new CardMatchingGrid();
-
+        private CardMatchingGrid cardMatchingGrid;
         private DataGridViewButtonCellWithCustomName firstCardInPairAttempt;
         private DataGridViewButtonCellWithCustomName secondCardInPairAttempt;
 
         private int tryAgainCount = 0;
 
-        private Shuffler _shuffler;
+        private Shuffler shuffler;
 
         public FormMatchingGame()
         {
             InitializeComponent();
 
-            //cardMatchingGrid.FaceDownCellImage = new Bitmap(WinFormsMatchingGame.Properties.Resources.BlankCell);
-            cardMatchingGrid.FaceDownCellImage = null;
-
-            cardMatchingGrid.CardList = new List<Card>()
-            {
-                new Card { 
-                    Name = "Daleks in Blackpool", 
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card1) },
-                new Card { 
-                    Name = "Daleks in Blackpool",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card1) },
-                new Card { 
-                    Name = "Lower Lighthouse in Fleetwood",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card2) },
-                new Card { 
-                    Name = "Lower Lighthouse in Fleetwood",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card2) },
-                new Card { 
-                    Name = "Fish and Chips in Cleveleys",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card3) },
-                new Card { 
-                    Name = "Fish and Chips in Cleveleys",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card3) },
-                new Card { 
-                    Name = "Cockersand Abbey",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card4) },
-                new Card { 
-                    Name = "Cockersand Abbey",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card4) },
-                new Card { 
-                    Name = "North Pier in Blackpool",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
-                new Card { 
-                    Name = "North Pier in Blackpool",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
-                new Card { 
-                    Name = "Bolton Abbey",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card6) },
-                new Card { 
-                    Name = "Bolton Abbey",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card6) },
-                new Card { 
-                    Name = "Harrogate Obelisk",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card7) },
-                new Card { 
-                    Name = "Harrogate Obelisk",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card7) },
-                new Card { 
-                    Name = "Hampsfell Hospice",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card8) },
-                new Card { 
-                    Name = "Hampsfell Hospice",
-                    Description = "A",
-                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card8) },
-            };
-
-            _shuffler = new Shuffler();
-            _shuffler.Shuffle(cardMatchingGrid.CardList);
-
-            cardMatchingGrid.AccessibilityObject.Name = "Cards for matching";
+            cardMatchingGrid = new CardMatchingGrid();
+            
+            cardMatchingGrid.AccessibilityObject.Name = Resources.ResourceManager.GetString("CardsForMatching");
 
             cardMatchingGrid.RowHeadersVisible = false;
             cardMatchingGrid.ColumnHeadersVisible = false;
@@ -135,9 +62,86 @@ namespace WinFormsMatchingGame
             cardMatchingGrid.CellPainting += CardMatchingGrid_CellPainting;
             cardMatchingGrid.SizeChanged += Grid_SizeChanged;
 
+            SetupCardList();
+
             this.panelCardGrid.Controls.Add(cardMatchingGrid);
 
             ResizeGridContent();
+        }
+
+        private void SetupCardList()
+        {
+            // This app assumes the count of cards is square number. It's currently 16.
+            cardMatchingGrid.CardList = new List<Card>()
+            {
+                new Card {
+                    Name = "Daleks in Blackpool",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card1) },
+                new Card {
+                    Name = "Daleks in Blackpool",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card1) },
+                new Card {
+                    Name = "Lower Lighthouse in Fleetwood",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card2) },
+                new Card {
+                    Name = "Lower Lighthouse in Fleetwood",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card2) },
+                new Card {
+                    Name = "Fish and Chips in Cleveleys",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card3) },
+                new Card {
+                    Name = "Fish and Chips in Cleveleys",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card3) },
+                new Card {
+                    Name = "Cockersand Abbey",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card4) },
+                new Card {
+                    Name = "Cockersand Abbey",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card4) },
+                new Card {
+                    Name = "North Pier in Blackpool",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
+                new Card {
+                    Name = "North Pier in Blackpool",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
+                new Card {
+                    Name = "Bolton Abbey",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card6) },
+                new Card {
+                    Name = "Bolton Abbey",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card6) },
+                new Card {
+                    Name = "Harrogate Obelisk",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card7) },
+                new Card {
+                    Name = "Harrogate Obelisk",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card7) },
+                new Card {
+                    Name = "Hampsfell Hospice",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card8) },
+                new Card {
+                    Name = "Hampsfell Hospice",
+                    Description = "A",
+                    Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card8) },
+            };
+
+            shuffler = new Shuffler();
+            shuffler.Shuffle(cardMatchingGrid.CardList);
         }
 
         private void CardMatchingGrid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -310,10 +314,7 @@ namespace WinFormsMatchingGame
         {
             tryAgainCount = 0;
 
-            _shuffler.Shuffle(cardMatchingGrid.CardList);
-
-            // Todo: Get focus working back on the grid.
-            //this.cardMatchingGrid.Focus();
+            shuffler.Shuffle(cardMatchingGrid.CardList);
 
             for (int i = 0; i < this.cardMatchingGrid.CardList.Count; i++)
             {
@@ -365,15 +366,6 @@ namespace WinFormsMatchingGame
     public class CardMatchingGrid : DataGridView
     {
         public List<Card> CardList { get; set; }
-        public int CardCountInPlay { get; set; }
-        public Bitmap FaceDownCellImage { get; set; }
-
-        public Card GetCardFromRowColumn(int rowIndex, int columnIndex)
-        {
-            var columnCount = this.GridDimensions;
-            var index = (columnCount * rowIndex) + columnIndex;
-            return this.CardList[index];
-        }
 
         public int GridDimensions
         {
@@ -381,6 +373,13 @@ namespace WinFormsMatchingGame
             {
                 return (int)Math.Sqrt(CardList.Count);
             }
+        }
+
+        public Card GetCardFromRowColumn(int rowIndex, int columnIndex)
+        {
+            var columnCount = this.GridDimensions;
+            var index = (columnCount * rowIndex) + columnIndex;
+            return this.CardList[index];
         }
     }
 
@@ -397,11 +396,6 @@ namespace WinFormsMatchingGame
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             return new DataGridViewButtonCellWithCustomNameAccessibleObject(this);
-        }
-
-        protected override void OnClick(DataGridViewCellEventArgs e)
-        {
-            base.OnClick(e);
         }
 
         public void TurnOver(bool FaceUp)
@@ -433,14 +427,17 @@ namespace WinFormsMatchingGame
                     var cardName = Resources.ResourceManager.GetString("Card") + " " +
                         ((this.Owner as DataGridViewButtonCellWithCustomName).GetCardIndex() + 1);
 
-                    // During app development, include the Value in the name.
-                    cardName += ", " + this.Value;
+                    cardName += ", " + this.CurrentExposedName;
 
                     return cardName;
                 }
             }
 
-            public override string Value 
+            // The currently exposed name is too important to not be announced by a
+            // screen reader, so don't only have it be the Value here.
+            //public override string Value 
+
+            private string CurrentExposedName
             {
                 get
                 {
@@ -495,18 +492,18 @@ namespace WinFormsMatchingGame
 
     public class Shuffler
     {
-        private readonly Random _random;
+        private readonly Random random;
 
         public Shuffler()
         {
-            this._random = new Random();
+            this.random = new Random();
         }
 
         public void Shuffle<T>(IList<T> array)
         {
             for (int i = array.Count; i > 1;)
             {
-                int j = this._random.Next(i);
+                int j = this.random.Next(i);
 
                 --i;
 

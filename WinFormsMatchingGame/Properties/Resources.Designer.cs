@@ -160,6 +160,15 @@ namespace WinFormsMatchingGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cards for matching.
+        /// </summary>
+        internal static string CardsForMatching {
+            get {
+                return ResourceManager.GetString("CardsForMatching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Face down.
         /// </summary>
         internal static string FaceDown {
