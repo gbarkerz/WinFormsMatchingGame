@@ -4,14 +4,24 @@ using System.Drawing;
 using System.Windows.Forms;
 using WinFormsMatchingGame.Properties;
 
+// DataGridViewButtonCell doesn't seem to support an image on the button.
+// (Painting the image in CellPainting doesn't seem a very clean way to go.)
+// So use DataGridViewImageCell, and explicitly check for a Space key press.
+
+// https://docs.microsoft.com/en-us/accessibility-tools-docs/items/WinForms/DataItem_Name
+// https://docs.microsoft.com/en-us/accessibility-tools-docs/items/WinForms/DataItem_HelpText
+// https://docs.microsoft.com/en-us/accessibility-tools-docs/items/WinForms/DataItem_ValueValue
+// https://www.linkedin.com/pulse/common-approaches-enhancing-programmatic-your-win32-winforms-barker/
+// https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.control.queryaccessibilityhelp?redirectedfrom=MSDN&view=windowsdesktop-5.0
+
 namespace WinFormsMatchingGame
 {
     public partial class FormMatchingGame : Form
     {
         private CardMatchingGrid cardMatchingGrid = new CardMatchingGrid();
 
-        private DataGridViewButtonCellWithCustomName firstCardInPairAttempt;
-        private DataGridViewButtonCellWithCustomName secondCardInPairAttempt;
+        private DataGridViewImageCellWithCustomName firstCardInPairAttempt;
+        private DataGridViewImageCellWithCustomName secondCardInPairAttempt;
 
         private int tryAgainCount = 0;
 
@@ -20,6 +30,9 @@ namespace WinFormsMatchingGame
         public FormMatchingGame()
         {
             InitializeComponent();
+
+            //cardMatchingGrid.FaceDownCellImage = new Bitmap(WinFormsMatchingGame.Properties.Resources.BlankCell);
+            cardMatchingGrid.FaceDownCellImage = null;
 
             cardMatchingGrid.CardList = new List<Card>()
             {
@@ -101,10 +114,10 @@ namespace WinFormsMatchingGame
             cardMatchingGrid.AllowUserToAddRows = false;
             cardMatchingGrid.ShowCellToolTips = false;
 
-            cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnWithCustomName());
-            cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnWithCustomName());
-            cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnWithCustomName());
-            cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnWithCustomName());
+            cardMatchingGrid.Columns.Add(new DataGridViewImageColumnWithCustomName());
+            cardMatchingGrid.Columns.Add(new DataGridViewImageColumnWithCustomName());
+            cardMatchingGrid.Columns.Add(new DataGridViewImageColumnWithCustomName());
+            cardMatchingGrid.Columns.Add(new DataGridViewImageColumnWithCustomName());
 
             cardMatchingGrid.Rows.Add();
             cardMatchingGrid.Rows.Add();
@@ -114,51 +127,26 @@ namespace WinFormsMatchingGame
             cardMatchingGrid.CellClick += DataGridView_CellClick;
             cardMatchingGrid.SizeChanged += Grid_SizeChanged;
 
-            this.panelCardGrid.Controls.Add(cardMatchingGrid);
+            cardMatchingGrid.KeyPress += CardMatchingGrid_KeyPress;
 
-            cardMatchingGrid.CellPainting += CardMatchingGrid_CellPainting;
+            this.panelCardGrid.Controls.Add(cardMatchingGrid);
 
             ResizeGridContent();
         }
 
-
-
-        private void CardMatchingGrid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void CardMatchingGrid_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-            var button = (this.cardMatchingGrid.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewButtonCellWithCustomName);
-            if (button.ReadOnly)
+            // Has a Space been pressed on a cell?
+            if (e.KeyChar == 0x20)
             {
-                var columnCount = cardMatchingGrid.GridDimensions;
-                var index = ((columnCount * e.RowIndex) + e.ColumnIndex);
-                var bmp = cardMatchingGrid.CardList[index].Image;
-
-                var w = bmp.Width;
-                var h = bmp.Height;
-                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
-                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
-
-                double ratio = Math.Max(
-                    (double)w / (double)e.CellBounds.Width, 
-                    (double)h / (double)e.CellBounds.Height);
-
-                var finalWidth  = (int)(w / ratio) - 4;
-                var finalHeight = (int)(h / ratio) - 4;
-
-                e.Graphics.DrawImage(bmp,
-                    new Rectangle(
-                        e.CellBounds.Left + ((e.CellBounds.Width - finalWidth) / 2),
-                        e.CellBounds.Top + ((e.CellBounds.Height - finalHeight) /2 ),
-                        finalWidth, 
-                        finalHeight),
-                    new Rectangle(0, 0, bmp.Width, bmp.Height),
-                    GraphicsUnit.Pixel);
+                // Consider this a click on the cell.
+                if (this.cardMatchingGrid.SelectedCells.Count > 0)
+                {
+                    var cell = this.cardMatchingGrid.SelectedCells[0];
+                    ClickCell(cell.RowIndex, cell.ColumnIndex);
+                }
             }
-
-            e.Handled = true;
         }
-
         private void Grid_SizeChanged(object sender, EventArgs e)
         {
             ResizeGridContent();
@@ -177,8 +165,11 @@ namespace WinFormsMatchingGame
 
         private void DataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var grid = sender as DataGridView;
+            ClickCell(e.RowIndex, e.ColumnIndex);
+        }
 
+        private void ClickCell(int rowIndex, int columnIndex)
+        { 
             // Take no action while the Try Again button is enabled.
             if (buttonTryAgain.Enabled)
             {
@@ -186,19 +177,19 @@ namespace WinFormsMatchingGame
             }
 
             // Take no action is the click is on a read-only cell.
-            if (this.cardMatchingGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ReadOnly)
+            if (this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex].ReadOnly)
             {
                 return;
             }
 
             var gridDimensions = cardMatchingGrid.GridDimensions;
-            var index = (gridDimensions * e.RowIndex) + e.ColumnIndex;
+            var index = (gridDimensions * rowIndex) + columnIndex;
 
             // Is this the first card turned over in an attempt to find a pair?
             if (firstCardInPairAttempt == null)
             {
-                firstCardInPairAttempt = (this.cardMatchingGrid.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewButtonCellWithCustomName);
-                firstCardInPairAttempt.ReadOnly = true;
+                firstCardInPairAttempt = (this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex] as DataGridViewImageCellWithCustomName);
+                firstCardInPairAttempt.TurnOver(true);
             }
             else 
             {
@@ -210,11 +201,12 @@ namespace WinFormsMatchingGame
 
                 var cardNameSecond = this.cardMatchingGrid.CardList[index].Name;
 
-                secondCardInPairAttempt = (this.cardMatchingGrid.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewButtonCellWithCustomName);
+                secondCardInPairAttempt = (this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex] as DataGridViewImageCellWithCustomName);
 
                 if (cardNameFirst == cardNameSecond)
                 {
-                    this.cardMatchingGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].ReadOnly = true;
+                    var card = this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex] as DataGridViewImageCellWithCustomName;
+                    card .TurnOver(true);
 
                     this.cardMatchingGrid.CardList[index].Matched = true;
 
@@ -245,8 +237,8 @@ namespace WinFormsMatchingGame
                 }
                 else
                 {
-                    secondCardInPairAttempt = (this.cardMatchingGrid.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewButtonCellWithCustomName);
-                    secondCardInPairAttempt.ReadOnly = true;
+                    secondCardInPairAttempt = (this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex] as DataGridViewImageCellWithCustomName);
+                    secondCardInPairAttempt.TurnOver(true);
 
                     buttonTryAgain.Enabled = true;
                 }
@@ -289,14 +281,12 @@ namespace WinFormsMatchingGame
             {
                 for (int c = 0; c < gridDimensions; c++)
                 {
-                    var button = (this.cardMatchingGrid.Rows[r].Cells[c] as DataGridViewButtonCellWithCustomName);
-                    button.ReadOnly = false;
+                    var button = (this.cardMatchingGrid.Rows[r].Cells[c] as DataGridViewImageCellWithCustomName);
+                    button.TurnOver(false);
                 }
             }
 
             buttonTryAgain.Enabled = false;
-
-            this.cardMatchingGrid.Refresh();
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -310,13 +300,11 @@ namespace WinFormsMatchingGame
 
             buttonTryAgain.Enabled = false;
 
-            firstCardInPairAttempt.ReadOnly = false;
-            secondCardInPairAttempt.ReadOnly = false;
+            firstCardInPairAttempt.TurnOver(false);
+            secondCardInPairAttempt.TurnOver(false);
 
             firstCardInPairAttempt = null;
             secondCardInPairAttempt = null;
-
-            this.cardMatchingGrid.Refresh();
         }
 
         private void buttonRestartGame_Click(object sender, EventArgs e)
@@ -329,6 +317,8 @@ namespace WinFormsMatchingGame
     {
         public List<Card> CardList { get; set; }
         public int CardCountInPlay { get; set; }
+        public Bitmap FaceDownCellImage { get; set; }
+
         public int GridDimensions
         {
             get
@@ -338,19 +328,45 @@ namespace WinFormsMatchingGame
         }
     }
 
-    public class DataGridViewButtonColumnWithCustomName : DataGridViewButtonColumn
+    public class DataGridViewImageColumnWithCustomName : DataGridViewImageColumn
     {
-        public DataGridViewButtonColumnWithCustomName()
+        public DataGridViewImageColumnWithCustomName()
         {
-            this.CellTemplate = new DataGridViewButtonCellWithCustomName();
+            this.CellTemplate = new DataGridViewImageCellWithCustomName();
         }
     }
 
-    public class DataGridViewButtonCellWithCustomName : DataGridViewButtonCell
+    public class DataGridViewImageCellWithCustomName : DataGridViewImageCell
     {
         protected override AccessibleObject CreateAccessibilityInstance()
         {
-            return new DataGridViewButtonCellWithCustomNameAccessibleObject(this);
+            return new DataGridViewImageCellWithCustomNameAccessibleObject(this);
+        }
+
+        protected override void OnClick(DataGridViewCellEventArgs e)
+        {
+            base.OnClick(e);
+        }
+
+        public void TurnOver(bool FaceUp)
+        {
+            ReadOnly = FaceUp;
+
+            var index = GetCardIndex();
+
+            var grid = (this.DataGridView as CardMatchingGrid);
+
+            if (ReadOnly)
+            {
+                this.ImageLayout = DataGridViewImageCellLayout.Zoom;
+                Value = grid.CardList[index].Image;
+
+            }
+            else
+            {
+                this.ImageLayout = DataGridViewImageCellLayout.NotSet;
+                Value = grid.FaceDownCellImage;
+            }
         }
 
         public int GetCardIndex()
@@ -359,10 +375,10 @@ namespace WinFormsMatchingGame
             return ((columnCount * this.RowIndex) + this.ColumnIndex);
         }
 
-        protected class DataGridViewButtonCellWithCustomNameAccessibleObject : 
-            DataGridViewButtonCellAccessibleObject
+        protected class DataGridViewImageCellWithCustomNameAccessibleObject :
+            DataGridViewImageCellAccessibleObject
         {
-            public DataGridViewButtonCellWithCustomNameAccessibleObject(DataGridViewButtonCellWithCustomName owner) : base(owner)
+            public DataGridViewImageCellWithCustomNameAccessibleObject(DataGridViewImageCellWithCustomName owner) : base(owner)
             {
             }
 
@@ -371,10 +387,10 @@ namespace WinFormsMatchingGame
                 get
                 {
                     var cardName = Resources.ResourceManager.GetString("Card") + " " +
-                        ((this.Owner as DataGridViewButtonCellWithCustomName).GetCardIndex() + 1);
+                        ((this.Owner as DataGridViewImageCellWithCustomName).GetCardIndex() + 1);
 
                     // During app development, include the Value in the name.
-                    var index = (this.Owner as DataGridViewButtonCellWithCustomName).GetCardIndex();
+                    var index = (this.Owner as DataGridViewImageCellWithCustomName).GetCardIndex();
 
                     string fullName = cardName + ", " + this.Value;
 
@@ -386,12 +402,12 @@ namespace WinFormsMatchingGame
             {
                 get
                 {
-                    var button = (this.Owner as DataGridViewButtonCellWithCustomName);
+                    var button = (this.Owner as DataGridViewImageCellWithCustomName);
                     var index = button.GetCardIndex();
                     
                     string value = button.ReadOnly ?
-                        (this.Owner.DataGridView as CardMatchingGrid).CardList[index].Name : 
-                        "Face down";
+                        (this.Owner.DataGridView as CardMatchingGrid).CardList[index].Name :
+                        Resources.ResourceManager.GetString("FaceDown");
 
                     return value;
                 }
@@ -405,7 +421,7 @@ namespace WinFormsMatchingGame
             {
                 get
                 {
-                    var button = (this.Owner as DataGridViewButtonCellWithCustomName);
+                    var button = (this.Owner as DataGridViewImageCellWithCustomName);
                     var index = button.GetCardIndex();
 
                     // A face down card needs no description.
