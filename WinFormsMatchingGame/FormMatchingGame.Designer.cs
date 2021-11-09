@@ -53,7 +53,7 @@ namespace WinFormsMatchingGame
             this.buttonTryAgain.Name = "buttonTryAgain";
             this.buttonTryAgain.Size = new System.Drawing.Size(131, 40);
             this.buttonTryAgain.TabIndex = 1;
-            this.buttonTryAgain.Text = "&Next go";
+            this.buttonTryAgain.Text = "Try &Again";
             this.buttonTryAgain.UseVisualStyleBackColor = true;
             this.buttonTryAgain.Click += new System.EventHandler(this.buttonTryAgain_Click);
             // 
@@ -63,7 +63,7 @@ namespace WinFormsMatchingGame
             this.buttonClose.Location = new System.Drawing.Point(432, 484);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(131, 40);
-            this.buttonClose.TabIndex = 2;
+            this.buttonClose.TabIndex = 3;
             this.buttonClose.Text = "&Close";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
@@ -74,7 +74,7 @@ namespace WinFormsMatchingGame
             this.buttonRestartGame.Location = new System.Drawing.Point(295, 484);
             this.buttonRestartGame.Name = "buttonRestartGame";
             this.buttonRestartGame.Size = new System.Drawing.Size(131, 40);
-            this.buttonRestartGame.TabIndex = 3;
+            this.buttonRestartGame.TabIndex = 2;
             this.buttonRestartGame.Text = "&Restart";
             this.buttonRestartGame.UseVisualStyleBackColor = true;
             this.buttonRestartGame.Click += new System.EventHandler(this.buttonRestartGame_Click);
@@ -84,13 +84,13 @@ namespace WinFormsMatchingGame
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 536);
+            this.Controls.Add(this.panelCardGrid);
+            this.Controls.Add(this.buttonTryAgain);
             this.Controls.Add(this.buttonRestartGame);
             this.Controls.Add(this.buttonClose);
-            this.Controls.Add(this.buttonTryAgain);
-            this.Controls.Add(this.panelCardGrid);
             this.MinimumSize = new System.Drawing.Size(500, 400);
             this.Name = "FormMatchingGame";
-            this.Text = "Northern England Matching Game";
+            this.Text = "Northern England Matching Game V1.0";
             this.ResumeLayout(false);
 
         }

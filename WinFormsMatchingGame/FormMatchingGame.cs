@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using WinFormsMatchingGame.Controls;
 using WinFormsMatchingGame.Properties;
 
 // DataGridViewButtonCell doesn't seem to support an image on the button.
@@ -21,6 +22,8 @@ using WinFormsMatchingGame.Properties;
 // That doesn't get exposed as UIA clients would expect. (Rather it gets exposed in a
 // way to support clients of a legacy Windows accessibility API.)
 
+// Leave the default grid behavior of an Enter press moving to the cell below the focused cell.
+
 namespace WinFormsMatchingGame
 {
     public partial class FormMatchingGame : Form
@@ -37,8 +40,13 @@ namespace WinFormsMatchingGame
         {
             InitializeComponent();
 
+            CreateCardMatchingGrid();
+        }
+
+        private void CreateCardMatchingGrid()
+        {
             cardMatchingGrid = new CardMatchingGrid();
-            
+
             cardMatchingGrid.AccessibilityObject.Name = Resources.ResourceManager.GetString("CardsForMatching");
 
             cardMatchingGrid.RowHeadersVisible = false;
@@ -47,6 +55,7 @@ namespace WinFormsMatchingGame
             cardMatchingGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             cardMatchingGrid.AllowUserToAddRows = false;
             cardMatchingGrid.ShowCellToolTips = false;
+            cardMatchingGrid.StandardTab = true;
 
             cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnWithCustomName());
             cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnWithCustomName());
@@ -144,6 +153,181 @@ namespace WinFormsMatchingGame
             shuffler.Shuffle(cardMatchingGrid.CardList);
         }
 
+        private void buttonTryAgain_Click(object sender, EventArgs e)
+        {
+            TryAgain();
+        }
+
+        private void buttonRestartGame_Click(object sender, EventArgs e)
+        {
+            RestartGame();
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void TryAgain()
+        {
+            ++tryAgainCount;
+
+            buttonTryAgain.Enabled = false;
+
+            firstCardInPairAttempt.TurnOver(false);
+            secondCardInPairAttempt.TurnOver(false);
+
+            firstCardInPairAttempt = null;
+            secondCardInPairAttempt = null;
+
+            // In the interests of game efficiency, move focus back into the grid now.
+            cardMatchingGrid.Focus();
+        }
+
+        private void RestartGame()
+        {
+            tryAgainCount = 0;
+
+            shuffler.Shuffle(cardMatchingGrid.CardList);
+
+            for (int i = 0; i < this.cardMatchingGrid.CardList.Count; i++)
+            {
+                this.cardMatchingGrid.CardList[i].FaceUp = false;
+                this.cardMatchingGrid.CardList[i].Matched = false;
+            }
+
+            firstCardInPairAttempt = null;
+            secondCardInPairAttempt = null;
+
+            var gridDimensions = cardMatchingGrid.GridDimensions;
+
+            for (int r = 0; r < gridDimensions; r++)
+            {
+                for (int c = 0; c < gridDimensions; c++)
+                {
+                    var button = (this.cardMatchingGrid.Rows[r].Cells[c] as DataGridViewButtonCellWithCustomName);
+                    button.TurnOver(false);
+                }
+            }
+
+            buttonTryAgain.Enabled = false;
+
+            cardMatchingGrid.Focus();
+        }
+
+        private void Grid_SizeChanged(object sender, EventArgs e)
+        {
+            ResizeGridContent();
+        }
+
+        private void ResizeGridContent()
+        {
+            var gridDimensions = cardMatchingGrid.GridDimensions;
+
+            for (int i = 0; i < gridDimensions; ++i)
+            {
+                cardMatchingGrid.Columns[i].Width = (this.panelCardGrid.ClientSize.Width / gridDimensions) - 1;
+                cardMatchingGrid.Rows[i].Height = (this.panelCardGrid.ClientSize.Height / gridDimensions) - 1;
+            }
+        }
+
+        private void DataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ClickCell(e.RowIndex, e.ColumnIndex);
+        }
+
+        private void ClickCell(int rowIndex, int columnIndex)
+        {
+            // Take no action while the Try Again button is enabled.
+            if (buttonTryAgain.Enabled)
+            {
+                return;
+            }
+
+            // Take no action if the click is on a cell that's already face-up.
+            var card = cardMatchingGrid.GetCardFromRowColumn(rowIndex, columnIndex);
+            if (card.FaceUp)
+            {
+                return;
+            }
+
+            var gridDimensions = cardMatchingGrid.GridDimensions;
+            var index = (gridDimensions * rowIndex) + columnIndex;
+
+            // Is this the first card turned over in an attempt to find a pair?
+            if (firstCardInPairAttempt == null)
+            {
+                firstCardInPairAttempt = (this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex] as DataGridViewButtonCellWithCustomName);
+                firstCardInPairAttempt.TurnOver(true);
+            }
+            else
+            {
+                // This must be the second card turned over in an attempt to find a pair.
+                // Has a pair been found?
+
+                var firstIndex = firstCardInPairAttempt.GetCardIndex();
+                var cardNameFirst = this.cardMatchingGrid.CardList[firstIndex].Name;
+
+                var cardNameSecond = this.cardMatchingGrid.CardList[index].Name;
+
+                secondCardInPairAttempt = (this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex] as DataGridViewButtonCellWithCustomName);
+
+                if (cardNameFirst == cardNameSecond)
+                {
+                    var button = (this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex] as DataGridViewButtonCellWithCustomName);
+                    button.TurnOver(true);
+
+                    this.cardMatchingGrid.CardList[index].Matched = true;
+
+                    this.cardMatchingGrid.CardList[index].Matched = true;
+                    this.cardMatchingGrid.CardList[firstIndex].Matched = true;
+
+                    firstCardInPairAttempt = null;
+                    secondCardInPairAttempt = null;
+
+                    // Has the game been won?
+                    if (GameIsWon())
+                    {
+                        // Todo: Localized this.
+                        var answer = MessageBox.Show(
+                            this,
+                            "Congratulations! You won the game in " +
+                            (tryAgainCount +
+                                ((cardMatchingGrid.RowCount * cardMatchingGrid.ColumnCount) / 2)) +
+                            " goes.\r\n\r\nWould you like another game?",
+                            "Accessible Matching Game",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question);
+                        if (answer == DialogResult.Yes)
+                        {
+                            RestartGame();
+                        }
+                    }
+
+                }
+                else
+                {
+                    secondCardInPairAttempt = (this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex] as DataGridViewButtonCellWithCustomName);
+                    secondCardInPairAttempt.TurnOver(true);
+
+                    buttonTryAgain.Enabled = true;
+                }
+            }
+        }
+
+        private bool GameIsWon()
+        {
+            for (int i = 0; i < this.cardMatchingGrid.CardList.Count; i++)
+            {
+                if (!this.cardMatchingGrid.CardList[i].Matched)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         private void CardMatchingGrid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             // Set up clip regions below in order to prevent the image in the cell from
@@ -195,322 +379,6 @@ namespace WinFormsMatchingGame
             }
 
             e.Handled = true;
-        }
-
-        private void Grid_SizeChanged(object sender, EventArgs e)
-        {
-            ResizeGridContent();
-        }
-
-        private void ResizeGridContent()
-        {
-            var gridDimensions = cardMatchingGrid.GridDimensions;
-
-            for (int i = 0; i < gridDimensions; ++i)
-            {
-                cardMatchingGrid.Columns[i].Width = (this.panelCardGrid.ClientSize.Width / gridDimensions) - 1;
-                cardMatchingGrid.Rows[i].Height = (this.panelCardGrid.ClientSize.Height / gridDimensions) - 1;
-            }
-        }
-
-        private void DataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            ClickCell(e.RowIndex, e.ColumnIndex);
-        }
-
-        private void ClickCell(int rowIndex, int columnIndex)
-        { 
-            // Take no action while the Try Again button is enabled.
-            if (buttonTryAgain.Enabled)
-            {
-                return;
-            }
-
-            // Take no action if the click is on a cell that's already face-up.
-            var card = cardMatchingGrid.GetCardFromRowColumn(rowIndex, columnIndex);
-            if (card.FaceUp)
-            {
-                return;
-            }
-
-            var gridDimensions = cardMatchingGrid.GridDimensions;
-            var index = (gridDimensions * rowIndex) + columnIndex;
-
-            // Is this the first card turned over in an attempt to find a pair?
-            if (firstCardInPairAttempt == null)
-            {
-                firstCardInPairAttempt = (this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex] as DataGridViewButtonCellWithCustomName);
-                firstCardInPairAttempt.TurnOver(true);
-            }
-            else 
-            {
-                // This must be the second card turned over in an attempt to find a pair.
-                // Has a pair been found?
-
-                var firstIndex = firstCardInPairAttempt.GetCardIndex();
-                var cardNameFirst = this.cardMatchingGrid.CardList[firstIndex].Name;
-
-                var cardNameSecond = this.cardMatchingGrid.CardList[index].Name;
-
-                secondCardInPairAttempt = (this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex] as DataGridViewButtonCellWithCustomName);
-
-                if (cardNameFirst == cardNameSecond)
-                {
-                    var button = (this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex] as DataGridViewButtonCellWithCustomName);
-                    button.TurnOver(true);
-
-                    this.cardMatchingGrid.CardList[index].Matched = true;
-
-                    this.cardMatchingGrid.CardList[index].Matched = true;
-                    this.cardMatchingGrid.CardList[firstIndex].Matched = true;
-
-                    firstCardInPairAttempt = null;
-                    secondCardInPairAttempt = null;
-
-                    // Has the game been won?
-                    if (GameIsWon())
-                    {
-                        // Todo: Localized this.
-                        var answer = MessageBox.Show(
-                            this,
-                            "Congratulations! You won the game in " +
-                            (tryAgainCount + 
-                                ((cardMatchingGrid.RowCount * cardMatchingGrid.ColumnCount) / 2)) +
-                            " goes.\r\n\r\nWould you like another game?",
-                            "Accessible Matching Game",
-                            MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Question);
-                        if (answer == DialogResult.Yes)
-                        {
-                            RestartGame();
-                        }
-                    }
-
-                }
-                else
-                {
-                    secondCardInPairAttempt = (this.cardMatchingGrid.Rows[rowIndex].Cells[columnIndex] as DataGridViewButtonCellWithCustomName);
-                    secondCardInPairAttempt.TurnOver(true);
-
-                    buttonTryAgain.Enabled = true;
-                }
-            }
-        }
-
-        private bool GameIsWon()
-        {
-            for (int i = 0; i < this.cardMatchingGrid.CardList.Count; i++)
-            {
-                if (!this.cardMatchingGrid.CardList[i].Matched)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        private void RestartGame()
-        {
-            tryAgainCount = 0;
-
-            shuffler.Shuffle(cardMatchingGrid.CardList);
-
-            for (int i = 0; i < this.cardMatchingGrid.CardList.Count; i++)
-            {
-                this.cardMatchingGrid.CardList[i].FaceUp = false;
-                this.cardMatchingGrid.CardList[i].Matched = false;
-            }
-
-            firstCardInPairAttempt = null;
-            secondCardInPairAttempt = null;
-
-            var gridDimensions = cardMatchingGrid.GridDimensions;
-
-            for (int r = 0; r < gridDimensions; r++)
-            {
-                for (int c = 0; c < gridDimensions; c++)
-                {
-                    var button = (this.cardMatchingGrid.Rows[r].Cells[c] as DataGridViewButtonCellWithCustomName);
-                    button.TurnOver(false);
-                }
-            }
-
-            buttonTryAgain.Enabled = false;
-        }
-
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void buttonTryAgain_Click(object sender, EventArgs e)
-        {
-            ++tryAgainCount;
-
-            buttonTryAgain.Enabled = false;
-
-            firstCardInPairAttempt.TurnOver(false);
-            secondCardInPairAttempt.TurnOver(false);
-
-            firstCardInPairAttempt = null;
-            secondCardInPairAttempt = null;
-        }
-
-        private void buttonRestartGame_Click(object sender, EventArgs e)
-        {
-            RestartGame();
-        }
-    }
-
-    public class CardMatchingGrid : DataGridView
-    {
-        public List<Card> CardList { get; set; }
-
-        public int GridDimensions
-        {
-            get
-            {
-                return (int)Math.Sqrt(CardList.Count);
-            }
-        }
-
-        public Card GetCardFromRowColumn(int rowIndex, int columnIndex)
-        {
-            var columnCount = this.GridDimensions;
-            var index = (columnCount * rowIndex) + columnIndex;
-            return this.CardList[index];
-        }
-    }
-
-    public class DataGridViewButtonColumnWithCustomName : DataGridViewButtonColumn
-    {
-        public DataGridViewButtonColumnWithCustomName()
-        {
-            this.CellTemplate = new DataGridViewButtonCellWithCustomName();
-        }
-    }
-
-    public class DataGridViewButtonCellWithCustomName : DataGridViewButtonCell
-    {
-        protected override AccessibleObject CreateAccessibilityInstance()
-        {
-            return new DataGridViewButtonCellWithCustomNameAccessibleObject(this);
-        }
-
-        public void TurnOver(bool FaceUp)
-        {
-            var card = (this.DataGridView as CardMatchingGrid).GetCardFromRowColumn(this.RowIndex, this.ColumnIndex);
-            card.FaceUp = FaceUp;
-
-            var button = (this.DataGridView.Rows[this.RowIndex].Cells[this.ColumnIndex] as DataGridViewButtonCellWithCustomName);
-            this.DataGridView.InvalidateCell(button);
-        }
-
-        public int GetCardIndex()
-        {
-            var columnCount = (this.DataGridView as CardMatchingGrid).GridDimensions;
-            return ((columnCount * this.RowIndex) + this.ColumnIndex);
-        }
-
-        protected class DataGridViewButtonCellWithCustomNameAccessibleObject :
-            DataGridViewButtonCellAccessibleObject
-        {
-            public DataGridViewButtonCellWithCustomNameAccessibleObject(DataGridViewButtonCellWithCustomName owner) : base(owner)
-            {
-            }
-
-            public override string Name
-            {
-                get
-                {
-                    var cardName = Resources.ResourceManager.GetString("Card") + " " +
-                        ((this.Owner as DataGridViewButtonCellWithCustomName).GetCardIndex() + 1);
-
-                    cardName += ", " + this.CurrentExposedName;
-
-                    return cardName;
-                }
-            }
-
-            // The currently exposed name is too important to not be announced by a
-            // screen reader, so don't only have it be the Value here.
-            //public override string Value 
-
-            private string CurrentExposedName
-            {
-                get
-                {
-                    var button = (this.Owner as DataGridViewButtonCellWithCustomName);
-                    var card = (this.Owner.DataGridView as CardMatchingGrid).GetCardFromRowColumn(
-                                    button.RowIndex, button.ColumnIndex);
-
-                    string value = card.FaceUp ?
-                        card.Name :
-                        Resources.ResourceManager.GetString("FaceDown");
-
-                    return value;
-                }
-            }
-
-            // Don't override the Description property here. Doing so impacts how data
-            // gets exposed through a legacy Windows accessibility API, but not how 
-            // Windows UI Automation clients expect it to be exposed. So override the 
-            // Help property instead, as that maps to the UIA HelpText property.
-            public override string Help
-            {
-                get
-                {
-                    var button = (this.Owner as DataGridViewButtonCellWithCustomName);
-                    var index = button.GetCardIndex();
-
-                    // A face down card needs no description.
-                    var card = (this.Owner.DataGridView as CardMatchingGrid).GetCardFromRowColumn(
-                                    button.RowIndex, button.ColumnIndex);
-
-                    string description = card.FaceUp ?
-                        (this.Owner.DataGridView as CardMatchingGrid).CardList[index].Description :
-                        "";
-
-                    return description;
-                }
-            }
-
-            // Attempting to override the UIA ControlType has apparently has no effect.
-            // public override AccessibleRole Role
-        }
-    }
-
-    public class Card
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public Bitmap Image { get; set; }
-        public bool FaceUp { get; set; }
-        public bool Matched { get; set; }
-    }
-
-    public class Shuffler
-    {
-        private readonly Random random;
-
-        public Shuffler()
-        {
-            this.random = new Random();
-        }
-
-        public void Shuffle<T>(IList<T> array)
-        {
-            for (int i = array.Count; i > 1;)
-            {
-                int j = this.random.Next(i);
-
-                --i;
-
-                T temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-            }
         }
     }
 }
