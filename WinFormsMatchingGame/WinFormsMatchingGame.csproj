@@ -4,7 +4,30 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <Authors>Guy Barker</Authors>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Card1.jpg" />
+    <None Remove="Resources\Card2.jpg" />
+    <None Remove="Resources\Card3.jpg" />
+    <None Remove="Resources\Card4.jpg" />
+    <None Remove="Resources\Card5.jpg" />
+    <None Remove="Resources\Card6.jpg" />
+    <None Remove="Resources\Card7.jpg" />
+    <None Remove="Resources\Card8.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Card1.jpg" />
+    <EmbeddedResource Include="Resources\Card2.jpg" />
+    <EmbeddedResource Include="Resources\Card3.jpg" />
+    <EmbeddedResource Include="Resources\Card4.jpg" />
+    <EmbeddedResource Include="Resources\Card5.jpg" />
+    <EmbeddedResource Include="Resources\Card6.jpg" />
+    <EmbeddedResource Include="Resources\Card7.jpg" />
+    <EmbeddedResource Include="Resources\Card8.jpg" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

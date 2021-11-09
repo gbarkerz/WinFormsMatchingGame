@@ -137,11 +137,11 @@ namespace WinFormsMatchingGame
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card7) },
                 new Card {
                     Name = "Hampsfell Hospice",
-                    Description = "A small square stone building with an opening on the near side. Above the railing are 15 Greek symbols. Railing surrounds the top of the building, and a sundial sits at the centre of the top. In the background is rocky grassland, with rolling hills in the far background along with a slightly cloudy, blue sky.",
+                    Description = "A small square stone building with an opening on the near side. Above the opening is a Greek inscription. Railing surrounds the top of the building, and a sundial sits at the centre of the top. In the background is rocky grassland, with rolling hills in the far background along with a slightly cloudy, blue sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card8) },
                 new Card {
                     Name = "Hampsfell Hospice",
-                    Description = "A small square stone building with an opening on the near side. Above the railing are 15 Greek symbols. Railing surrounds the top of the building, and a sundial sits at the centre of the top. In the background is rocky grassland, with rolling hills in the far background along with a slightly cloudy, blue sky.",
+                    Description = "A small square stone building with an opening on the near side. Above the opening is a Greek inscription. Railing surrounds the top of the building, and a sundial sits at the centre of the top. In the background is rocky grassland, with rolling hills in the far background along with a slightly cloudy, blue sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card8) },
             };
 
