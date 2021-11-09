@@ -76,72 +76,72 @@ namespace WinFormsMatchingGame
 
         private void SetupCardList()
         {
-            // This app assumes the count of cards is square number. It's currently 16.
+            // This app assumes the count of cards is square number. (Currently the count is 16.)
             cardMatchingGrid.CardList = new List<Card>()
             {
                 new Card {
                     Name = "Daleks in Blackpool",
-                    Description = "This is a description of Daleks in Blackpool",
+                    Description = "A smiling man with a red coat and arms outstretched, standing in front of 3 large Daleks and a TARDIS. The Daleks seem to be raised above the grass beneath them, and a slightly cloudy sky is in the background.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card1) },
                 new Card {
                     Name = "Daleks in Blackpool",
-                    Description = "This is a description of Daleks in Blackpool",
+                    Description = "A smiling man with a red coat and arms outstretched, standing in front of 3 large Daleks and a TARDIS. The Daleks seem to be raised above the grass beneath them, and a slightly cloudy sky is in the background.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card1) },
                 new Card {
                     Name = "Lower Lighthouse in Fleetwood",
-                    Description = "This is a description of Lower Lighthouse in Fleetwood",
+                    Description = "A small brown stone lighthouse, with an upper small balcony and a lower bigger balcony. A covered sitting area is at the base of the lighthouse. In front of the lighthouse in the stone ground are anchor and compass symbols, and in the background is a grey cloudy sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card2) },
                 new Card {
                     Name = "Lower Lighthouse in Fleetwood",
-                    Description = "This is a description of Lower Lighthouse in Fleetwood",
+                    Description = "A small brown stone lighthouse, with an upper small balcony and a lower bigger balcony. A covered sitting area is at the base of the lighthouse. In front of the lighthouse in the stone ground are anchor and compass symbols, and in the background is a grey cloudy sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card2) },
                 new Card {
                     Name = "Fish and Chips in Cleveleys",
-                    Description = "This is a description of Fish and Chips in Cleveleys",
+                    Description = "A first-person view looking down on two portions of fish and chips in trays and paper. In the background is a concrete path, and two partially shown shoes.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card3) },
                 new Card {
                     Name = "Fish and Chips in Cleveleys",
-                    Description = "This is a description of Fish and Chips in Cleveleys",
+                    Description = "A first-person view looking down on two portions of fish and chips in trays and paper. In the background is a concrete path, and two partially shown shoes.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card3) },
                 new Card {
                     Name = "Cockersand Abbey",
-                    Description = "This is a description of Cockersand Abbey",
+                    Description = "A small, ancient looking hexagonal red stone building, with castellated battlements housing a cross. Arched windows on the sides of the building are bricked-up from the inside. The building sits of grass, with a bay and cloudy sky in the background.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card4) },
                 new Card {
                     Name = "Cockersand Abbey",
-                    Description = "This is a description of Cockersand Abbey",
+                    Description = "A small, ancient looking hexagonal red stone building, with castellated battlements housing a cross. Arched windows on the sides of the building are bricked-up from the inside. The building sits of grass, with a bay and cloudy sky in the background.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card4) },
                 new Card {
                     Name = "Lythan St Annes Windmill",
-                    Description = "This is a descrption of Lythan St Annes Windmill",
+                    Description = "A white windmill with a black roof and black sails. The windmill has stairs going up to a black door, and black windows. In the background is a street of houses and a clear, blue sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
                 new Card {
                     Name = "Lythan St Annes Windmill",
-                    Description = "This is a descrption of Lythan St Annes Windmill",
+                    Description = "A white windmill with a black roof and black sails. The windmill has stairs going up to a black door, and black windows. In the background is a street of houses and a clear, blue sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
                 new Card {
                     Name = "Bolton Abbey",
-                    Description = "This is a description of Bolton Abbey",
+                    Description = "The stone ruins of a large ancient abbey. The abbey has no roof or windows, and the sun shines through the arches from behind the abbey. In the foreground is a lawn housing multiple large stone graves, and in the background is a clear blue sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card6) },
                 new Card {
                     Name = "Bolton Abbey",
-                    Description = "This is a description of Bolton Abbey",
+                    Description = "The stone ruins of a large ancient abbey. The abbey has no roof or windows, and the sun shines through the arches from behind the abbey. In the foreground is a lawn housing multiple large stone graves, and in the background is a clear blue sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card6) },
                 new Card {
                     Name = "Harrogate Obelisk",
-                    Description = "This is a description of Harrogate Obelisk",
+                    Description = "A large stone obelisk in a town square, with buildings and trees nearby. The sun shines on the obelisk, with a slightly cloudy, blue sky in the background. At the base of the obelisk are six red wreaths.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card7) },
                 new Card {
                     Name = "Harrogate Obelisk",
-                    Description = "This is a description of Harrogate Obelisk",
+                    Description = "A large stone obelisk in a town square, with buildings and trees nearby. The sun shines on the obelisk, with a slightly cloudy, blue sky in the background. At the base of the obelisk are six red wreaths.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card7) },
                 new Card {
                     Name = "Hampsfell Hospice",
-                    Description = "This is a description of Hampsfell Hospice",
+                    Description = "A small square stone building with an opening on the near side. Above the railing are 15 Greek symbols. Railing surrounds the top of the building, and a sundial sits at the centre of the top. In the background is rocky grassland, with rolling hills in the far background along with a slightly cloudy, blue sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card8) },
                 new Card {
                     Name = "Hampsfell Hospice",
-                    Description = "This is a description of Hampsfell Hospice",
+                    Description = "A small square stone building with an opening on the near side. Above the railing are 15 Greek symbols. Railing surrounds the top of the building, and a sundial sits at the centre of the top. In the background is rocky grassland, with rolling hills in the far background along with a slightly cloudy, blue sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card8) },
             };
 
