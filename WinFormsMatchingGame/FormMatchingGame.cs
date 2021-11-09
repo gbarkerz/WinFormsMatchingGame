@@ -112,12 +112,12 @@ namespace WinFormsMatchingGame
                     Description = "This is a description of Cockersand Abbey",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card4) },
                 new Card {
-                    Name = "Grange-over-Sands duck pond",
-                    Description = "Grange-over-Sands duck pond",
+                    Name = "Lythan St Annes Windmill",
+                    Description = "This is a descrption of Lythan St Annes Windmill",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
                 new Card {
-                    Name = "Grange-over-Sands duck pond",
-                    Description = "Grange-over-Sands duck pond",
+                    Name = "Lythan St Annes Windmill",
+                    Description = "This is a descrption of Lythan St Annes Windmill",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
                 new Card {
                     Name = "Bolton Abbey",
