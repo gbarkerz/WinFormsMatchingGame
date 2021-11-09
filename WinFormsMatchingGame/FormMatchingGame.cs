@@ -36,8 +36,6 @@ namespace WinFormsMatchingGame
     {
         private CardMatchingGrid cardMatchingGrid;
 
-        private Shuffler shuffler;
-
         public FormMatchingGame()
         {
             InitializeComponent();
@@ -58,6 +56,8 @@ namespace WinFormsMatchingGame
             cardMatchingGrid.AllowUserToAddRows = false;
             cardMatchingGrid.ShowCellToolTips = false;
             cardMatchingGrid.StandardTab = true;
+            cardMatchingGrid.AllowUserToResizeRows = false;
+            cardMatchingGrid.AllowUserToResizeColumns = false;
 
             cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnWithCustomName());
             cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnWithCustomName());
@@ -145,8 +145,7 @@ namespace WinFormsMatchingGame
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card8) },
             };
 
-            shuffler = new Shuffler();
-            shuffler.Shuffle(cardMatchingGrid.CardList);
+            cardMatchingGrid.Shuffle();
         }
 
         private void buttonTryAgain_Click(object sender, EventArgs e)
@@ -162,7 +161,6 @@ namespace WinFormsMatchingGame
         private void RestartGame()
         {
             cardMatchingGrid.ResetGrid();
-            shuffler.Shuffle(cardMatchingGrid.CardList);
 
             cardMatchingGrid.Focus();
         }

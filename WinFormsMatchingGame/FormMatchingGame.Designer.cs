@@ -89,6 +89,7 @@ namespace WinFormsMatchingGame
             this.Controls.Add(this.buttonClose);
             this.MinimumSize = new System.Drawing.Size(500, 400);
             this.Name = "FormMatchingGame";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Northern England Matching Game V1.0";
             this.ResumeLayout(false);
 

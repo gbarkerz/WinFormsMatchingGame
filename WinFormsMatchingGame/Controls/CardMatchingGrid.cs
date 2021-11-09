@@ -22,6 +22,12 @@ namespace WinFormsMatchingGame.Controls
             CellPainting += CardMatchingGrid_CellPainting;
         }
 
+        public void Shuffle()
+        {
+            var shuffler = new Shuffler();
+            shuffler.Shuffle(this.CardList);
+        }
+
         private void Grid_SizeChanged(object sender, EventArgs e)
         {
             ResizeGridContent();
@@ -204,6 +210,8 @@ namespace WinFormsMatchingGame.Controls
                     button.TurnOver(false);
                 }
             }
+
+            Shuffle();
         }
 
         public void TryAgain()
