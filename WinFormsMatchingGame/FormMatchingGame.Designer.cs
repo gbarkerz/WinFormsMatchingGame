@@ -42,25 +42,24 @@ namespace WinFormsMatchingGame
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelCardGrid.Location = new System.Drawing.Point(13, 13);
             this.panelCardGrid.Name = "panelCardGrid";
-            this.panelCardGrid.Size = new System.Drawing.Size(551, 452);
+            this.panelCardGrid.Size = new System.Drawing.Size(751, 652);
             this.panelCardGrid.TabIndex = 0;
             // 
             // buttonTryAgain
             // 
             this.buttonTryAgain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonTryAgain.Enabled = false;
-            this.buttonTryAgain.Location = new System.Drawing.Point(13, 484);
+            this.buttonTryAgain.Location = new System.Drawing.Point(13, 684);
             this.buttonTryAgain.Name = "buttonTryAgain";
-            this.buttonTryAgain.Size = new System.Drawing.Size(131, 40);
+            this.buttonTryAgain.Size = new System.Drawing.Size(301, 40);
             this.buttonTryAgain.TabIndex = 1;
-            this.buttonTryAgain.Text = "Try &Again";
+            this.buttonTryAgain.Text = "Turn unmatched cards &back";
             this.buttonTryAgain.UseVisualStyleBackColor = true;
             this.buttonTryAgain.Click += new System.EventHandler(this.buttonTryAgain_Click);
             // 
             // buttonClose
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClose.Location = new System.Drawing.Point(432, 484);
+            this.buttonClose.Location = new System.Drawing.Point(632, 684);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(131, 40);
             this.buttonClose.TabIndex = 3;
@@ -71,7 +70,7 @@ namespace WinFormsMatchingGame
             // buttonRestartGame
             // 
             this.buttonRestartGame.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRestartGame.Location = new System.Drawing.Point(295, 484);
+            this.buttonRestartGame.Location = new System.Drawing.Point(495, 684);
             this.buttonRestartGame.Name = "buttonRestartGame";
             this.buttonRestartGame.Size = new System.Drawing.Size(131, 40);
             this.buttonRestartGame.TabIndex = 2;
@@ -83,7 +82,7 @@ namespace WinFormsMatchingGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(576, 536);
+            this.ClientSize = new System.Drawing.Size(776, 736);
             this.Controls.Add(this.panelCardGrid);
             this.Controls.Add(this.buttonTryAgain);
             this.Controls.Add(this.buttonRestartGame);

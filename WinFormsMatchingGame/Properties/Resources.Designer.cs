@@ -61,16 +61,6 @@ namespace WinFormsMatchingGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap BlankCell {
-            get {
-                object obj = ResourceManager.GetObject("BlankCell", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Card.
         /// </summary>
         internal static string Card {
@@ -169,11 +159,47 @@ namespace WinFormsMatchingGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unmatched cards turned back..
+        /// </summary>
+        internal static string CardsTurnedBack {
+            get {
+                return ResourceManager.GetString("CardsTurnedBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Face down.
         /// </summary>
         internal static string FaceDown {
             get {
                 return ResourceManager.GetString("FaceDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to That&apos;s a match!.
+        /// </summary>
+        internal static string ThatsAMatch {
+            get {
+                return ResourceManager.GetString("ThatsAMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turn cards back to continue..
+        /// </summary>
+        internal static string TurnCardsBackToContinue {
+            get {
+                return ResourceManager.GetString("TurnCardsBackToContinue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turned over.
+        /// </summary>
+        internal static string TurnedOver {
+            get {
+                return ResourceManager.GetString("TurnedOver", resourceCulture);
             }
         }
     }
