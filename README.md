@@ -45,7 +45,7 @@ By default, I would say that the names of cards in the game should never change.
 The Description property of a class derived from DataGridViewButtonCellAccessibleObject does not get exposed through the Windows UI Automation (UIA) API as as UIA clients would expect, so that property is not overridden. Rather, the Help property is used to describe the image shown on a card, and that gets exposed through the UIA HelpText property.
 
 
-![The Accessibility Insights for Windows tool reporting the UI Automation hierarchy of the grid cells shown in the game.](ReadMeImages/WinFormsMatchingGameUIATree.png)
+![The Accessibility Insights for Windows tool reporting the UI Automation hierarchy of the grid cells shown in the game.](WinFormsMatchingGame/AppScreenshots/WinFormsMatchingGameUIATree.png)
 
 
 Technical resources
