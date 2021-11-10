@@ -121,9 +121,6 @@ namespace WinFormsMatchingGame.Controls
                 return;
             }
 
-            var gridDimensions = GridDimensions;
-            var index = (gridDimensions * rowIndex) + columnIndex;
-
             // Is this the first card turned over in an attempt to find a match?
             if (firstCardInMatchAttempt == null)
             {
@@ -133,30 +130,26 @@ namespace WinFormsMatchingGame.Controls
             else
             {
                 // This must be the second card turned over in an attempt to find a match.
-                // Has a match been found?
+                secondCardInMatchAttempt = (this.Rows[rowIndex].Cells[columnIndex] as DataGridViewButtonCellWithMatchingGame);
+                secondCardInMatchAttempt.TurnOver(true);
 
+                // Has a match been found?
                 var firstIndex = firstCardInMatchAttempt.GetCardIndex();
                 var cardNameFirst = this.CardList[firstIndex].Name;
 
-                var cardNameSecond = this.CardList[index].Name;
-
-                secondCardInMatchAttempt = (this.Rows[rowIndex].Cells[columnIndex] as DataGridViewButtonCellWithMatchingGame);
+                var secondIndex = secondCardInMatchAttempt.GetCardIndex();
+                var cardNameSecond = this.CardList[secondIndex].Name;
 
                 if (cardNameFirst == cardNameSecond)
                 {
                     // We have a match!
-                    var button = (this.Rows[rowIndex].Cells[columnIndex] as DataGridViewButtonCellWithMatchingGame);
-                    button.TurnOver(true);
-
-                    this.CardList[index].Matched = true;
-
-                    this.CardList[index].Matched = true;
+                    this.CardList[secondIndex].Matched = true;
                     this.CardList[firstIndex].Matched = true;
+
+                    AnnounceAction(Resources.ThatsAMatch);
 
                     firstCardInMatchAttempt = null;
                     secondCardInMatchAttempt = null;
-
-                    AnnounceAction(Resources.ThatsAMatch);
 
                     // Has the game been won?
                     if (GameIsWon())
@@ -176,13 +169,6 @@ namespace WinFormsMatchingGame.Controls
                             ResetGrid();
                         }
                     }
-
-                }
-                else
-                {
-                    // This second card is not a match.
-                    secondCardInMatchAttempt = (this.Rows[rowIndex].Cells[columnIndex] as DataGridViewButtonCellWithMatchingGame);
-                    secondCardInMatchAttempt.TurnOver(true);
                 }
             }
         }
@@ -191,6 +177,7 @@ namespace WinFormsMatchingGame.Controls
         public void ResetGrid()
         {
             tryAgainCount = 0;
+
             firstCardInMatchAttempt = null;
             secondCardInMatchAttempt = null;
 

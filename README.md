@@ -12,7 +12,7 @@ The game is based on a traditional card matching game, where face-down cards are
 
 When the game is run, a 4x4 grid of squares appears, each square representing a card. When a card is clicked, an image is shown on the square. When another square is clicked, an another is also shown on that square. If the two images are the same, then the squares are considered to be matched, and will not change again for the rest of the game. If the images do not match, then the cards are considered to be unmatched, and the "Turn cards back over" button must be clicked, which results in the two unmatched cards no longer showing images. These steps are to be repeated until all matching images have been found, and a "Congratulations" window appears.
 
-![The WinFormsMatchingGame showing two pairs of matched cards, and one pair of unmatched cards.](WinFormsMatchingGame/AppScreenshots/WinFormsMatchingGameMismatched.png)
+![The WinFormsMatchingGame showing two pairs of matched cards and one pair of unmatched cards.](WinFormsMatchingGame/AppScreenshots/WinFormsMatchingGameMismatch.png)
 
 **Keyboard**
 
@@ -63,6 +63,10 @@ For other technical accessibility resources relating to WinForms and other Windo
 
 The app's exe has been made available for people who aren't set up to build the app themselves. To run this app, following the steps below. The app will only run on a 64-bit version of Windows.
 
-1. Downloading the exe from the folder at [WinFormsMatchingGame](https://1drv.ms/u/s!AlVXdkIXfQVpidFhyGkmurWNrLifNA?e=gFMquj) to your computer. Note that typically exe files would never be downloaded from the cloud, so you would have to explicitly say at the download site that you wish the file to be downloaded.
+1. Download the exe from the folder at [WinFormsMatchingGame](https://1drv.ms/u/s!AlVXdkIXfQVpidFhyGkmurWNrLifNA?e=gFMquj) to your computer. Note that typically exe files would never be downloaded from the cloud, so you would have to explicitly say at the download site that you wish the file to be downloaded.
 2. Run the exe from your computer. Given that the exe is not digitally signed, you would have to explicitly say that you wish the app to run on your computer.
 3. If .NET 5 is not yet installed on your computer, you will be prompted to install it. The required version is .NET for x64 Windows Desktop.
+
+**Future improvements**
+
+Please provide feedback on how the app could be made more accessible to youself or people you know. I'll try my best to update it accordingly.
