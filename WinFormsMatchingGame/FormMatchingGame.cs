@@ -6,10 +6,8 @@ using WinFormsMatchingGame.Controls;
 using WinFormsMatchingGame.Properties;
 
 // TODO:
-// Add image descriptions.
-// Check exe runs in isolation.
 // Code cleanup.
-// Create ReadMe file, with prerequisites of .NET 5.
+// Create ReadMe file, with prerequisites of .NET 5 x64 and a 64-bit machine.
 
 // DataGridViewButtonCell doesn't seem to support an image on the button.
 // (Painting the image in CellPainting doesn't seem a very clean way to go.)
