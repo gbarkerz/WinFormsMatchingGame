@@ -91,11 +91,11 @@ namespace WinFormsMatchingGame
                     Description = "A small, ancient looking hexagonal red stone building, with castellated battlements housing a cross. Arched windows on the sides of the building are bricked-up from the inside. The building sits of grass, with a bay and cloudy sky in the background.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card4) },
                 new Card {
-                    Name = "Lythan St Annes Windmill",
+                    Name = "Lytham St Annes Windmill",
                     Description = "A white windmill with a black roof and black sails. The windmill has stairs going up to a black door, and black windows. In the background is a street of houses and a clear, blue sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
                 new Card {
-                    Name = "Lythan St Annes Windmill",
+                    Name = "Lytham St Annes Windmill",
                     Description = "A white windmill with a black roof and black sails. The windmill has stairs going up to a black door, and black windows. In the background is a street of houses and a clear, blue sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
                 new Card {
