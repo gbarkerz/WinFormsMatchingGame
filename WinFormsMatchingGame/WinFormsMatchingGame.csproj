@@ -6,6 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <Authors>Guy Barker</Authors>
     <AssemblyName>NorthernEnglandMatchingGame</AssemblyName>
+    <Product>Northern England Matching Game</Product>
   </PropertyGroup>
 
   <ItemGroup>
