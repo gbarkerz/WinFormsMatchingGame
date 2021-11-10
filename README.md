@@ -1,8 +1,6 @@
 # WinFormsMatchingGame
 
-This is an in-development app, demonstrating some accessibility-related topics.
-
-Please note that the below was Guy Barker's understanding of things at the time of writing all this, and some of it might not be right. If someone knows of any errors in what I've said, please let me know. I also want to learn.
+Please note that the below was Guy Barker's understanding of things at the time of writing all this, and some of it might not be right. If someone knows of any errors in what I've said, please let me know. I always want to learn.
 
 **Goal**
 
@@ -14,15 +12,19 @@ The game is based on a traditional card matching game, where face-down cards are
 
 When the game is run, a 4x4 grid of squares appears, each square representing a card. When a card is clicked, an image is shown on the square. When another square is clicked, an another is also shown on that square. If the two images are the same, then the squares are considered to be matched, and will not change again for the rest of the game. If the images do not match, then the cards are considered to be unmatched, and the "Turn cards back over" button must be clicked, which results in the two unmatched cards no longer showing images. These steps are to be repeated until all matching images have been found, and a "Congratulations" window appears.
 
+![The WinFormsMatchingGame showing two pairs of matched cards, and one pair of unmatched cards.](WinFormsMatchingGame/AppScreenshots/WinFormsMatchingGameMismatched.png)
+
 **Keyboard**
 
-Tab key presses move keyboard focus between the grid and the buttons shown in the app. To move keyboard focus between the cards inside the grid, use the arrow keys. To turn two unmatched cards back over, either press Alt+A or the Enter key.
+Tab key presses move keyboard focus between the grid and the buttons shown in the app. To move keyboard focus between the cards inside the grid, use the arrow keys. To turn two unmatched cards back over, either press Alt+B or the Enter key.
 
 Is it recognized that the game needs work to explain to a player exactly how the game can be played. For example, there is no information in the game related to the results of the pressing the Enter key while keyboard focus is on a card in the grid.
 
 **Speech**
 
 To click one of the cards shown in the app using speech input, say "Click Card" followed by the number of the card. The cards are numbered from 1 to 16, reading let to right then top to bottom. For example, to click the first card on the bottom row, say "Click card 13".
+
+![The WinFormsMatchingGame showing two pairs of matched cards and one pair of unmatched cards. Above the game is the Windows Speech Recognition feature showing "Clicking Card 10, Face down"](WinFormsMatchingGame/AppScreenshots/WinFormsMatchingGameSpeech.png)
 
 **Technical considerations while building the app**
 
@@ -42,8 +44,7 @@ The game does in some situations raise programmatic events, requesting that scre
 
 By default, I would say that the names of cards in the game should never change. For example, a card might have a name of "Card 1" or "Card 8". Any current state data associated with the card would be programmatically exposed through other properties, such as its Value. However, given that a card's Value might not be announced depending on a screen reader's settings, the very important data of what image is shown on the card, that data is incorporated into the name. Feedback would be appreciated as to how all the data associated with a card would be most helpfully exposed.
 
-The Description property of a class derived from DataGridViewButtonCellAccessibleObject does not get exposed through the Windows UI Automation (UIA) API as as UIA clients would expect, so that property is not overridden. Rather, the Help property is used to describe the image shown on a card, and that gets exposed through the UIA HelpText property.
-
+The Description property of a class derived from DataGridViewButtonCellAccessibleObject does not get exposed through the Windows UI Automation (UIA) API as UIA clients would expect it to, so that property is not overridden. Rather, the Help property is used to describe the image shown on a card, and that gets exposed through the UIA HelpText property.
 
 ![The Accessibility Insights for Windows tool reporting the UI Automation hierarchy of the grid cells shown in the game.](WinFormsMatchingGame/AppScreenshots/WinFormsMatchingGameUIATree.png)
 
@@ -51,9 +52,9 @@ The Description property of a class derived from DataGridViewButtonCellAccessibl
 **Technical resources**
 
 The following resources show code snippets relating to customizing the accessibility of DataGridView cells.
-[WinForms: Setting the accessible name of a DataGridView cell](https://docs.microsoft.com/en-us/accessibility-tools-docs/items/WinForms/DataItem_Name)
-[WinForms: Setting helpful supplemental information on a DataGridView cell](https://docs.microsoft.com/en-us/accessibility-tools-docs/items/WinForms/DataItem_HelpText)
-[WinForms: Setting a value on a DataGridView cell](https://docs.microsoft.com/en-us/accessibility-tools-docs/items/WinForms/DataItem_ValueValue)
+- [WinForms: Setting the accessible name of a DataGridView cell](https://docs.microsoft.com/en-us/accessibility-tools-docs/items/WinForms/DataItem_Name) 
+- [WinForms: Setting helpful supplemental information on a DataGridView cell](https://docs.microsoft.com/en-us/accessibility-tools-docs/items/WinForms/DataItem_HelpText) 
+- [WinForms: Setting a value on a DataGridView cell](https://docs.microsoft.com/en-us/accessibility-tools-docs/items/WinForms/DataItem_ValueValue) 
 
 For other technical accessibility resources relating to WinForms and other Windows UI Frameworks, please visit 
 [Common approaches for enhancing the programmatic accessibility of your Win32, WinForms and WPF apps](https://www.linkedin.com/pulse/common-approaches-enhancing-programmatic-your-win32-winforms-barker)

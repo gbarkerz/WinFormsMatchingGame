@@ -5,10 +5,7 @@ using System.Windows.Forms;
 using WinFormsMatchingGame.Controls;
 using WinFormsMatchingGame.Properties;
 
-// TODO:
-// Code cleanup.
-// Create ReadMe file, with prerequisites of .NET 5 x64 and a 64-bit machine.
-
+// For details on this app, please read the ReadMe file included in the app's VS solution.
 namespace WinFormsMatchingGame
 {
     public partial class FormMatchingGame : Form
@@ -24,30 +21,37 @@ namespace WinFormsMatchingGame
 
         private void CreateCardMatchingGrid()
         {
+            // Create the grid to host the cards shown in the game.
             cardMatchingGrid = new CardMatchingGrid();
 
-            cardMatchingGrid.AccessibilityObject.Name = Resources.ResourceManager.GetString("CardsForMatching");
-
+            // Set up the grid in a way that most closely matches the needs of the game.
             cardMatchingGrid.RowHeadersVisible = false;
             cardMatchingGrid.ColumnHeadersVisible = false;
-            cardMatchingGrid.Dock = DockStyle.Fill;
-            cardMatchingGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            cardMatchingGrid.AllowUserToAddRows = false;
-            cardMatchingGrid.ShowCellToolTips = false;
-            cardMatchingGrid.StandardTab = true;
             cardMatchingGrid.AllowUserToResizeRows = false;
             cardMatchingGrid.AllowUserToResizeColumns = false;
+            cardMatchingGrid.AllowUserToAddRows = false;
+            cardMatchingGrid.Dock = DockStyle.Fill;
+            cardMatchingGrid.ShowCellToolTips = false;
 
-            cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnWithCustomName());
-            cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnWithCustomName());
-            cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnWithCustomName());
-            cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnWithCustomName());
+            // Make sure the grid itself has an accessible name.
+            cardMatchingGrid.AccessibilityObject.Name = Resources.ResourceManager.GetString("CardsForMatching");
+
+            // Don't have Tab presses move keyboard focus between cells in the grid.
+            cardMatchingGrid.StandardTab = true;
+
+            // The game currently only shows a 4x4 grid of cards.
+
+            cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnMatchingGame());
+            cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnMatchingGame());
+            cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnMatchingGame());
+            cardMatchingGrid.Columns.Add(new DataGridViewButtonColumnMatchingGame());
 
             cardMatchingGrid.Rows.Add();
             cardMatchingGrid.Rows.Add();
             cardMatchingGrid.Rows.Add();
             cardMatchingGrid.Rows.Add();
 
+            // Set up the cards to be shown.
             SetupCardList();
 
             this.panelCardGrid.Controls.Add(cardMatchingGrid);
@@ -55,7 +59,7 @@ namespace WinFormsMatchingGame
 
         private void SetupCardList()
         {
-            // This app assumes the count of cards is square number. (Currently the count is 16.)
+            // Note: This app assumes the count of cards is square number. (Currently the count is 16.)
             cardMatchingGrid.CardList = new List<Card>()
             {
                 new Card {
@@ -132,6 +136,11 @@ namespace WinFormsMatchingGame
             TryAgain();
         }
 
+        private void TryAgain()
+        {
+            cardMatchingGrid.TryAgain();
+        }
+
         private void buttonRestartGame_Click(object sender, EventArgs e)
         {
             RestartGame();
@@ -140,21 +149,12 @@ namespace WinFormsMatchingGame
         private void RestartGame()
         {
             cardMatchingGrid.ResetGrid();
-
             cardMatchingGrid.Focus();
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void TryAgain()
-        {
-            cardMatchingGrid.TryAgain();
-
-            // In the interests of game efficiency, move focus back into the grid now.
-            cardMatchingGrid.Focus();
         }
     }
 }
