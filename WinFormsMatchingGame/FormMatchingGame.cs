@@ -9,25 +9,6 @@ using WinFormsMatchingGame.Properties;
 // Code cleanup.
 // Create ReadMe file, with prerequisites of .NET 5 x64 and a 64-bit machine.
 
-// DataGridViewButtonCell doesn't seem to support an image on the button.
-// (Painting the image in CellPainting doesn't seem a very clean way to go.)
-// So use DataGridViewButtonCell, and explicitly check for a Space key press.
-// Then again, DataGridViewImageCell doesn't support a click, and didn't seem 
-// to support being clicked via Windows Speech Recognition, so stick with a
-// DataGridViewButtonCell.
-
-// https://docs.microsoft.com/en-us/accessibility-tools-docs/items/WinForms/DataItem_Name
-// https://docs.microsoft.com/en-us/accessibility-tools-docs/items/WinForms/DataItem_HelpText
-// https://docs.microsoft.com/en-us/accessibility-tools-docs/items/WinForms/DataItem_ValueValue
-// https://www.linkedin.com/pulse/common-approaches-enhancing-programmatic-your-win32-winforms-barker/
-// https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.control.queryaccessibilityhelp?redirectedfrom=MSDN&view=windowsdesktop-5.0
-
-// Don't bother setting the DataGridViewButtonCellWithCustomName's Description property.
-// That doesn't get exposed as UIA clients would expect. (Rather it gets exposed in a
-// way to support clients of a legacy Windows accessibility API.)
-
-// Leave the default grid behavior of an Enter press moving to the cell below the focused cell.
-
 namespace WinFormsMatchingGame
 {
     public partial class FormMatchingGame : Form
