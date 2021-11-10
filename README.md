@@ -26,7 +26,9 @@ To click one of the cards shown in the app using speech input, say "Click Card" 
 
 Technical considerations while building the app
 
-By default, when building games for that everyone can use, it's best to use standard controls with come with the UI framework being used. Typically standard controls have built-in support for some level of accessibility, and so provide a great head-start when building an accessible app. So the first question is, what would be the most appropriate WinForms control to use for the grid of cards. One option that seemed attractive was to use a DataGridView control. That supports keyboard accessibility, and customization of both the programmatic and visual representation of its cells, and so it seemed worth starting with that control. The DataGridView is great for binding data which can populates rows in the grid, but for this app, each cell is independent of all other cells, and so data binding isn't used. Rather, a separate list of card data is managed independently of grid, and the list's data accessed however necessary when working with the grid.
+By default, when building games for that everyone can use, it's best to use standard controls with come with the UI framework being used. Typically standard controls have built-in support for some level of accessibility, and so provide a great head-start when building an accessible app. So the first question is, what would be the most appropriate WinForms control to use for the grid of cards?
+
+One option that seemed attractive was to use a DataGridView control. That supports keyboard accessibility, customization of both the programmatic and visual representation of its cells, and programmatically exposed the row and column data associated with the grid and cells withing the grid. As such, the DataGridView seemed to have great potential as a starting point for the grid shown in the game. The DataGridView typically has data bound to it and populates rows in the grid based on the data items, but for this app, each cell is independent of all other cells, and so data binding isn't used. Rather, a separate list of card data is managed independently of grid, and the list's data accessed however necessary when working with the grid.
 
 The next question is what type of DataGridView cells are the best match for the cards in the game. Given that images are to be shown in the cells, it was tempting to use DataGridViewImageCell. That would make it really easy to have images shown, and to specify how the images are to be presented. However, in tests, it didn't seem that the DataGridViewImageCell responded to attempts to click the cell with the keyboard or through speech input. So instead, the DataGridView in the game uses the DataGridViewButtonCell. That type of cell responds to a click using mouse, touch, keyboard and speech, and so provides a great head start on supporting all players. The only apparent disadvantage of using the DataGridViewButtonCell here is that it doesn't natively support displaying an image. As such, the DataGridView in the game has its CellPainting overridden, and manual action is taken to present the image on a card.
 
@@ -41,6 +43,10 @@ Two unmatched cards are turned back.
 By default, I would say that the names of cards in the game should never change. For example, a card might have a name of "Card 1" or "Card 8". Any current state data associated with the card would be programmatically exposed through other properties, such as its Value. However, given that a card's Value might not be announced depending on a screen reader's settings, the very important data of what image is shown on the card, that data is incorporated into the name. Feedback would be appreciated as to how all the data associated with a card would be most helpfully exposed.
 
 The Description property of a class derived from DataGridViewButtonCellAccessibleObject does not get exposed through the Windows UI Automation (UIA) API as as UIA clients would expect, so that property is not overridden. Rather, the Help property is used to describe the image shown on a card, and that gets exposed through the UIA HelpText property.
+
+
+![The Accessibility Insights for Windows tool reporting the UI Automation hierarchy of the grid cells shown in the game.](ReadMeImages/WinFormsMatchingGameUIATree.png)
+
 
 Technical resources
 

@@ -10,6 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReadMeImages", "ReadMeImages", "{6542F9C8-D173-4FA8-8580-8B9B9D6B34DA}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Pictures\WinFormsMatchingGameUIATree.png = ..\..\..\Pictures\WinFormsMatchingGameUIATree.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +28,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6542F9C8-D173-4FA8-8580-8B9B9D6B34DA} = {F037AC69-53F0-485A-B970-099A43DE1AFF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F191546F-AEE5-4E25-A889-1914D992F149}
