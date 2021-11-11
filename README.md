@@ -1,6 +1,10 @@
 # WinFormsMatchingGame
 
-Please note that the below was Guy Barker's understanding of things at the time of writing all this, and some of it might not be right. If someone knows of any errors in what I've said, please let me know. I always want to learn.
+Please note that the content below was Guy Barker's understanding of things at the time of writing all this, and some of it might not be right. If someone knows of any errors in what I've said, please let me know. I always want to learn.
+
+Also please note that it's early days for the app. The are lots more helpful features that could be added, and the implementation will surely evolve over time. But it's an interesting starting point for building a matching game that everyone can play.
+
+&nbsp;
 
 **Goal**
 
