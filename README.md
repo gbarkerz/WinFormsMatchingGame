@@ -6,6 +6,8 @@ Please note that the below was Guy Barker's understanding of things at the time 
 
 The goal of this app is to demonstrate some considerations and implementation relating to an simple, accessible Windows game app.
 
+&nbsp;
+
 **Playing the game**
 
 The game is based on a traditional card matching game, where face-down cards are turned over in the hope of finding pairs of cards.
@@ -14,17 +16,23 @@ When the game is run, a 4x4 grid of squares appears, each square representing a 
 
 ![The WinFormsMatchingGame showing two pairs of matched cards and one pair of unmatched cards.](WinFormsMatchingGame/AppScreenshots/WinFormsMatchingGameMismatch.png)
 
+&nbsp;
+
 **Keyboard**
 
 Tab key presses move keyboard focus between the grid and the buttons shown in the app. To move keyboard focus between the cards inside the grid, use the arrow keys. To turn two unmatched cards back over, either press Alt+B or the Enter key.
 
 Is it recognized that the game needs work to explain to a player exactly how the game can be played. For example, there is no information in the game related to the results of the pressing the Enter key while keyboard focus is on a card in the grid.
 
+&nbsp;
+
 **Speech**
 
 To click one of the cards shown in the app using speech input, say "Click Card" followed by the number of the card. The cards are numbered from 1 to 16, reading let to right then top to bottom. For example, to click the first card on the bottom row, say "Click card 13".
 
 ![The WinFormsMatchingGame showing two pairs of matched cards and one pair of unmatched cards. Above the game is the Windows Speech Recognition feature showing "Clicking Card 10, Face down"](WinFormsMatchingGame/AppScreenshots/WinFormsMatchingGameSpeech.png)
+
+&nbsp;
 
 **Technical considerations while building the app**
 
@@ -52,6 +60,7 @@ The Description property of a class derived from DataGridViewButtonCellAccessibl
 
 ![The Accessibility Insights for Windows tool reporting the UI Automation hierarchy of the grid cells shown in the game.](WinFormsMatchingGame/AppScreenshots/WinFormsMatchingGameUIATree.png)
 
+&nbsp;
 
 **Technical resources**
 
@@ -63,6 +72,8 @@ The following resources show code snippets relating to customizing the accessibi
 For other technical accessibility resources relating to WinForms and other Windows UI Frameworks, please visit 
 [Common approaches for enhancing the programmatic accessibility of your Win32, WinForms and WPF apps](https://www.linkedin.com/pulse/common-approaches-enhancing-programmatic-your-win32-winforms-barker)
 
+&nbsp;
+
 **To run the app without building it**
 
 The app's exe has been made available for people who aren't set up to build the app themselves. To run this app, following the steps below. The app will only run on a 64-bit version of Windows.
@@ -70,6 +81,8 @@ The app's exe has been made available for people who aren't set up to build the 
 1. Download the exe from the folder at [WinFormsMatchingGame](https://1drv.ms/u/s!AlVXdkIXfQVpidFhyGkmurWNrLifNA?e=gFMquj) to your computer. Note that typically exe files would never be downloaded from the cloud, so you would have to explicitly say at the download site that you wish the file to be downloaded.
 2. Run the exe from your computer. Given that the exe is not digitally signed, you would have to explicitly say that you wish the app to run on your computer.
 3. If .NET 5 is not yet installed on your computer, you will be prompted to install it. The required version is .NET for x64 Windows Desktop.
+
+&nbsp;
 
 **Future improvements**
 
