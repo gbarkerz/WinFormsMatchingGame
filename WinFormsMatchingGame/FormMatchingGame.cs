@@ -88,11 +88,11 @@ namespace WinFormsMatchingGame
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card3) },
                 new Card {
                     Name = "Cockersand Abbey",
-                    Description = "A small, ancient looking hexagonal red stone building, with castellated battlements housing a cross. Arched windows on the sides of the building are bricked-up from the inside. The building sits of grass, with a bay and cloudy sky in the background.",
+                    Description = "A small, very old hexagonal red stone building, with castellated battlements housing a cross. Arched windows on the sides of the building are bricked-up from the inside. The building sits on grass, with a bay and cloudy sky in the background.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card4) },
                 new Card {
                     Name = "Cockersand Abbey",
-                    Description = "A small, ancient looking hexagonal red stone building, with castellated battlements housing a cross. Arched windows on the sides of the building are bricked-up from the inside. The building sits of grass, with a bay and cloudy sky in the background.",
+                    Description = "A small, very old hexagonal red stone building, with castellated battlements housing a cross. Arched windows on the sides of the building are bricked-up from the inside. The building sits on grass, with a bay and cloudy sky in the background.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card4) },
                 new Card {
                     Name = "Lytham St Annes Windmill",
@@ -104,11 +104,11 @@ namespace WinFormsMatchingGame
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
                 new Card {
                     Name = "Bolton Abbey",
-                    Description = "The stone ruins of a large ancient abbey. The abbey has no roof or windows, and the sun shines through the arches from behind the abbey. In the foreground is a lawn housing multiple large stone graves, and in the background is a clear blue sky.",
+                    Description = "The stone ruins of a large, very old abbey. The abbey has no roof or windows, and the sun shines through the arches from behind the abbey. In the foreground is a lawn housing multiple large stone graves, and in the background is a clear blue sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card6) },
                 new Card {
                     Name = "Bolton Abbey",
-                    Description = "The stone ruins of a large ancient abbey. The abbey has no roof or windows, and the sun shines through the arches from behind the abbey. In the foreground is a lawn housing multiple large stone graves, and in the background is a clear blue sky.",
+                    Description = "The stone ruins of a large, very old abbey. The abbey has no roof or windows, and the sun shines through the arches from behind the abbey. In the foreground is a lawn housing multiple large stone graves, and in the background is a clear blue sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card6) },
                 new Card {
                     Name = "Harrogate Obelisk",
