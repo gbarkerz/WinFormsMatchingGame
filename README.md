@@ -21,6 +21,9 @@ When the game is run, a 4x4 grid of blank squares appears, each square represent
 &nbsp;
 
 The following image shows the game showing two pairs of matched cards and one pair of unmatched cards.
+
+&nbsp;
+
 ![The WinFormsMatchingGame showing two pairs of matched cards and one pair of unmatched cards.](WinFormsMatchingGame/AppScreenshots/WinFormsMatchingGameMismatch.png)
 
 &nbsp;
