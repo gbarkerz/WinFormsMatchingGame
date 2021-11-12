@@ -18,6 +18,8 @@ The game is based on a traditional card matching game, where face-down cards are
 
 When the game is run, a 4x4 grid of blank squares appears, each square representing a card. When a card is clicked, an image is shown on the card. When another card is clicked, an image is also shown on that second card. If the two images are the same, then the cards are considered to be matched, and will not change again for the rest of the game. If the images do not match, then the cards are considered to be unmatched, and the "Turn cards back over" button must be clicked, which results in the two unmatched cards no longer showing images. These steps are to be repeated until all matching images have been found, and a "Congratulations" window appears.
 
+&nbsp;
+
 The following image shows the game showing two pairs of matched cards and one pair of unmatched cards.
 ![The WinFormsMatchingGame showing two pairs of matched cards and one pair of unmatched cards.](WinFormsMatchingGame/AppScreenshots/WinFormsMatchingGameMismatch.png)
 
@@ -36,6 +38,9 @@ It is recognized that the app needs work to explain to a player exactly how the 
 To click one of the cards shown in the app using speech input, say "Click Card" followed by the number of the card. The cards are numbered from 1 to 16, reading left to right then top to bottom. For example, to click the first card on the bottom row, say "Click card 13".
 
 The following image shows two pairs of matched cards and one pair of unmatched cards. Above the game is the Windows Speech Recognition feature showing "Clicking Card 10, Face down"
+
+&nbsp;
+
 ![The WinFormsMatchingGame showing two pairs of matched cards and one pair of unmatched cards. Above the game is the Windows Speech Recognition feature showing "Clicking Card 10, Face down"](WinFormsMatchingGame/AppScreenshots/WinFormsMatchingGameSpeech.png)
 
 &nbsp;
@@ -65,6 +70,9 @@ By default, I would say that the names of cards in the game should never change.
 The Description property of a class derived from DataGridViewButtonCellAccessibleObject does not get exposed through the Windows UI Automation (UIA) API as UIA clients would expect it to, so that property is not overridden in the app. Rather, the Help property is used to describe the image shown on a card, and that gets exposed through the UIA HelpText property.
 
 The following image shows the Accessibility Insights for Windows tool reporting the UI Automation hierarchy of the grid cells shown in the game.
+
+&nbsp;
+
 ![The Accessibility Insights for Windows tool reporting the UI Automation hierarchy of the grid cells shown in the game.](WinFormsMatchingGame/AppScreenshots/WinFormsMatchingGameUIATree.png)
 
 &nbsp;
