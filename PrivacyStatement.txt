@@ -1,0 +1,5 @@
+This is the Accessible Matching Game Privacy Statement.
+
+The Accessible Matching Game app does not access, collect, or transmit personal information.
+
+To learn more about the app, including access to all the source code for the app, please visit https://github.com/gbarkerz/WinFormsMatchingGame.
