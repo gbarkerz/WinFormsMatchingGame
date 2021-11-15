@@ -1,11 +1,5 @@
 # WinFormsMatchingGame
 
-Please note that the content below was Guy Barker's understanding of things at the time of writing all this, and some of it might not be right. If someone knows of any errors in what I've said, please let me know. I always want to learn.
-
-Also please note that it's early days for the app. There are a lot of other helpful features that could be added to the app, and its implementation will surely evolve over time. But it's an interesting starting point for building a matching game that everyone can play.
-
-&nbsp;
-
 **Goals**
 
 The goals of this app are to (1) demonstrate some considerations and implementation relating to a simple, accessible Windows game app, and (2) make an enjoyable game available for everyone.
