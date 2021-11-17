@@ -307,7 +307,7 @@ namespace WinFormsMatchingGame.Controls
             if (FaceUp)
             {
                 // Raise an event for screen reader to react to.
-                (this.DataGridView as CardMatchingGrid).AnnounceAction(Resources.TurnedOver + card.Name);
+                (this.DataGridView as CardMatchingGrid).AnnounceAction(Resources.TurnedOver + " " + card.Name);
             }
 
             // Repaint the cell to show the image.
