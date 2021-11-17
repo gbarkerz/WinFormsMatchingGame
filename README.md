@@ -88,15 +88,10 @@ For other technical accessibility resources relating to WinForms and other Windo
 
 **To run the app without building it**
 
-The app's exe has been made available for people who aren't set up to build the app themselves. To run this app, following the steps below. This exe will only run on a 64-bit version of Windows.
+The app's available at the Microsoft Store for people who aren't set up to build the app themselves. To run this app, following the steps below. This exe will only run on a 64-bit version of Windows.
 
-1. Download the setup app, WinFormsMatchingGameSetup.msi, in the folder at [WinFormsMatchingGame](https://1drv.ms/u/s!AlVXdkIXfQVpidFhyGkmurWNrLifNA?e=gFMquj) to your computer. Before the download is complete, you may have to explicitly say that you really do wish the keep the file being downloaded.
-2. After setup is complete, run the Matching Game app from the shortcut on your Windows desktop. Given that the exe is not digitally signed, you will have to explicitly say that you really do wish the app to run on your computer.
-3. If .NET 5 is not yet installed on your computer, you will be prompted to install it. The required version is .NET 5 for x64 Windows Desktop.
-
-If you later wish to uninstall the app, go to the Settings app, then "Apps and Features", and uninstall the app called "Winforms Matching Game".
-
-If the game generates any interest, I can explore digitally signing the app, or making some version of it available through the Microsoft Store. 
+1. Download the app from the Microsoft store at ms-windows-store://pdp/?productid=9P6KHLZJF7C7
+2. If .NET 5 is not yet installed on your computer, you will be prompted to install it when the app is run. The required version is .NET 5 for x64 Windows Desktop.
 
 &nbsp;
 
