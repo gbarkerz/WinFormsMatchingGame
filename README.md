@@ -90,7 +90,7 @@ For other technical accessibility resources relating to WinForms and other Windo
 
 The app's available at the Microsoft Store for people who aren't set up to build the app themselves. To run this app, following the steps below. This exe will only run on a 64-bit version of Windows.
 
-1. Download the app from the Microsoft store at [Accessible Matching Game](ms-windows-store://pdp/?productid=9P6KHLZJF7C7).
+1. Download the app from the Microsoft store at [Accessible Matching Game](https://www.microsoft.com/store/apps/9P6KHLZJF7C7).
 2. If .NET 5 is not yet installed on your computer, you will be prompted to install it when the app is run. The required version is .NET 5 for x64 Windows Desktop.
 
 &nbsp;
