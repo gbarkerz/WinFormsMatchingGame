@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using WinFormsMatchingGame.Controls;
 using WinFormsMatchingGame.Properties;
@@ -17,6 +19,15 @@ namespace WinFormsMatchingGame
             InitializeComponent();
 
             CreateCardMatchingGrid();
+
+            if (Settings.Default.YourPictures)
+            {
+                if (!IsPicturePathValid(Settings.Default.YourPicturesPath))
+                {
+                    var gameSettings = new GameSettings(this);
+                    gameSettings.ShowDialog(this);
+                }
+            }
         }
 
         private void CreateCardMatchingGrid()
@@ -152,9 +163,58 @@ namespace WinFormsMatchingGame
             cardMatchingGrid.Focus();
         }
 
-        private void buttonClose_Click(object sender, EventArgs e)
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowSettingsDialog();
+        }
+
+        private void ShowSettingsDialog()
+        {
+            var gameSettings = new GameSettings(this);
+            gameSettings.ShowDialog(this);
+        }
+
+        public bool IsPicturePathValid(string picturePath)
+        {
+            bool picturePathValid = true;
+
+            System.IO.DirectoryInfo di = new DirectoryInfo(picturePath);
+
+            try
+            {
+                string[] extensions = { ".jpg", ".png", ".bmp" };
+
+                var files = di.EnumerateFiles("*", SearchOption.TopDirectoryOnly)
+                                .Where(f => extensions.Contains(f.Extension.ToLower()))
+                                .ToArray();
+
+                if (files.Length < 8)
+                {
+                    picturePathValid = false;
+                }
+            }
+            catch
+            {
+                picturePathValid = false;
+            }
+
+            if (!picturePathValid)
+            {
+                // Todo: Localize.
+                MessageBox.Show(
+                    this,
+                    "Please choose a folder that contains at least 8 pictures.",
+                    "Matching Game Settings",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+
+            return picturePathValid;
         }
     }
 }
