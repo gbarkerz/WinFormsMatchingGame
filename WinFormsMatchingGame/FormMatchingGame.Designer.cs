@@ -110,7 +110,7 @@ namespace WinFormsMatchingGame
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(205, 40);
             this.optionsToolStripMenuItem.Text = "&Settings";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -127,7 +127,7 @@ namespace WinFormsMatchingGame
             this.MinimumSize = new System.Drawing.Size(500, 400);
             this.Name = "FormMatchingGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Northern England Matching Game V1.0";
+            this.Text = "Card Matching Game V1.1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
