@@ -10,8 +10,9 @@ using System.Windows.Forms;
 //  -- Remove TabIndex.
 //  -- Reorder the Add() calls in Group and in Dialog, verify the order with AIWin.
 //  -- Run AIWin.
+// - Be sure to do the above as changes are made to the dialog. (And watch for TabIndex being added back.)
 // - Assume the common Folder browse dlg is accessible.
-
+// - Be clear about what an sterirsk means.
 
 namespace WinFormsMatchingGame
 {
@@ -31,6 +32,31 @@ namespace WinFormsMatchingGame
             radioButtonPicturesNorthernEngland.Checked = !Settings.Default.YourPictures;
 
             textBoxYourPicturesPath.Text = Settings.Default.YourPicturesPath;
+
+            for (int i = 0; i < 8; i++)
+            {
+                string settingName = "Card" + (i + 1) + "Path";
+                try
+                {
+                    if (String.IsNullOrWhiteSpace(Settings.Default[settingName].ToString()))
+                    {
+                        break;
+                    }
+
+                    DirectoryInfo di = new DirectoryInfo(Settings.Default[settingName].ToString());
+                    dataGridViewPictureData.Rows.Add(di.Name);
+
+                    settingName = "Card" + (i + 1) + "Name";
+                    dataGridViewPictureData.Rows[i].Cells[1].Value = Settings.Default[settingName];
+
+                    settingName = "Card" + (i + 1) + "Description";
+                    dataGridViewPictureData.Rows[i].Cells[2].Value = Settings.Default[settingName];
+                }
+                catch
+                {
+                    break;
+                }
+            }
         }
 
         private void GameSettings_FormClosing(object sender, FormClosingEventArgs e)
@@ -56,6 +82,29 @@ namespace WinFormsMatchingGame
             Settings.Default.YourPictures = radioButtonPicturesYourPictures.Checked;
             Settings.Default.YourPicturesPath = textBoxYourPicturesPath.Text;
 
+            // The Settings for the card file paths has already been persisted.
+            for (int i = 0; i < 8; i++)
+            {
+                string settingName = "Card" + (i + 1) + "Path";
+                try
+                {
+                    if (String.IsNullOrWhiteSpace(Settings.Default[settingName].ToString()))
+                    {
+                        break;
+                    }
+
+                    settingName = "Card" + (i + 1) + "Name";
+                    Settings.Default[settingName] = dataGridViewPictureData.Rows[i].Cells[1].Value;
+
+                    settingName = "Card" + (i + 1) + "Description";
+                    Settings.Default[settingName] = dataGridViewPictureData.Rows[i].Cells[2].Value;
+                }
+                catch
+                {
+                    break;
+                }
+            }
+
             Settings.Default.Save();
         }
 
@@ -66,6 +115,10 @@ namespace WinFormsMatchingGame
             labelYourPicturesInstructions.Enabled = useYourPictures;
             textBoxYourPicturesPath.Enabled = useYourPictures;
             buttonYourPicturesBrowse.Enabled = useYourPictures;
+
+            labelPictureDataGrid.Enabled = useYourPictures;
+            dataGridViewPictureData.Enabled = useYourPictures;
+
         }
 
         private void buttonYourPicturesBrowse_Click(object sender, EventArgs e)
@@ -80,6 +133,23 @@ namespace WinFormsMatchingGame
                 if (formMatchingGame.IsPicturePathValid(folderBrowserDialog.SelectedPath))
                 {
                     textBoxYourPicturesPath.Text = folderBrowserDialog.SelectedPath;
+
+                    DirectoryInfo di = new DirectoryInfo(textBoxYourPicturesPath.Text);
+
+                    string[] extensions = { ".jpg", ".png", ".bmp" };
+
+                    var files = di.EnumerateFiles("*", SearchOption.TopDirectoryOnly)
+                                    .Where(f => extensions.Contains(f.Extension.ToLower()))
+                                    .ToArray();
+                    for (int i = 0; i < files.Length; i++)
+                    {
+                        dataGridViewPictureData.Rows.Add(files[i].Name);
+
+                        string settingName = "Card" + (i + 1) + "Path";
+                        Settings.Default[settingName] = files[i].FullName;
+                    }
+
+                    Settings.Default.Save();
                 }
             }
         }

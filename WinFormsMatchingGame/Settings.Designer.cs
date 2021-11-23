@@ -46,5 +46,293 @@ namespace WinFormsMatchingGame {
                 this["YourPicturesPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card1Path {
+            get {
+                return ((string)(this["Card1Path"]));
+            }
+            set {
+                this["Card1Path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card1Name {
+            get {
+                return ((string)(this["Card1Name"]));
+            }
+            set {
+                this["Card1Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card1Description {
+            get {
+                return ((string)(this["Card1Description"]));
+            }
+            set {
+                this["Card1Description"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card2Path {
+            get {
+                return ((string)(this["Card2Path"]));
+            }
+            set {
+                this["Card2Path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card2Name {
+            get {
+                return ((string)(this["Card2Name"]));
+            }
+            set {
+                this["Card2Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card2Description {
+            get {
+                return ((string)(this["Card2Description"]));
+            }
+            set {
+                this["Card2Description"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card3Path {
+            get {
+                return ((string)(this["Card3Path"]));
+            }
+            set {
+                this["Card3Path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card3Name {
+            get {
+                return ((string)(this["Card3Name"]));
+            }
+            set {
+                this["Card3Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card3Description {
+            get {
+                return ((string)(this["Card3Description"]));
+            }
+            set {
+                this["Card3Description"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card4Path {
+            get {
+                return ((string)(this["Card4Path"]));
+            }
+            set {
+                this["Card4Path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card4Name {
+            get {
+                return ((string)(this["Card4Name"]));
+            }
+            set {
+                this["Card4Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card4Description {
+            get {
+                return ((string)(this["Card4Description"]));
+            }
+            set {
+                this["Card4Description"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card5Path {
+            get {
+                return ((string)(this["Card5Path"]));
+            }
+            set {
+                this["Card5Path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card5Name {
+            get {
+                return ((string)(this["Card5Name"]));
+            }
+            set {
+                this["Card5Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card5Description {
+            get {
+                return ((string)(this["Card5Description"]));
+            }
+            set {
+                this["Card5Description"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card6Path {
+            get {
+                return ((string)(this["Card6Path"]));
+            }
+            set {
+                this["Card6Path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card6Name {
+            get {
+                return ((string)(this["Card6Name"]));
+            }
+            set {
+                this["Card6Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card6Description {
+            get {
+                return ((string)(this["Card6Description"]));
+            }
+            set {
+                this["Card6Description"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card7Path {
+            get {
+                return ((string)(this["Card7Path"]));
+            }
+            set {
+                this["Card7Path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card7Name {
+            get {
+                return ((string)(this["Card7Name"]));
+            }
+            set {
+                this["Card7Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card7Description {
+            get {
+                return ((string)(this["Card7Description"]));
+            }
+            set {
+                this["Card7Description"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card8Path {
+            get {
+                return ((string)(this["Card8Path"]));
+            }
+            set {
+                this["Card8Path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card8Name {
+            get {
+                return ((string)(this["Card8Name"]));
+            }
+            set {
+                this["Card8Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Card8Description {
+            get {
+                return ((string)(this["Card8Description"]));
+            }
+            set {
+                this["Card8Description"] = value;
+            }
+        }
     }
 }

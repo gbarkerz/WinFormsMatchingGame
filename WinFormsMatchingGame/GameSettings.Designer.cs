@@ -36,8 +36,14 @@ namespace WinFormsMatchingGame
             this.labelYourPicturesInstructions = new System.Windows.Forms.Label();
             this.textBoxYourPicturesPath = new System.Windows.Forms.TextBox();
             this.buttonYourPicturesBrowse = new System.Windows.Forms.Button();
+            this.labelPictureDataGrid = new System.Windows.Forms.Label();
+            this.dataGridViewPictureData = new System.Windows.Forms.DataGridView();
+            this.ColumnCardFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonClose = new System.Windows.Forms.Button();
             this.groupBoxCardPictures.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPictureData)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxCardPictures
@@ -48,9 +54,11 @@ namespace WinFormsMatchingGame
             this.groupBoxCardPictures.Controls.Add(this.labelYourPicturesInstructions);
             this.groupBoxCardPictures.Controls.Add(this.textBoxYourPicturesPath);
             this.groupBoxCardPictures.Controls.Add(this.buttonYourPicturesBrowse);
+            this.groupBoxCardPictures.Controls.Add(this.labelPictureDataGrid);
+            this.groupBoxCardPictures.Controls.Add(this.dataGridViewPictureData);
             this.groupBoxCardPictures.Location = new System.Drawing.Point(13, 13);
             this.groupBoxCardPictures.Name = "groupBoxCardPictures";
-            this.groupBoxCardPictures.Size = new System.Drawing.Size(819, 346);
+            this.groupBoxCardPictures.Size = new System.Drawing.Size(819, 610);
             this.groupBoxCardPictures.TabIndex = 0;
             this.groupBoxCardPictures.TabStop = false;
             this.groupBoxCardPictures.Text = "C&ard pictures";
@@ -92,10 +100,10 @@ namespace WinFormsMatchingGame
             this.labelYourPicturesInstructions.AutoSize = true;
             this.labelYourPicturesInstructions.Location = new System.Drawing.Point(69, 201);
             this.labelYourPicturesInstructions.Name = "labelYourPicturesInstructions";
-            this.labelYourPicturesInstructions.Size = new System.Drawing.Size(726, 60);
+            this.labelYourPicturesInstructions.Size = new System.Drawing.Size(512, 60);
             this.labelYourPicturesInstructions.TabIndex = 3;
-            this.labelYourPicturesInstructions.Text = "The pictures shown will be 8 randomly chosen from the folder you pick here. \r\nThe" +
-    " picture format needs to be JPG, PNG, or BMP.";
+            this.labelYourPicturesInstructions.Text = "Please select a folder that contains exactly 8 pictures. \r\nThe picture format nee" +
+    "ds to be JPG, PNG, or BMP.";
             // 
             // textBoxYourPicturesPath
             // 
@@ -114,9 +122,56 @@ namespace WinFormsMatchingGame
             this.buttonYourPicturesBrowse.UseVisualStyleBackColor = true;
             this.buttonYourPicturesBrowse.Click += new System.EventHandler(this.buttonYourPicturesBrowse_Click);
             // 
+            // labelPictureDataGrid
+            // 
+            this.labelPictureDataGrid.AutoSize = true;
+            this.labelPictureDataGrid.Location = new System.Drawing.Point(69, 333);
+            this.labelPictureDataGrid.Name = "labelPictureDataGrid";
+            this.labelPictureDataGrid.Size = new System.Drawing.Size(670, 30);
+            this.labelPictureDataGrid.TabIndex = 6;
+            this.labelPictureDataGrid.Text = "&Information about your pictures. (Columns marked with * are required.)";
+            // 
+            // dataGridViewPictureData
+            // 
+            this.dataGridViewPictureData.AllowUserToAddRows = false;
+            this.dataGridViewPictureData.AllowUserToDeleteRows = false;
+            this.dataGridViewPictureData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewPictureData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPictureData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnCardFileName,
+            this.ColumnName,
+            this.ColumnDescription});
+            this.dataGridViewPictureData.Location = new System.Drawing.Point(69, 371);
+            this.dataGridViewPictureData.Name = "dataGridViewPictureData";
+            this.dataGridViewPictureData.RowHeadersVisible = false;
+            this.dataGridViewPictureData.RowHeadersWidth = 72;
+            this.dataGridViewPictureData.RowTemplate.Height = 37;
+            this.dataGridViewPictureData.Size = new System.Drawing.Size(667, 199);
+            this.dataGridViewPictureData.StandardTab = true;
+            this.dataGridViewPictureData.TabIndex = 7;
+            // 
+            // ColumnCardFileName
+            // 
+            this.ColumnCardFileName.HeaderText = "File*";
+            this.ColumnCardFileName.MinimumWidth = 9;
+            this.ColumnCardFileName.Name = "ColumnCardFileName";
+            this.ColumnCardFileName.ReadOnly = true;
+            // 
+            // ColumnName
+            // 
+            this.ColumnName.HeaderText = "Name*";
+            this.ColumnName.MinimumWidth = 9;
+            this.ColumnName.Name = "ColumnName";
+            // 
+            // ColumnDescription
+            // 
+            this.ColumnDescription.HeaderText = "Description";
+            this.ColumnDescription.MinimumWidth = 9;
+            this.ColumnDescription.Name = "ColumnDescription";
+            // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(701, 398);
+            this.buttonClose.Location = new System.Drawing.Point(701, 637);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(131, 40);
             this.buttonClose.TabIndex = 1;
@@ -128,7 +183,7 @@ namespace WinFormsMatchingGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 450);
+            this.ClientSize = new System.Drawing.Size(844, 689);
             this.Controls.Add(this.groupBoxCardPictures);
             this.Controls.Add(this.buttonClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -139,6 +194,7 @@ namespace WinFormsMatchingGame
             this.Text = "GameSettings";
             this.groupBoxCardPictures.ResumeLayout(false);
             this.groupBoxCardPictures.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPictureData)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -153,5 +209,10 @@ namespace WinFormsMatchingGame
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Label labelYourPicturesInstructions;
         private System.Windows.Forms.Label labelCardPicturesInstructions;
+        private System.Windows.Forms.DataGridView dataGridViewPictureData;
+        private System.Windows.Forms.Label labelPictureDataGrid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCardFileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
     }
 }

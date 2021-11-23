@@ -70,6 +70,61 @@ namespace WinFormsMatchingGame
 
         private void SetupCardList()
         {
+            if (Settings.Default.YourPictures)
+            {
+                SetupCustomCardList();
+            }
+            else
+            {
+                SetupDefaultCardList();
+            }
+
+            cardMatchingGrid.Shuffle();
+        }
+
+        private void SetupCustomCardList()
+        {
+            cardMatchingGrid.CardList = new List<Card>();
+
+            for (int i = 0; i < 8; i++)
+            {
+                var settingNamePath = "Card" + (i + 1) + "Path";
+
+                try
+                {
+                    if (String.IsNullOrWhiteSpace(Settings.Default[settingNamePath].ToString()))
+                    {
+                        break;
+                    }
+
+                    var settingNameName = "Card" + (i + 1) + "Name";
+                    var settingNameDescription = "Card" + (i + 1) + "Description";
+
+                    cardMatchingGrid.CardList.Add(
+                        new Card
+                        {
+                            Name = Settings.Default[settingNameName].ToString(),
+                            Description = Settings.Default[settingNameDescription].ToString(),
+                            Image = new Bitmap(Settings.Default[settingNamePath].ToString())
+                        } );
+
+                    cardMatchingGrid.CardList.Add(
+                        new Card
+                        {
+                            Name = Settings.Default[settingNameName].ToString(),
+                            Description = Settings.Default[settingNameDescription].ToString(),
+                            Image = new Bitmap(Settings.Default[settingNamePath].ToString())
+                        });
+                }
+                catch
+                {
+                    break;
+                }
+            }
+        }
+
+        private void SetupDefaultCardList()
+        {
             // Note: This app assumes the count of cards is square number. (Currently the count is 16.)
             cardMatchingGrid.CardList = new List<Card>()
             {
@@ -138,8 +193,6 @@ namespace WinFormsMatchingGame
                     Description = "A small square stone building with an opening on the near side. Above the opening is a Greek inscription. Railing surrounds the top of the building, and a sundial sits at the centre of the top. In the background is rocky grassland, with rolling hills in the far background along with a slightly cloudy, blue sky.",
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card8) },
             };
-
-            cardMatchingGrid.Shuffle();
         }
 
         private void buttonTryAgain_Click(object sender, EventArgs e)
@@ -193,7 +246,7 @@ namespace WinFormsMatchingGame
                                 .Where(f => extensions.Contains(f.Extension.ToLower()))
                                 .ToArray();
 
-                if (files.Length < 8)
+                if (files.Length != 8)
                 {
                     picturePathValid = false;
                 }
@@ -208,7 +261,7 @@ namespace WinFormsMatchingGame
                 // Todo: Localize.
                 MessageBox.Show(
                     this,
-                    "Please choose a folder that contains at least 8 pictures.",
+                    "Please choose a folder that contains exactly 8 pictures.",
                     "Matching Game Settings",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
