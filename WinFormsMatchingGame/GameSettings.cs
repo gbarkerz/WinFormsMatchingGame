@@ -12,13 +12,18 @@ using System.Windows.Forms;
 //  -- Run AIWin.
 // - Be sure to do the above as changes are made to the dialog. (And watch for TabIndex being added back.)
 // - Assume the common Folder browse dlg is accessible.
-// - Be clear about what an sterirsk means.
+// - Be clear about what an asterisk means.
+
+// Todo: Add error checking when loading and saving card data.
 
 namespace WinFormsMatchingGame
 {
     public partial class GameSettings : Form
     {
         private FormMatchingGame formMatchingGame;
+
+        // For now, there are exactly 8 different cards in the game.
+        private const int cardCount = 8;
 
         public GameSettings(FormMatchingGame formMatchingGame)
         {
@@ -28,12 +33,17 @@ namespace WinFormsMatchingGame
 
             this.FormClosing += GameSettings_FormClosing;
 
-            radioButtonPicturesYourPictures.Checked = Settings.Default.YourPictures;
-            radioButtonPicturesNorthernEngland.Checked = !Settings.Default.YourPictures;
+            radioButtonPicturesYourPictures.Checked = Settings.Default.UseYourPictures;
+            radioButtonPicturesNorthernEngland.Checked = !Settings.Default.UseYourPictures;
 
             textBoxYourPicturesPath.Text = Settings.Default.YourPicturesPath;
 
-            for (int i = 0; i < 8; i++)
+            LoadCardDataIntoGrid();
+        }
+
+        private void LoadCardDataIntoGrid()
+        { 
+            for (int i = 0; i < cardCount; i++)
             {
                 string settingName = "Card" + (i + 1) + "Path";
                 try
@@ -79,11 +89,11 @@ namespace WinFormsMatchingGame
 
         private void SaveCurrentSettings()
         {
-            Settings.Default.YourPictures = radioButtonPicturesYourPictures.Checked;
+            Settings.Default.UseYourPictures = radioButtonPicturesYourPictures.Checked;
             Settings.Default.YourPicturesPath = textBoxYourPicturesPath.Text;
 
             // The Settings for the card file paths has already been persisted.
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < cardCount; i++)
             {
                 string settingName = "Card" + (i + 1) + "Path";
                 try

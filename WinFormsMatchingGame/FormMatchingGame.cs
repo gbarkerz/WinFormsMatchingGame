@@ -20,7 +20,7 @@ namespace WinFormsMatchingGame
 
             CreateCardMatchingGrid();
 
-            if (Settings.Default.YourPictures)
+            if (Settings.Default.UseYourPictures)
             {
                 if (!IsPicturePathValid(Settings.Default.YourPicturesPath))
                 {
@@ -70,9 +70,9 @@ namespace WinFormsMatchingGame
 
         private void SetupCardList()
         {
-            if (Settings.Default.YourPictures)
+            if (Settings.Default.UseYourPictures)
             {
-                SetupCustomCardList();
+                SetupYourPicturesCardList();
             }
             else
             {
@@ -82,7 +82,7 @@ namespace WinFormsMatchingGame
             cardMatchingGrid.Shuffle();
         }
 
-        private void SetupCustomCardList()
+        private void SetupYourPicturesCardList()
         {
             cardMatchingGrid.CardList = new List<Card>();
 
@@ -212,6 +212,9 @@ namespace WinFormsMatchingGame
 
         private void RestartGame()
         {
+            // We might be showing a different set of cards now.
+            SetupCardList();
+
             cardMatchingGrid.ResetGrid();
             cardMatchingGrid.Focus();
         }
@@ -230,6 +233,9 @@ namespace WinFormsMatchingGame
         {
             var gameSettings = new GameSettings(this);
             gameSettings.ShowDialog(this);
+
+            // Todo: Don't restart the game unless appropriate after the dialog has closed.
+            RestartGame();
         }
 
         public bool IsPicturePathValid(string picturePath)

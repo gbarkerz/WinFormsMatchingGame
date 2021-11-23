@@ -26,12 +26,12 @@ namespace WinFormsMatchingGame {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool YourPictures {
+        public bool UseYourPictures {
             get {
-                return ((bool)(this["YourPictures"]));
+                return ((bool)(this["UseYourPictures"]));
             }
             set {
-                this["YourPictures"] = value;
+                this["UseYourPictures"] = value;
             }
         }
         

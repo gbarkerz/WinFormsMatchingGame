@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WinFormsMatchingGame" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="YourPictures" Type="System.Boolean" Scope="User">
+    <Setting Name="UseYourPictures" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="YourPicturesPath" Type="System.String" Scope="User">
