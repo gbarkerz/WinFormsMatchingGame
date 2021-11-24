@@ -3,30 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-// Barker notes: Steps to creating this dialog.
-// - Add instructions and requirements as labels in the dialog.
-// - Add keyboard shortcuts.
-// - After creating UI, before adding code-behind:
-//  -- Remove TabIndex.
-//  -- Reorder the Add() calls in Group and in Dialog, verify the order with AIWin.
-//  -- Run AIWin.
-// - Be sure to do the above as changes are made to the dialog. (And watch for TabIndex being added back.)
-// - Assume the common Folder browse dlg is accessible.
-// - Be clear about what an asterisk means.
-// - Query before losing changes when the dialog closes.
-// - F3 Changes the sort order in the DGV.
-// - Set focus to missing required cell after informing player of missing data.
-
-// More Notes:
-// - The hidden column still bumps up the column index of the columns that follows it.
-// - Don't think there's a way to mark required columns or cells as being UIA required.
-// - The DGV doesn't support HideSelection like ListView does.
-// - Not showing preview of pictures, because there'll be too small for some players.
-// - Couldn't find a way to resize columns at
-//    https://docs.microsoft.com/en-us/dotnet/desktop/winforms/controls/default-keyboard-and-mouse-handling-in-the-windows-forms-datagridview-control?view=netframeworkdesktop-4.8&viewFallbackFrom=netdesktop-5.0
-
-// Future:
-// - Support more than one set of user-supplied pictures, with easy import/export of data.
+// Todo:
+// - Change the grid acc name to be not pulled from the preceding label.
 
 namespace WinFormsMatchingGame
 {

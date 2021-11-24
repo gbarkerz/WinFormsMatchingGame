@@ -70,9 +70,9 @@ namespace WinFormsMatchingGame
             this.labelCardPicturesInstructions.AutoSize = true;
             this.labelCardPicturesInstructions.Location = new System.Drawing.Point(22, 49);
             this.labelCardPicturesInstructions.Name = "labelCardPicturesInstructions";
-            this.labelCardPicturesInstructions.Size = new System.Drawing.Size(575, 30);
+            this.labelCardPicturesInstructions.Size = new System.Drawing.Size(580, 30);
             this.labelCardPicturesInstructions.TabIndex = 0;
-            this.labelCardPicturesInstructions.Text = "Choose the pictures that you\'d like to be shown on the cards";
+            this.labelCardPicturesInstructions.Text = "Choose the pictures that you\'d like to be shown on the cards.";
             // 
             // radioButtonPicturesNorthernEngland
             // 
@@ -104,8 +104,8 @@ namespace WinFormsMatchingGame
             this.labelYourPicturesInstructions.Name = "labelYourPicturesInstructions";
             this.labelYourPicturesInstructions.Size = new System.Drawing.Size(512, 60);
             this.labelYourPicturesInstructions.TabIndex = 3;
-            this.labelYourPicturesInstructions.Text = "Please select a folder that contains exactly 8 pictures. \r\nThe picture format nee" +
-    "ds to be JPG, PNG, or BMP.";
+            this.labelYourPicturesInstructions.Text = "Please select a &folder that contains exactly 8 pictures. \r\nThe picture format ne" +
+    "eds to be JPG, PNG, or BMP.";
             // 
             // textBoxYourPicturesPath
             // 
@@ -131,7 +131,7 @@ namespace WinFormsMatchingGame
             this.labelPictureDataGrid.Name = "labelPictureDataGrid";
             this.labelPictureDataGrid.Size = new System.Drawing.Size(564, 30);
             this.labelPictureDataGrid.TabIndex = 6;
-            this.labelPictureDataGrid.Text = "&Your Pictures Details. (Columns marked with * are required.)";
+            this.labelPictureDataGrid.Text = "Your Pictures &Details. (Columns marked with * are required.)";
             // 
             // dataGridViewPictureData
             // 
