@@ -12,8 +12,6 @@ The game is based on a traditional card matching game, where face-down cards are
 
 When the game is run, a 4x4 grid of blank squares appears, each square representing a card. When a card is clicked, an image is shown on the card. When another card is clicked, an image is also shown on that second card. If the two images are the same, then the cards are considered to be matched, and will not change again for the rest of the game. If the images do not match, then the cards are considered to be unmatched, and the "Turn cards back over" button must be clicked, which results in the two unmatched cards no longer showing images. These steps are to be repeated until all matching images have been found, and a "Congratulations" window appears.
 
-&nbsp;
-
 The following image shows the game showing two pairs of matched cards and one pair of unmatched cards.
 
 &nbsp;
@@ -24,7 +22,6 @@ The following image shows the game showing two pairs of matched cards and one pa
 
 From Version 1.1 of the game, players can select one set of their own 8 pictures to be used. Each picture must be accompanied by a name, and optionally a description, for players using screen readers to access.
 
-&nbsp;
 
 The following image shows the Settings window in the game, with pictures and text relating to the planets of the Solar System.
 
@@ -88,47 +85,25 @@ The following image shows the Accessibility Insights for Windows tool reporting 
 
 **Technical considerations while building V1.1 of the app**
 
-&nbsp;
-
 A Settings window was introduced in V1.1 of the game, so that players could provide one set of their own 8 pictures. Below are some of the considerations that went into adding the Settings window.
-
-&nbsp;
 
 Instructions related to the selection of pictures are shown as labels on the window. This reduces the chances that players select a number of pictures, or types of pictures, that the game doesn't handle. Having instructions missing, or hidden away as tooltips somewhere, will make the game more frustrating to use.
 
-&nbsp;
-
 Column headers in the picture table which must contain data are marked with an asterisk. Nearby is text explaining the meaning of an asterisk in the table.
-
-&nbsp;
 
 All focusable controls in the window have unique keyboard shortcuts.
 
-&nbsp;
-
 By default, do not customize the standard WinForms controls in the window. By never setting custom colours anywhere, the controls will respect the player's choice of theme colours. By never overriding keyboard input, default actions will behave as expected. For example, F3 to change the sort order of the Your Picture Details grid when keyboard focus is in the grid.
-
-&nbsp;
 
 Details relating to keyboard input at the grid are at [Default keyboard and mouse handling in the Windows Forms DataGridView control](https://docs.microsoft.com/en-us/dotnet/desktop/winforms/controls/default-keyboard-and-mouse-handling-in-the-windows-forms-datagridview-control?view=netframeworkdesktop-4.8&viewFallbackFrom=netdesktop-5.0). 
 
-&nbsp;
-
 If the Settings window is canceled after changes have been made, always query the player to make sure they're ok with the changes being lost. It's very easy for an Escape key to be pressed or a Cancel button to be clicked by accident.
-
-&nbsp;
 
 If required data is missing when the Save and Close button is clicked, present a message to be clear about what data is missing, and then move keyboard focus over to a control which needs updating.
 
-&nbsp;
-
 I decided not to show a preview of the pictures in the grid, as the preview would be too small for to be useful to many people.
 
-&nbsp;
-
 Whenever controls are added, removed, or rearranged in the Settings window, Accessibility Insights for Windows is run to verify that the UIA order of elements is as players need it to be. If the order is not as expected, the calls to Add() in the form and the container in the form are reordered as necessary from the form designer file, in order to create the required UIA order. During this, all explicit setting of TabIndex is manually removed from the code. The TabIndex will be added back as required later by Visual Studio.
-
-&nbsp;
 
 The following image shows the Accessibility Insights for Windows tool reporting the UI Automation hierarchy of the elements in the Settings window. The order of the element matches the visual order shown in the window.
 
@@ -140,19 +115,11 @@ The following image shows the Accessibility Insights for Windows tool reporting 
 
 It is assumed here that the WinForms FolderBrowserDialog is fully accessible, but I've not verified that myself.
 
-&nbsp;
-
 For coding convenience, the grid uses a hidden column to store the full file path for the player's picture files. While that column data is not exposed through UIA, the column indices for all the columns after that column are increased by 1. This may cause some confusion for players using screen readers, as it gives the impression that there's a column somehere in the grid which is inaccessible to them. 
-
-&nbsp;
 
 I couldn't find a way to have cells which are required, be exposed through UIA as having a IsRequiredForForm property of true.
 
-&nbsp;
-
 I couldn't find a way to change the width of columns using only the keyboard.
-
-&nbsp;
 
 As I understand things, the DataGridView doesn't support the HideSelection property like the ListView control does. This means the current cell in the grid looks almost identical when the grid has keyboard focus and when it doesn't. I'd say this degrades the usage of the Setting window, so I may look into adding custom code which changes the visuals for the current cell when the grid doesn't have keyboard focus.
 
