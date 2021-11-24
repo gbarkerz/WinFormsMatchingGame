@@ -18,16 +18,19 @@ namespace WinFormsMatchingGame
         {
             InitializeComponent();
 
-            CreateCardMatchingGrid();
-
             if (Settings.Default.UseYourPictures)
             {
                 if (!IsPicturePathValid(Settings.Default.YourPicturesPath))
                 {
                     var gameSettings = new GameSettings(this);
-                    gameSettings.ShowDialog(this);
+                    if (gameSettings.ShowDialog(this) == DialogResult.Cancel)
+                    {
+                        Settings.Default.UseYourPictures = false;
+                    }
                 }
             }
+
+            CreateCardMatchingGrid();
         }
 
         private void CreateCardMatchingGrid()
