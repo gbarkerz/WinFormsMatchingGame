@@ -103,6 +103,8 @@ If required data is missing when the Save and Close button is clicked, present a
 
 I decided not to show a preview of the pictures in the grid, as the preview would be too small for to be useful to many people.
 
+By default, the accessible names of the TextBox and DataGridView controls are taken from the labels that precede those controls. In the case of this Settings window, the labels' text is not the best match for the accessible names of the TextBox and DataGridView controls. As such, more appropriate accessible names were explicitly set on those controls.
+
 Whenever controls are added, removed, or rearranged in the Settings window, Accessibility Insights for Windows is run to verify that the UIA order of elements is as players need it to be. If the order is not as expected, the calls to Add() in the form and the container in the form are reordered as necessary from the form designer file, in order to create the required UIA order. During this, all explicit setting of TabIndex is manually removed from the code. The TabIndex will be added back as required later by Visual Studio.
 
 The following image shows the Accessibility Insights for Windows tool reporting the UI Automation hierarchy of the elements in the Settings window. The order of the element matches the visual order shown in the window.

@@ -109,6 +109,7 @@ namespace WinFormsMatchingGame
             // 
             // textBoxYourPicturesPath
             // 
+            this.textBoxYourPicturesPath.AccessibleName = "Your pictures folder";
             this.textBoxYourPicturesPath.Location = new System.Drawing.Point(69, 282);
             this.textBoxYourPicturesPath.Name = "textBoxYourPicturesPath";
             this.textBoxYourPicturesPath.Size = new System.Drawing.Size(515, 35);
@@ -135,6 +136,7 @@ namespace WinFormsMatchingGame
             // 
             // dataGridViewPictureData
             // 
+            this.dataGridViewPictureData.AccessibleName = "Your Picture Details";
             this.dataGridViewPictureData.AllowUserToAddRows = false;
             this.dataGridViewPictureData.AllowUserToDeleteRows = false;
             this.dataGridViewPictureData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
