@@ -15,11 +15,13 @@ using System.Windows.Forms;
 // - Be clear about what an asterisk means.
 // - Query before losing changes when the dialog closes.
 // - F3 Changes the sort order in the DGV.
+// - Set focus to missing required cell after informing player of missing data.
 
 // More Notes:
 // - The hidden column still bumps up the column index of the columns that follows it.
 // - Don't think there's a way to mark required columns or cells as being UIA required.
 // - The DGV doesn't support HideSelection like ListView does.
+// - Not showing preview of pictures, because there'll be too small for some players.
 
 // Future:
 // - Support more than one set of user-supplied pictures, with easy import/export of data.
@@ -186,6 +188,20 @@ namespace WinFormsMatchingGame
                             "Matching Game Settings",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
+
+                        if ((dataGridViewPictureData.Rows[i].Cells[1] == null) ||
+                            (dataGridViewPictureData.Rows[i].Cells[1].Value == null) ||
+                            String.IsNullOrWhiteSpace(dataGridViewPictureData.Rows[i].Cells[1].Value.ToString()))
+                        {
+                            textBoxYourPicturesPath.Focus();
+                        }
+                        else if ((dataGridViewPictureData.Rows[i].Cells[2] == null) ||
+                            (dataGridViewPictureData.Rows[i].Cells[2].Value == null) ||
+                            String.IsNullOrWhiteSpace(dataGridViewPictureData.Rows[i].Cells[2].Value.ToString()))
+                        {
+                            dataGridViewPictureData.CurrentCell = dataGridViewPictureData.Rows[i].Cells[2];
+                            dataGridViewPictureData.Focus();
+                        }
 
                         break;
                     }

@@ -93,36 +93,34 @@ namespace WinFormsMatchingGame
             {
                 var settingNamePath = "Card" + (i + 1) + "Path";
 
-                try
-                {
-                    if (String.IsNullOrWhiteSpace(Settings.Default[settingNamePath].ToString()))
-                    {
-                        break;
-                    }
-
-                    var settingNameName = "Card" + (i + 1) + "Name";
-                    var settingNameDescription = "Card" + (i + 1) + "Description";
-
-                    cardMatchingGrid.CardList.Add(
-                        new Card
-                        {
-                            Name = Settings.Default[settingNameName].ToString(),
-                            Description = Settings.Default[settingNameDescription].ToString(),
-                            Image = new Bitmap(Settings.Default[settingNamePath].ToString())
-                        } );
-
-                    cardMatchingGrid.CardList.Add(
-                        new Card
-                        {
-                            Name = Settings.Default[settingNameName].ToString(),
-                            Description = Settings.Default[settingNameDescription].ToString(),
-                            Image = new Bitmap(Settings.Default[settingNamePath].ToString())
-                        });
-                }
-                catch
+                if (String.IsNullOrWhiteSpace(Settings.Default[settingNamePath].ToString()))
                 {
                     break;
                 }
+
+                var settingNameName = "Card" + (i + 1) + "Name";
+                var settingNameDescription = "Card" + (i + 1) + "Description";
+
+                var name = Settings.Default[settingNameName].ToString();
+                var desc = Settings.Default[settingNameDescription] == null ?
+                            "" : Settings.Default[settingNameDescription].ToString();
+                var image = new Bitmap(Settings.Default[settingNamePath].ToString());
+
+                cardMatchingGrid.CardList.Add(
+                    new Card
+                    {
+                        Name = name,
+                        Description = desc,
+                        Image = image
+                    } );
+
+                cardMatchingGrid.CardList.Add(
+                    new Card
+                    {
+                        Name = name,
+                        Description = desc,
+                        Image = image
+                    });
             }
         }
 
