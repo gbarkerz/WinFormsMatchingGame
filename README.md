@@ -22,6 +22,18 @@ The following image shows the game showing two pairs of matched cards and one pa
 
 &nbsp;
 
+From Version 1.1 of the game, players can select one set of their own 8 pictures to be used. Each picture must be accompanied by a name, and optionally a description, for players using screen readers to access.
+
+&nbsp;
+
+The following image shows the Settings window in the game, with pictures and text relating to the planets of the Solar System.
+
+&nbsp;
+
+![The Settings window of the WinFormsMatchingGame, with pictures and text relating to the planets of the Solar System.](WinFormsMatchingGame/AppScreenshots/GameSettings.png)
+
+&nbsp;
+
 **Keyboard**
 
 Tab key presses move keyboard focus between the grid and the buttons shown in the app. To move keyboard focus between the cards inside the grid, use the arrow keys. To turn two unmatched cards back over, either press Alt+B or the Enter key.

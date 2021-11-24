@@ -22,6 +22,8 @@ using System.Windows.Forms;
 // - Don't think there's a way to mark required columns or cells as being UIA required.
 // - The DGV doesn't support HideSelection like ListView does.
 // - Not showing preview of pictures, because there'll be too small for some players.
+// - Couldn't find a way to resize columns at
+//    https://docs.microsoft.com/en-us/dotnet/desktop/winforms/controls/default-keyboard-and-mouse-handling-in-the-windows-forms-datagridview-control?view=netframeworkdesktop-4.8&viewFallbackFrom=netdesktop-5.0
 
 // Future:
 // - Support more than one set of user-supplied pictures, with easy import/export of data.
