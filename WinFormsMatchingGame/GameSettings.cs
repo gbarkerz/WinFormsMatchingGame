@@ -3,11 +3,17 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-// Todo:
-// - Change the grid acc name to be not pulled from the preceding label.
-
 namespace WinFormsMatchingGame
 {
+    // Todo: Localize all the player-facing strings below.
+
+    // This class supports the Settings feature in the WinFormsMatchingGame app.
+    // The DataGridView shown in the Settings window has four columns. The first
+    // is a hidden column, used as a convenient place to store the full path for
+    // each of the player's own pictures. The other three columns are visible, 
+    // and show the file name (without path), and the player-supplied accessible
+    // name and optional accessible description for the picture.
+
     public partial class GameSettings : Form
     {
         private FormMatchingGame formMatchingGame;
@@ -27,7 +33,7 @@ namespace WinFormsMatchingGame
         }
 
         private void LoadCurrentSettings()
-        { 
+        {
             radioButtonPicturesYourPictures.Checked = Settings.Default.UseYourPictures;
             radioButtonPicturesNorthernEngland.Checked = !Settings.Default.UseYourPictures;
 
@@ -39,20 +45,18 @@ namespace WinFormsMatchingGame
                 for (int i = 0; i < cardPairCount; i++)
                 {
                     string settingName = "Card" + (i + 1) + "Path";
-                    if (String.IsNullOrWhiteSpace(Settings.Default[settingName].ToString()))
+                    if (!String.IsNullOrWhiteSpace(Settings.Default[settingName].ToString()))
                     {
-                        break;
+                        DirectoryInfo di = new DirectoryInfo(Settings.Default[settingName].ToString());
+                        dataGridViewPictureData.Rows.Add(di.FullName);
+                        dataGridViewPictureData.Rows[i].Cells[1].Value = di.Name;
+
+                        settingName = "Card" + (i + 1) + "Name";
+                        dataGridViewPictureData.Rows[i].Cells[2].Value = Settings.Default[settingName];
+
+                        settingName = "Card" + (i + 1) + "Description";
+                        dataGridViewPictureData.Rows[i].Cells[3].Value = Settings.Default[settingName];
                     }
-
-                    DirectoryInfo di = new DirectoryInfo(Settings.Default[settingName].ToString());
-                    dataGridViewPictureData.Rows.Add(di.FullName);
-                    dataGridViewPictureData.Rows[i].Cells[1].Value = di.Name;
-
-                    settingName = "Card" + (i + 1) + "Name";
-                    dataGridViewPictureData.Rows[i].Cells[2].Value = Settings.Default[settingName];
-
-                    settingName = "Card" + (i + 1) + "Description";
-                    dataGridViewPictureData.Rows[i].Cells[3].Value = Settings.Default[settingName];
                 }
             }
         }
@@ -66,6 +70,7 @@ namespace WinFormsMatchingGame
 
         private void GameSettings_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // Always query whether Settings changes are to be lost.
             if (AreSettingsChanged())
             {
                 var result = MessageBox.Show(
@@ -81,6 +86,7 @@ namespace WinFormsMatchingGame
             }
         }
 
+        // Has anything changed in the Settings window since the window was last loaded?
         private bool AreSettingsChanged()
         {
             bool settingsAreChanged = (Settings.Default.UseYourPictures != 
@@ -124,8 +130,10 @@ namespace WinFormsMatchingGame
 
         private void buttonSaveClose_Click(object sender, EventArgs e)
         {
+            // Do now permit invalid settings to be saved.
             if (AreSettingsDataValid())
             {
+                // The Settings are vald.
                 SaveCurrentSettings();
 
                 this.DialogResult = DialogResult.OK;
@@ -136,7 +144,7 @@ namespace WinFormsMatchingGame
 
         private bool AreSettingsDataValid()
         {
-            // Only verify the Your Pictures data is that data will be used.
+            // Only verify the the Your Pictures data is valid if that data will be used.
             if (radioButtonPicturesNorthernEngland.Checked)
             {
                 return true;
@@ -146,7 +154,7 @@ namespace WinFormsMatchingGame
             bool settingsAreValid = formMatchingGame.IsPicturePathValid(textBoxYourPicturesPath.Text);
             if (settingsAreValid)
             {
-                // Now check all required data have been supplied.
+                // Now check all the required picture data have been supplied.
                 for (int i = 0; i < cardPairCount; i++)
                 {
                     if ((dataGridViewPictureData.Rows[i].Cells[0] == null) ||
@@ -161,7 +169,6 @@ namespace WinFormsMatchingGame
                     {
                         settingsAreValid = false;
 
-                        // Todo: Localize.
                         MessageBox.Show(
                             this,
                             "Please provide 8 named pictures in the Your Picture Details table.",
@@ -169,16 +176,19 @@ namespace WinFormsMatchingGame
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
 
+                        // Move keyboard focus to where it seems most helpful to supply the missing data.
                         if ((dataGridViewPictureData.Rows[i].Cells[1] == null) ||
                             (dataGridViewPictureData.Rows[i].Cells[1].Value == null) ||
                             String.IsNullOrWhiteSpace(dataGridViewPictureData.Rows[i].Cells[1].Value.ToString()))
                         {
+                            // A file path is missing, so move focus to the picture folder field.
                             textBoxYourPicturesPath.Focus();
                         }
                         else if ((dataGridViewPictureData.Rows[i].Cells[2] == null) ||
                             (dataGridViewPictureData.Rows[i].Cells[2].Value == null) ||
                             String.IsNullOrWhiteSpace(dataGridViewPictureData.Rows[i].Cells[2].Value.ToString()))
                         {
+                            // A name is missing, so move focus to a name field in the grid.
                             dataGridViewPictureData.CurrentCell = dataGridViewPictureData.Rows[i].Cells[2];
                             dataGridViewPictureData.Focus();
                         }
@@ -193,6 +203,7 @@ namespace WinFormsMatchingGame
 
         private void SaveCurrentSettings()
         {
+            // Persist all the data in the Settings window.
             Settings.Default.UseYourPictures = radioButtonPicturesYourPictures.Checked;
             Settings.Default.YourPicturesPath = textBoxYourPicturesPath.Text;
 

@@ -60,7 +60,7 @@ namespace WinFormsMatchingGame
             this.groupBoxCardPictures.Controls.Add(this.dataGridViewPictureData);
             this.groupBoxCardPictures.Location = new System.Drawing.Point(13, 13);
             this.groupBoxCardPictures.Name = "groupBoxCardPictures";
-            this.groupBoxCardPictures.Size = new System.Drawing.Size(819, 610);
+            this.groupBoxCardPictures.Size = new System.Drawing.Size(858, 610);
             this.groupBoxCardPictures.TabIndex = 0;
             this.groupBoxCardPictures.TabStop = false;
             this.groupBoxCardPictures.Text = "C&ard pictures";
@@ -102,22 +102,23 @@ namespace WinFormsMatchingGame
             this.labelYourPicturesInstructions.AutoSize = true;
             this.labelYourPicturesInstructions.Location = new System.Drawing.Point(69, 201);
             this.labelYourPicturesInstructions.Name = "labelYourPicturesInstructions";
-            this.labelYourPicturesInstructions.Size = new System.Drawing.Size(512, 60);
+            this.labelYourPicturesInstructions.Size = new System.Drawing.Size(787, 60);
             this.labelYourPicturesInstructions.TabIndex = 3;
-            this.labelYourPicturesInstructions.Text = "Please select a &folder that contains exactly 8 pictures. \r\nThe picture format ne" +
-    "eds to be JPG, PNG, or BMP.";
+            this.labelYourPicturesInstructions.Text = "Please select a &folder that contains exactly 8 pictures. The pictures must be lo" +
+    "cated \r\nbeneath your Pictures folder, and the picture format needs to be JPG, PN" +
+    "G, or BMP.";
             // 
             // textBoxYourPicturesPath
             // 
             this.textBoxYourPicturesPath.AccessibleName = "Your pictures folder";
             this.textBoxYourPicturesPath.Location = new System.Drawing.Point(69, 282);
             this.textBoxYourPicturesPath.Name = "textBoxYourPicturesPath";
-            this.textBoxYourPicturesPath.Size = new System.Drawing.Size(515, 35);
+            this.textBoxYourPicturesPath.Size = new System.Drawing.Size(632, 35);
             this.textBoxYourPicturesPath.TabIndex = 4;
             // 
             // buttonYourPicturesBrowse
             // 
-            this.buttonYourPicturesBrowse.Location = new System.Drawing.Point(605, 279);
+            this.buttonYourPicturesBrowse.Location = new System.Drawing.Point(711, 280);
             this.buttonYourPicturesBrowse.Name = "buttonYourPicturesBrowse";
             this.buttonYourPicturesBrowse.Size = new System.Drawing.Size(131, 40);
             this.buttonYourPicturesBrowse.TabIndex = 5;
@@ -153,7 +154,7 @@ namespace WinFormsMatchingGame
             this.dataGridViewPictureData.RowHeadersWidth = 72;
             this.dataGridViewPictureData.RowTemplate.Height = 37;
             this.dataGridViewPictureData.ShowCellToolTips = false;
-            this.dataGridViewPictureData.Size = new System.Drawing.Size(667, 199);
+            this.dataGridViewPictureData.Size = new System.Drawing.Size(773, 199);
             this.dataGridViewPictureData.StandardTab = true;
             this.dataGridViewPictureData.TabIndex = 7;
             // 
@@ -186,7 +187,7 @@ namespace WinFormsMatchingGame
             // 
             // buttonSaveClose
             // 
-            this.buttonSaveClose.Location = new System.Drawing.Point(486, 637);
+            this.buttonSaveClose.Location = new System.Drawing.Point(515, 637);
             this.buttonSaveClose.Name = "buttonSaveClose";
             this.buttonSaveClose.Size = new System.Drawing.Size(199, 40);
             this.buttonSaveClose.TabIndex = 1;
@@ -197,7 +198,7 @@ namespace WinFormsMatchingGame
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(701, 637);
+            this.buttonCancel.Location = new System.Drawing.Point(724, 637);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(131, 40);
             this.buttonCancel.TabIndex = 2;
@@ -210,7 +211,7 @@ namespace WinFormsMatchingGame
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(844, 689);
+            this.ClientSize = new System.Drawing.Size(883, 689);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.groupBoxCardPictures);
             this.Controls.Add(this.buttonSaveClose);

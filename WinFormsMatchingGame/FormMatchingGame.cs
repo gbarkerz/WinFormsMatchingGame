@@ -18,13 +18,20 @@ namespace WinFormsMatchingGame
         {
             InitializeComponent();
 
+            // Check that the current settings for the game are still valid.
+            // For example, verify that all player-supplied pictures previously
+            // selected are still available to use in the game.
             if (Settings.Default.UseYourPictures)
             {
                 if (!IsPicturePathValid(Settings.Default.YourPicturesPath))
                 {
+                    // Ths settings are not valid, so show the Settings window now.
                     var gameSettings = new GameSettings(this);
                     if (gameSettings.ShowDialog(this) == DialogResult.Cancel)
                     {
+                        // The Settings window was cancelled, so the settings are
+                        // still invalid. As such, use the default pictures until
+                        // the setting are fixed by the player.
                         Settings.Default.UseYourPictures = false;
                     }
                 }
@@ -73,11 +80,14 @@ namespace WinFormsMatchingGame
 
         private void SetupCardList()
         {
+            bool cardsAreSetUp = false;
+
             if (Settings.Default.UseYourPictures)
             {
-                SetupYourPicturesCardList();
+                cardsAreSetUp = SetupYourPicturesCardList();
             }
-            else
+            
+            if (!cardsAreSetUp)
             {
                 SetupDefaultCardList();
             }
@@ -85,16 +95,21 @@ namespace WinFormsMatchingGame
             cardMatchingGrid.Shuffle();
         }
 
-        private void SetupYourPicturesCardList()
+        private bool SetupYourPicturesCardList()
         {
+            bool cardsAreSetUp = true;
+
             cardMatchingGrid.CardList = new List<Card>();
 
+            // For now, the game only handles 8 pairs of pictures.
             for (int i = 0; i < 8; i++)
             {
                 var settingNamePath = "Card" + (i + 1) + "Path";
 
                 if (String.IsNullOrWhiteSpace(Settings.Default[settingNamePath].ToString()))
                 {
+                    cardsAreSetUp = false;
+
                     break;
                 }
 
@@ -104,7 +119,19 @@ namespace WinFormsMatchingGame
                 var name = Settings.Default[settingNameName].ToString();
                 var desc = Settings.Default[settingNameDescription] == null ?
                             "" : Settings.Default[settingNameDescription].ToString();
-                var image = new Bitmap(Settings.Default[settingNamePath].ToString());
+
+                Bitmap image;
+
+                try
+                {
+                    image = new Bitmap(Settings.Default[settingNamePath].ToString());
+                }
+                catch
+                {
+                    cardsAreSetUp = false;
+
+                    break;
+                }
 
                 cardMatchingGrid.CardList.Add(
                     new Card
@@ -112,7 +139,7 @@ namespace WinFormsMatchingGame
                         Name = name,
                         Description = desc,
                         Image = image
-                    } );
+                    });
 
                 cardMatchingGrid.CardList.Add(
                     new Card
@@ -122,11 +149,14 @@ namespace WinFormsMatchingGame
                         Image = image
                     });
             }
+
+            return cardsAreSetUp;
         }
 
         private void SetupDefaultCardList()
         {
-            // Note: This app assumes the count of cards is square number. (Currently the count is 16.)
+            // Note: This app assumes the total count of cards is 16.
+            // Todo: Remove the use of duplicate strings here.
             cardMatchingGrid.CardList = new List<Card>()
             {
                 new Card {
@@ -233,12 +263,14 @@ namespace WinFormsMatchingGame
         private void ShowSettingsDialog()
         {
             var gameSettings = new GameSettings(this);
-            gameSettings.ShowDialog(this);
-
-            // Todo: Don't restart the game unless appropriate after the dialog has closed.
-            RestartGame();
+            if (gameSettings.ShowDialog(this) != DialogResult.Cancel)
+            {
+                RestartGame();
+            }
         }
 
+        // For now, a folder is considered valid if it contains exactly 8 files
+        // with extensions suggesting that the game can handle them.
         public bool IsPicturePathValid(string picturePath)
         {
             bool picturePathValid = true;
@@ -265,7 +297,6 @@ namespace WinFormsMatchingGame
 
             if (!picturePathValid)
             {
-                // Todo: Localize.
                 MessageBox.Show(
                     this,
                     "Please choose a folder that contains exactly 8 pictures.",
