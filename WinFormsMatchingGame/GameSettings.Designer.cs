@@ -81,7 +81,6 @@ namespace WinFormsMatchingGame
             this.radioButtonPicturesNorthernEngland.Location = new System.Drawing.Point(43, 103);
             this.radioButtonPicturesNorthernEngland.Name = "radioButtonPicturesNorthernEngland";
             this.radioButtonPicturesNorthernEngland.Size = new System.Drawing.Size(203, 34);
-            this.radioButtonPicturesNorthernEngland.TabIndex = 1;
             this.radioButtonPicturesNorthernEngland.TabStop = true;
             this.radioButtonPicturesNorthernEngland.Text = "&Northern England";
             this.radioButtonPicturesNorthernEngland.UseVisualStyleBackColor = true;
@@ -92,7 +91,6 @@ namespace WinFormsMatchingGame
             this.radioButtonPicturesYourPictures.Location = new System.Drawing.Point(43, 159);
             this.radioButtonPicturesYourPictures.Name = "radioButtonPicturesYourPictures";
             this.radioButtonPicturesYourPictures.Size = new System.Drawing.Size(158, 34);
-            this.radioButtonPicturesYourPictures.TabIndex = 2;
             this.radioButtonPicturesYourPictures.Text = "&Your pictures";
             this.radioButtonPicturesYourPictures.UseVisualStyleBackColor = true;
             this.radioButtonPicturesYourPictures.CheckedChanged += new System.EventHandler(this.radioButtonPicturesYourPictures_CheckedChanged);
@@ -103,7 +101,6 @@ namespace WinFormsMatchingGame
             this.labelYourPicturesInstructions.Location = new System.Drawing.Point(69, 201);
             this.labelYourPicturesInstructions.Name = "labelYourPicturesInstructions";
             this.labelYourPicturesInstructions.Size = new System.Drawing.Size(787, 60);
-            this.labelYourPicturesInstructions.TabIndex = 3;
             this.labelYourPicturesInstructions.Text = "Please select a &folder that contains exactly 8 pictures. The pictures must be lo" +
     "cated \r\nbeneath your Pictures folder, and the picture format needs to be JPG, PN" +
     "G, or BMP.";
@@ -114,14 +111,12 @@ namespace WinFormsMatchingGame
             this.textBoxYourPicturesPath.Location = new System.Drawing.Point(69, 282);
             this.textBoxYourPicturesPath.Name = "textBoxYourPicturesPath";
             this.textBoxYourPicturesPath.Size = new System.Drawing.Size(632, 35);
-            this.textBoxYourPicturesPath.TabIndex = 4;
             // 
             // buttonYourPicturesBrowse
             // 
             this.buttonYourPicturesBrowse.Location = new System.Drawing.Point(711, 280);
             this.buttonYourPicturesBrowse.Name = "buttonYourPicturesBrowse";
             this.buttonYourPicturesBrowse.Size = new System.Drawing.Size(131, 40);
-            this.buttonYourPicturesBrowse.TabIndex = 5;
             this.buttonYourPicturesBrowse.Text = "&Browse";
             this.buttonYourPicturesBrowse.UseVisualStyleBackColor = true;
             this.buttonYourPicturesBrowse.Click += new System.EventHandler(this.buttonYourPicturesBrowse_Click);
@@ -132,7 +127,6 @@ namespace WinFormsMatchingGame
             this.labelPictureDataGrid.Location = new System.Drawing.Point(69, 333);
             this.labelPictureDataGrid.Name = "labelPictureDataGrid";
             this.labelPictureDataGrid.Size = new System.Drawing.Size(564, 30);
-            this.labelPictureDataGrid.TabIndex = 6;
             this.labelPictureDataGrid.Text = "Your Pictures &Details. (Columns marked with * are required.)";
             // 
             // dataGridViewPictureData
@@ -156,7 +150,6 @@ namespace WinFormsMatchingGame
             this.dataGridViewPictureData.ShowCellToolTips = false;
             this.dataGridViewPictureData.Size = new System.Drawing.Size(773, 199);
             this.dataGridViewPictureData.StandardTab = true;
-            this.dataGridViewPictureData.TabIndex = 7;
             // 
             // FileFullPath
             // 
@@ -190,7 +183,6 @@ namespace WinFormsMatchingGame
             this.buttonSaveClose.Location = new System.Drawing.Point(515, 637);
             this.buttonSaveClose.Name = "buttonSaveClose";
             this.buttonSaveClose.Size = new System.Drawing.Size(199, 40);
-            this.buttonSaveClose.TabIndex = 1;
             this.buttonSaveClose.Text = "&Save and Close";
             this.buttonSaveClose.UseVisualStyleBackColor = true;
             this.buttonSaveClose.Click += new System.EventHandler(this.buttonSaveClose_Click);
@@ -201,7 +193,6 @@ namespace WinFormsMatchingGame
             this.buttonCancel.Location = new System.Drawing.Point(724, 637);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(131, 40);
-            this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "&Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -212,9 +203,9 @@ namespace WinFormsMatchingGame
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(883, 689);
-            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.groupBoxCardPictures);
             this.Controls.Add(this.buttonSaveClose);
+            this.Controls.Add(this.buttonCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
