@@ -85,11 +85,11 @@ The following image shows the Accessibility Insights for Windows tool reporting 
 
 **Technical considerations while building V1.1 of the app**
 
-A Settings window was introduced in V1.1 of the game, so that players could provide one set of their own 8 pictures. Below are some of the considerations that went into adding the Settings window.
+A Settings window was introduced in V1.1 of the game, so that players can provide one set of their own 8 pictures. Below are some of the considerations that went into adding the Settings window.
 
 Instructions related to the selection of pictures are shown as labels on the window. This reduces the chances that players select a number of pictures, or types of pictures, that the game doesn't handle. Having instructions missing, or hidden away as tooltips somewhere, will make the game more frustrating to use.
 
-Column headers in the picture table which must contain data are marked with an asterisk. Nearby is text explaining the meaning of an asterisk in the table.
+Column headers in the picture table relating to columns where data is required, are marked with an asterisk. A label near the column headers explains the meaning of an asterisk in the table.
 
 All focusable controls in the window have unique keyboard shortcuts.
 
@@ -103,11 +103,11 @@ If required data is missing when the Save and Close button is clicked, present a
 
 I decided not to show a preview of the pictures in the grid, as the preview would be too small for to be useful to many people.
 
-By default, the accessible names of the TextBox and DataGridView controls are taken from the labels that precede those controls. In the case of this Settings window, the labels' text is not the best match for the accessible names of the TextBox and DataGridView controls. As such, more appropriate accessible names were explicitly set on those controls.
+By default, the accessible names of the TextBox and DataGridView controls are taken from the labels that precede those controls. In the case of this Settings window, the preceding labels' text is not the best match for the accessible names of the TextBox and DataGridView controls. As such, more appropriate accessible names have been explicitly set on those controls.
 
-Whenever controls are added, removed, or rearranged in the Settings window, Accessibility Insights for Windows is run to verify that the UIA order of elements is as players need it to be. If the order is not as expected, the calls to Add() in the form and the container in the form are reordered as necessary from the form designer file, in order to create the required UIA order. During this, all explicit setting of TabIndex is manually removed from the code. The TabIndex will be added back as required later by Visual Studio.
+Whenever controls are added, removed, or rearranged in the Settings window, Accessibility Insights for Windows is run to verify that the UIA order of elements is as players need it to be. If the order is not as expected, the calls to Add() in the Settings window's Designer file were reordered as necessary, in order to create the required UIA order in the form and in the containers within the form. While editing the Designer file, all explicit setting of TabIndex is manually removed from the code. The TabIndex will be added back as required later by Visual Studio.
 
-The following image shows the Accessibility Insights for Windows tool reporting the UI Automation hierarchy of the elements in the Settings window. The order of the element matches the visual order shown in the window.
+The following image shows the Accessibility Insights for Windows tool reporting the UI Automation hierarchy of the elements in the Settings window. The programmatic order of the elements matches the visual order shown in the window.
 
 &nbsp;
 
@@ -117,13 +117,13 @@ The following image shows the Accessibility Insights for Windows tool reporting 
 
 It is assumed here that the WinForms FolderBrowserDialog is fully accessible, but I've not verified that myself.
 
-For coding convenience, the grid uses a hidden column to store the full file path for the player's picture files. While that column data is not exposed through UIA, the column indices for all the columns after that column are increased by 1. This may cause some confusion for players using screen readers, as it gives the impression that there's a column somehere in the grid which is inaccessible to them. 
+For coding convenience, the grid uses a hidden column to store the full file path for the player's picture files. While that column data is not exposed through UIA, the column indices for all the columns after that column are increased by 1. This may cause some confusion for players using screen readers, as it gives the impression that there's a column somewhere in the grid which is inaccessible to them. 
 
 I couldn't find a way to have cells which are required, be exposed through UIA as having a IsRequiredForForm property of true.
 
 I couldn't find a way to change the width of columns using only the keyboard.
 
-As I understand things, the DataGridView doesn't support the HideSelection property like the ListView control does. This means the current cell in the grid looks almost identical when the grid has keyboard focus and when it doesn't. I'd say this degrades the usage of the Setting window, so I may look into adding custom code which changes the visuals for the current cell when the grid doesn't have keyboard focus.
+As I understand things, the DataGridView doesn't support the HideSelection property like the ListView control does. This means the current cell in the grid looks almost identical when the grid has keyboard focus and when it doesn't. I'd say this degrades the usage of the Settings window, so I may look into adding custom code which changes the visuals for the current cell when the grid doesn't have keyboard focus.
 
 &nbsp;
 
