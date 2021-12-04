@@ -109,7 +109,13 @@ namespace WinFormsMatchingGame.Controls
             // Take no action if we've already turned over two not-matching cards.
             if (secondCardInMatchAttempt != null)
             {
-                AnnounceAction(Resources.TurnCardsBackToContinue);
+                MessageBox.Show(
+                    this,
+                    "Please turn the unmatched cards back over before turning more cards up.\r\n\r\n" + 
+                        "To turn the unmatched cards back over, either press the Enter key or click the \"Turn unmatched cards back\" button.",
+                    "Matching Game Settings",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
 
                 return;
             }
@@ -190,6 +196,17 @@ namespace WinFormsMatchingGame.Controls
             this.Refresh();
 
             Shuffle();
+        }
+
+        public void TurnCardUp()
+        {
+            DataGridViewButtonCellWithMatchingGame selectedCard;
+
+            if (this.SelectedCells.Count > 0)
+            {
+                selectedCard = this.SelectedCells[0] as DataGridViewButtonCellWithMatchingGame;
+                ClickCell(selectedCard.RowIndex, selectedCard.ColumnIndex);
+            }
         }
 
         public void TryAgain()

@@ -7,6 +7,13 @@ using System.Windows.Forms;
 using WinFormsMatchingGame.Controls;
 using WinFormsMatchingGame.Properties;
 
+// In this update:
+// Add buttons making it clearer how to play the game with the keyboard.
+// Add a message when attempt to turn up a card when 2 unmatched cards are already up.
+//  This is more helpful than nothing happening in that situation.
+// Move the Restart action to a menu with F5 shortcut.
+
+
 // For details on this app, please read the ReadMe file included in the app's VS solution.
 namespace WinFormsMatchingGame
 {
@@ -155,75 +162,81 @@ namespace WinFormsMatchingGame
 
         private void SetupDefaultCardList()
         {
+            var resManager = Resources.ResourceManager;
+
             // Note: This app assumes the total count of cards is 16.
-            // Todo: Remove the use of duplicate strings here.
             cardMatchingGrid.CardList = new List<Card>()
             {
                 new Card {
-                    Name = "Daleks in Blackpool",
-                    Description = "A smiling man with a red coat and arms outstretched, standing in front of 3 large Daleks and a TARDIS. The Daleks seem to be raised above the grass beneath them, and a slightly cloudy sky is in the background.",
+                    Name = resManager.GetString("DefaultCard1Name"),
+                    Description = resManager.GetString("DefaultCard1Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card1) },
                 new Card {
-                    Name = "Daleks in Blackpool",
-                    Description = "A smiling man with a red coat and arms outstretched, standing in front of 3 large Daleks and a TARDIS. The Daleks seem to be raised above the grass beneath them, and a slightly cloudy sky is in the background.",
+                    Name = resManager.GetString("DefaultCard1Name"),
+                    Description = resManager.GetString("DefaultCard1Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card1) },
                 new Card {
-                    Name = "Lower Lighthouse in Fleetwood",
-                    Description = "A small brown stone lighthouse, with an upper small balcony and a lower bigger balcony. A covered sitting area is at the base of the lighthouse. In front of the lighthouse in the stone ground are anchor and compass symbols, and in the background is a grey cloudy sky.",
+                    Name = resManager.GetString("DefaultCard2Name"),
+                    Description = resManager.GetString("DefaultCard2Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card2) },
                 new Card {
-                    Name = "Lower Lighthouse in Fleetwood",
-                    Description = "A small brown stone lighthouse, with an upper small balcony and a lower bigger balcony. A covered sitting area is at the base of the lighthouse. In front of the lighthouse in the stone ground are anchor and compass symbols, and in the background is a grey cloudy sky.",
+                    Name = resManager.GetString("DefaultCard2Name"),
+                    Description = resManager.GetString("DefaultCard2Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card2) },
                 new Card {
-                    Name = "Fish and Chips in Cleveleys",
-                    Description = "A first-person view looking down on two portions of fish and chips in trays and paper. In the background is a concrete path, and two partially shown shoes.",
+                    Name = resManager.GetString("DefaultCard3Name"),
+                    Description = resManager.GetString("DefaultCard3Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card3) },
                 new Card {
-                    Name = "Fish and Chips in Cleveleys",
-                    Description = "A first-person view looking down on two portions of fish and chips in trays and paper. In the background is a concrete path, and two partially shown shoes.",
+                    Name = resManager.GetString("DefaultCard3Name"),
+                    Description = resManager.GetString("DefaultCard3Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card3) },
                 new Card {
-                    Name = "Cockersand Abbey",
-                    Description = "A small, very old hexagonal red stone building, with castellated battlements housing a cross. Arched windows on the sides of the building are bricked-up from the inside. The building sits on grass, with a bay and cloudy sky in the background.",
+                    Name = resManager.GetString("DefaultCard4Name"),
+                    Description = resManager.GetString("DefaultCard4Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card4) },
                 new Card {
-                    Name = "Cockersand Abbey",
-                    Description = "A small, very old hexagonal red stone building, with castellated battlements housing a cross. Arched windows on the sides of the building are bricked-up from the inside. The building sits on grass, with a bay and cloudy sky in the background.",
+                    Name = resManager.GetString("DefaultCard4Name"),
+                    Description = resManager.GetString("DefaultCard4Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card4) },
                 new Card {
-                    Name = "Lytham St Annes Windmill",
-                    Description = "A white windmill with a black roof and black sails. The windmill has stairs going up to a black door, and black windows. In the background is a street of houses and a clear, blue sky.",
+                    Name = resManager.GetString("DefaultCard5Name"),
+                    Description = resManager.GetString("DefaultCard5Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
                 new Card {
-                    Name = "Lytham St Annes Windmill",
-                    Description = "A white windmill with a black roof and black sails. The windmill has stairs going up to a black door, and black windows. In the background is a street of houses and a clear, blue sky.",
+                    Name = resManager.GetString("DefaultCard5Name"),
+                    Description = resManager.GetString("DefaultCard5Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card5) },
                 new Card {
-                    Name = "Bolton Abbey",
-                    Description = "The stone ruins of a large, very old abbey. The abbey has no roof or windows, and the sun shines through the arches from behind the abbey. In the foreground is a lawn housing multiple large stone graves, and in the background is a clear blue sky.",
+                    Name = resManager.GetString("DefaultCard6Name"),
+                    Description = resManager.GetString("DefaultCard6Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card6) },
                 new Card {
-                    Name = "Bolton Abbey",
-                    Description = "The stone ruins of a large, very old abbey. The abbey has no roof or windows, and the sun shines through the arches from behind the abbey. In the foreground is a lawn housing multiple large stone graves, and in the background is a clear blue sky.",
+                    Name = resManager.GetString("DefaultCard6Name"),
+                    Description = resManager.GetString("DefaultCard6Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card6) },
                 new Card {
-                    Name = "Harrogate Obelisk",
-                    Description = "A large stone obelisk in a town square, with buildings and trees nearby. The sun shines on the obelisk, with a slightly cloudy, blue sky in the background. At the base of the obelisk are six red wreaths.",
+                    Name = resManager.GetString("DefaultCard7Name"),
+                    Description = resManager.GetString("DefaultCard7Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card7) },
                 new Card {
-                    Name = "Harrogate Obelisk",
-                    Description = "A large stone obelisk in a town square, with buildings and trees nearby. The sun shines on the obelisk, with a slightly cloudy, blue sky in the background. At the base of the obelisk are six red wreaths.",
+                    Name = resManager.GetString("DefaultCard7Name"),
+                    Description = resManager.GetString("DefaultCard7Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card7) },
                 new Card {
-                    Name = "Hampsfell Hospice",
-                    Description = "A small square stone building with an opening on the near side. Above the opening is a Greek inscription. Railing surrounds the top of the building, and a sundial sits at the centre of the top. In the background is rocky grassland, with rolling hills in the far background along with a slightly cloudy, blue sky.",
+                    Name = resManager.GetString("DefaultCard8Name"),
+                    Description = resManager.GetString("DefaultCard8Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card8) },
                 new Card {
-                    Name = "Hampsfell Hospice",
-                    Description = "A small square stone building with an opening on the near side. Above the opening is a Greek inscription. Railing surrounds the top of the building, and a sundial sits at the centre of the top. In the background is rocky grassland, with rolling hills in the far background along with a slightly cloudy, blue sky.",
+                    Name = resManager.GetString("DefaultCard8Name"),
+                    Description = resManager.GetString("DefaultCard8Description"),
                     Image = new Bitmap(WinFormsMatchingGame.Properties.Resources.Card8) },
             };
+        }
+
+        private void buttonTurnCardUp_Click(object sender, EventArgs e)
+        {
+            cardMatchingGrid.TurnCardUp();
         }
 
         private void buttonTryAgain_Click(object sender, EventArgs e)
@@ -236,7 +249,17 @@ namespace WinFormsMatchingGame
             cardMatchingGrid.TryAgain();
         }
 
-        private void buttonRestartGame_Click(object sender, EventArgs e)
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowSettingsDialog();
+        }
+
+        private void restartToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RestartGame();
         }
@@ -248,16 +271,6 @@ namespace WinFormsMatchingGame
 
             cardMatchingGrid.ResetGrid();
             cardMatchingGrid.Focus();
-        }
-
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowSettingsDialog();
         }
 
         private void ShowSettingsDialog()

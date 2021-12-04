@@ -168,6 +168,150 @@ namespace WinFormsMatchingGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A smiling man with a red coat and arms outstretched, standing in front of 3 large Daleks and a TARDIS. The Daleks seem to be raised above the grass beneath them, and a slightly cloudy sky is in the background..
+        /// </summary>
+        internal static string DefaultCard1Description {
+            get {
+                return ResourceManager.GetString("DefaultCard1Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daleks in Blackpool.
+        /// </summary>
+        internal static string DefaultCard1Name {
+            get {
+                return ResourceManager.GetString("DefaultCard1Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A small brown stone lighthouse, with an upper small balcony and a lower bigger balcony. A covered sitting area is at the base of the lighthouse. In front of the lighthouse in the stone ground are anchor and compass symbols, and in the background is a grey cloudy sky..
+        /// </summary>
+        internal static string DefaultCard2Description {
+            get {
+                return ResourceManager.GetString("DefaultCard2Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lower Lighthouse in Fleetwood.
+        /// </summary>
+        internal static string DefaultCard2Name {
+            get {
+                return ResourceManager.GetString("DefaultCard2Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A first-person view looking down on two portions of fish and chips in trays and paper. In the background is a concrete path, and two partially shown shoes..
+        /// </summary>
+        internal static string DefaultCard3Description {
+            get {
+                return ResourceManager.GetString("DefaultCard3Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fish and Chips in Cleveleys.
+        /// </summary>
+        internal static string DefaultCard3Name {
+            get {
+                return ResourceManager.GetString("DefaultCard3Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A small, very old hexagonal red stone building, with castellated battlements housing a cross. Arched windows on the sides of the building are bricked-up from the inside. The building sits on grass, with a bay and cloudy sky in the background..
+        /// </summary>
+        internal static string DefaultCard4Description {
+            get {
+                return ResourceManager.GetString("DefaultCard4Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cockersand Abbey.
+        /// </summary>
+        internal static string DefaultCard4Name {
+            get {
+                return ResourceManager.GetString("DefaultCard4Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A white windmill with a black roof and black sails. The windmill has stairs going up to a black door, and black windows. In the background is a street of houses and a clear, blue sky..
+        /// </summary>
+        internal static string DefaultCard5Description {
+            get {
+                return ResourceManager.GetString("DefaultCard5Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lytham St Annes Windmill.
+        /// </summary>
+        internal static string DefaultCard5Name {
+            get {
+                return ResourceManager.GetString("DefaultCard5Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The stone ruins of a large, very old abbey. The abbey has no roof or windows, and the sun shines through the arches from behind the abbey. In the foreground is a lawn housing multiple large stone graves, and in the background is a clear blue sky..
+        /// </summary>
+        internal static string DefaultCard6Description {
+            get {
+                return ResourceManager.GetString("DefaultCard6Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bolton Abbey.
+        /// </summary>
+        internal static string DefaultCard6Name {
+            get {
+                return ResourceManager.GetString("DefaultCard6Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A large stone obelisk in a town square, with buildings and trees nearby. The sun shines on the obelisk, with a slightly cloudy, blue sky in the background. At the base of the obelisk are six red wreaths..
+        /// </summary>
+        internal static string DefaultCard7Description {
+            get {
+                return ResourceManager.GetString("DefaultCard7Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Harrogate Obelisk.
+        /// </summary>
+        internal static string DefaultCard7Name {
+            get {
+                return ResourceManager.GetString("DefaultCard7Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A small square stone building with an opening on the near side. Above the opening is a Greek inscription. Railing surrounds the top of the building, and a sundial sits at the centre of the top. In the background is rocky grassland, with rolling hills in the far background along with a slightly cloudy, blue sky..
+        /// </summary>
+        internal static string DefaultCard8Description {
+            get {
+                return ResourceManager.GetString("DefaultCard8Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hampsfell Hospice.
+        /// </summary>
+        internal static string DefaultCard8Name {
+            get {
+                return ResourceManager.GetString("DefaultCard8Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Face down.
         /// </summary>
         internal static string FaceDown {
@@ -182,15 +326,6 @@ namespace WinFormsMatchingGame.Properties {
         internal static string ThatsAMatch {
             get {
                 return ResourceManager.GetString("ThatsAMatch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Turn cards back to continue..
-        /// </summary>
-        internal static string TurnCardsBackToContinue {
-            get {
-                return ResourceManager.GetString("TurnCardsBackToContinue", resourceCulture);
             }
         }
         
