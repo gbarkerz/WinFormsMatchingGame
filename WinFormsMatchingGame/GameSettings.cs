@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -234,7 +235,8 @@ namespace WinFormsMatchingGame
 
             Settings.Default.Save();
 
-            if (Settings.Default.AutoExportDetailsOnSave)
+            if (Settings.Default.UseYourPictures &&
+                Settings.Default.AutoExportDetailsOnSave)
             {
                 if (dataGridViewPictureData.Rows.Count > 0)
                 {
@@ -300,15 +302,23 @@ namespace WinFormsMatchingGame
                         Resources.ResourceManager.GetString("ImportExportDefaultFileName") +
                         ".txt";
                     StreamReader streamReader = null;
-                    if ((streamReader = new StreamReader(importFile)) != null)
-                    {
-                        string content = null;
-                        while ((content = streamReader.ReadLine()) != null)
-                        {
-                            SetNameDescription(content);
-                        }
 
-                        streamReader.Close();
+                    try
+                    {
+                        if ((streamReader = new StreamReader(importFile)) != null)
+                        {
+                            string content = null;
+                            while ((content = streamReader.ReadLine()) != null)
+                            {
+                                SetNameDescription(content);
+                            }
+
+                            streamReader.Close();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
                     }
                 }
             }
@@ -356,14 +366,21 @@ namespace WinFormsMatchingGame
         {
             string fullContent = "";
 
-            for (int i = 0; i < cardPairCount; i++)
+            try
             {
-                var fileName = dataGridViewPictureData.Rows[i].Cells[1].Value.ToString();
-                var name = dataGridViewPictureData.Rows[i].Cells[2].Value.ToString();
+                for (int i = 0; i < cardPairCount; i++)
+                {
+                    var fileName = dataGridViewPictureData.Rows[i].Cells[1].Value.ToString();
+                    var name = dataGridViewPictureData.Rows[i].Cells[2].Value.ToString();
 
-                string description = GetPictureDescription(i);
+                    string description = GetPictureDescription(i);
 
-                fullContent += fileName + "\t" + name + "\t" + description + "\r\n";
+                    fullContent += fileName + "\t" + name + "\t" + description + "\r\n";
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
             }
 
             streamWriter.Write(fullContent);
@@ -409,17 +426,24 @@ namespace WinFormsMatchingGame
             if (result == DialogResult.OK)
             {
                 Stream stream = null;
-                if ((stream = openDlg.OpenFile()) != null)
+                try
                 {
-                    var streamReader = new StreamReader(stream);
-
-                    string content = null;
-                    while ((content = streamReader.ReadLine()) != null)
+                    if ((stream = openDlg.OpenFile()) != null)
                     {
-                        SetNameDescription(content);
-                    }
+                        var streamReader = new StreamReader(stream);
 
-                    streamReader.Close();
+                        string content = null;
+                        while ((content = streamReader.ReadLine()) != null)
+                        {
+                            SetNameDescription(content);
+                        }
+
+                        streamReader.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
                 }
             }
         }

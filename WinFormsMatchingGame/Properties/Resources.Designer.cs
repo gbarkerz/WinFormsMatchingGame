@@ -348,7 +348,7 @@ namespace WinFormsMatchingGame.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MatchingPictureDetails.
+        ///   Looks up a localized string similar to MatchingGamePictureDetails.
         /// </summary>
         internal static string ImportExportDefaultFileName {
             get {

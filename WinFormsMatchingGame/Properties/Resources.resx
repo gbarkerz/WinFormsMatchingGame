@@ -212,7 +212,7 @@
     <value>Import Picture Names and Descriptions</value>
   </data>
   <data name="ImportExportDefaultFileName" xml:space="preserve">
-    <value>MatchingPictureDetails</value>
+    <value>MatchingGamePictureDetails</value>
   </data>
   <data name="ImportWarning" xml:space="preserve">
     <value>Please load 8 pictures before importing their names and descriptions.</value>
