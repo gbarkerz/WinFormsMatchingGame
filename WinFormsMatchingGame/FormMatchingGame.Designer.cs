@@ -39,6 +39,7 @@ namespace WinFormsMatchingGame
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonTurnCardUp = new System.Windows.Forms.Button();
+            this.labelKeyboardUseInstructions = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,17 +50,15 @@ namespace WinFormsMatchingGame
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelCardGrid.Location = new System.Drawing.Point(13, 41);
             this.panelCardGrid.Name = "panelCardGrid";
-            this.panelCardGrid.Size = new System.Drawing.Size(751, 624);
-            this.panelCardGrid.TabIndex = 0;
+            this.panelCardGrid.Size = new System.Drawing.Size(751, 632);
             // 
             // buttonTryAgain
             // 
             this.buttonTryAgain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonTryAgain.Location = new System.Drawing.Point(403, 684);
+            this.buttonTryAgain.Location = new System.Drawing.Point(456, 756);
             this.buttonTryAgain.Name = "buttonTryAgain";
-            this.buttonTryAgain.Size = new System.Drawing.Size(361, 40);
-            this.buttonTryAgain.TabIndex = 2;
-            this.buttonTryAgain.Text = "Turn unmatched cards &back (Enter)";
+            this.buttonTryAgain.Size = new System.Drawing.Size(308, 40);
+            this.buttonTryAgain.Text = "Turn unmatched cards &back";
             this.buttonTryAgain.UseVisualStyleBackColor = true;
             this.buttonTryAgain.Click += new System.EventHandler(this.buttonTryAgain_Click);
             // 
@@ -73,7 +72,6 @@ namespace WinFormsMatchingGame
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(776, 38);
-            this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
@@ -87,7 +85,7 @@ namespace WinFormsMatchingGame
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(181, 40);
             this.closeToolStripMenuItem.Text = "&Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
@@ -104,7 +102,7 @@ namespace WinFormsMatchingGame
             this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
             this.restartToolStripMenuItem.ShortcutKeyDisplayString = "F5";
             this.restartToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.restartToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.restartToolStripMenuItem.Size = new System.Drawing.Size(229, 40);
             this.restartToolStripMenuItem.Text = "&Restart";
             this.restartToolStripMenuItem.Click += new System.EventHandler(this.restartToolStripMenuItem_Click);
             // 
@@ -119,28 +117,36 @@ namespace WinFormsMatchingGame
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(205, 40);
             this.settingsToolStripMenuItem.Text = "&Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
-
             // 
             // buttonTurnCardUp
             // 
             this.buttonTurnCardUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonTurnCardUp.Location = new System.Drawing.Point(13, 684);
+            this.buttonTurnCardUp.Location = new System.Drawing.Point(204, 756);
             this.buttonTurnCardUp.Name = "buttonTurnCardUp";
-            this.buttonTurnCardUp.Size = new System.Drawing.Size(313, 40);
-            this.buttonTurnCardUp.TabIndex = 1;
-            this.buttonTurnCardUp.Text = "Turn selected card &up (Space)";
+            this.buttonTurnCardUp.Size = new System.Drawing.Size(239, 40);
+            this.buttonTurnCardUp.Text = "Turn selected card &up";
             this.buttonTurnCardUp.UseVisualStyleBackColor = true;
             this.buttonTurnCardUp.Click += new System.EventHandler(this.buttonTurnCardUp_Click);
+            // 
+            // labelKeyboardUseInstructions
+            // 
+            this.labelKeyboardUseInstructions.AutoSize = true;
+            this.labelKeyboardUseInstructions.Location = new System.Drawing.Point(13, 680);
+            this.labelKeyboardUseInstructions.Name = "labelKeyboardUseInstructions";
+            this.labelKeyboardUseInstructions.Size = new System.Drawing.Size(760, 60);
+            this.labelKeyboardUseInstructions.Text = "Keyboard use: Press the arrow keys to move around the card grid. Press Space to\r\n" +
+    "turn up the selected card. Press Enter to turns all unmatched cards back over.";
             // 
             // FormMatchingGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 736);
+            this.ClientSize = new System.Drawing.Size(776, 808);
             this.Controls.Add(this.panelCardGrid);
+            this.Controls.Add(this.labelKeyboardUseInstructions);
             this.Controls.Add(this.buttonTurnCardUp);
             this.Controls.Add(this.buttonTryAgain);
             this.Controls.Add(this.menuStrip1);
@@ -168,6 +174,7 @@ namespace WinFormsMatchingGame
         private System.Windows.Forms.Button buttonTurnCardUp;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.Label labelKeyboardUseInstructions;
     }
 }
 
