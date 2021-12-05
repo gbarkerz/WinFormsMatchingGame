@@ -29,6 +29,7 @@ namespace WinFormsMatchingGame
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameSettings));
             this.groupBoxCardPictures = new System.Windows.Forms.GroupBox();
             this.labelCardPicturesInstructions = new System.Windows.Forms.Label();
             this.radioButtonPicturesNorthernEngland = new System.Windows.Forms.RadioButton();
@@ -42,8 +43,11 @@ namespace WinFormsMatchingGame
             this.ColumnCardFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonImport = new System.Windows.Forms.Button();
+            this.buttonExport = new System.Windows.Forms.Button();
             this.buttonSaveClose = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.checkBoxAutoExportDetailsOnSave = new System.Windows.Forms.CheckBox();
             this.groupBoxCardPictures.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPictureData)).BeginInit();
             this.SuspendLayout();
@@ -58,9 +62,11 @@ namespace WinFormsMatchingGame
             this.groupBoxCardPictures.Controls.Add(this.buttonYourPicturesBrowse);
             this.groupBoxCardPictures.Controls.Add(this.labelPictureDataGrid);
             this.groupBoxCardPictures.Controls.Add(this.dataGridViewPictureData);
+            this.groupBoxCardPictures.Controls.Add(this.buttonImport);
+            this.groupBoxCardPictures.Controls.Add(this.buttonExport);
             this.groupBoxCardPictures.Location = new System.Drawing.Point(13, 13);
             this.groupBoxCardPictures.Name = "groupBoxCardPictures";
-            this.groupBoxCardPictures.Size = new System.Drawing.Size(858, 610);
+            this.groupBoxCardPictures.Size = new System.Drawing.Size(882, 730);
             this.groupBoxCardPictures.TabIndex = 0;
             this.groupBoxCardPictures.TabStop = false;
             this.groupBoxCardPictures.Text = "C&ard pictures";
@@ -81,6 +87,7 @@ namespace WinFormsMatchingGame
             this.radioButtonPicturesNorthernEngland.Location = new System.Drawing.Point(43, 103);
             this.radioButtonPicturesNorthernEngland.Name = "radioButtonPicturesNorthernEngland";
             this.radioButtonPicturesNorthernEngland.Size = new System.Drawing.Size(203, 34);
+            this.radioButtonPicturesNorthernEngland.TabIndex = 1;
             this.radioButtonPicturesNorthernEngland.TabStop = true;
             this.radioButtonPicturesNorthernEngland.Text = "&Northern England";
             this.radioButtonPicturesNorthernEngland.UseVisualStyleBackColor = true;
@@ -91,6 +98,7 @@ namespace WinFormsMatchingGame
             this.radioButtonPicturesYourPictures.Location = new System.Drawing.Point(43, 159);
             this.radioButtonPicturesYourPictures.Name = "radioButtonPicturesYourPictures";
             this.radioButtonPicturesYourPictures.Size = new System.Drawing.Size(158, 34);
+            this.radioButtonPicturesYourPictures.TabIndex = 2;
             this.radioButtonPicturesYourPictures.Text = "&Your pictures";
             this.radioButtonPicturesYourPictures.UseVisualStyleBackColor = true;
             this.radioButtonPicturesYourPictures.CheckedChanged += new System.EventHandler(this.radioButtonPicturesYourPictures_CheckedChanged);
@@ -100,23 +108,24 @@ namespace WinFormsMatchingGame
             this.labelYourPicturesInstructions.AutoSize = true;
             this.labelYourPicturesInstructions.Location = new System.Drawing.Point(69, 201);
             this.labelYourPicturesInstructions.Name = "labelYourPicturesInstructions";
-            this.labelYourPicturesInstructions.Size = new System.Drawing.Size(787, 60);
-            this.labelYourPicturesInstructions.Text = "Please select a &folder that contains exactly 8 pictures. The pictures must be lo" +
-    "cated \r\nbeneath your Pictures folder, and the picture format needs to be JPG, PN" +
-    "G, or BMP.";
+            this.labelYourPicturesInstructions.Size = new System.Drawing.Size(812, 120);
+            this.labelYourPicturesInstructions.TabIndex = 3;
+            this.labelYourPicturesInstructions.Text = resources.GetString("labelYourPicturesInstructions.Text");
             // 
             // textBoxYourPicturesPath
             // 
             this.textBoxYourPicturesPath.AccessibleName = "Your pictures folder";
-            this.textBoxYourPicturesPath.Location = new System.Drawing.Point(69, 282);
+            this.textBoxYourPicturesPath.Location = new System.Drawing.Point(69, 351);
             this.textBoxYourPicturesPath.Name = "textBoxYourPicturesPath";
             this.textBoxYourPicturesPath.Size = new System.Drawing.Size(632, 35);
+            this.textBoxYourPicturesPath.TabIndex = 4;
             // 
             // buttonYourPicturesBrowse
             // 
-            this.buttonYourPicturesBrowse.Location = new System.Drawing.Point(711, 280);
+            this.buttonYourPicturesBrowse.Location = new System.Drawing.Point(711, 349);
             this.buttonYourPicturesBrowse.Name = "buttonYourPicturesBrowse";
             this.buttonYourPicturesBrowse.Size = new System.Drawing.Size(131, 40);
+            this.buttonYourPicturesBrowse.TabIndex = 5;
             this.buttonYourPicturesBrowse.Text = "&Browse";
             this.buttonYourPicturesBrowse.UseVisualStyleBackColor = true;
             this.buttonYourPicturesBrowse.Click += new System.EventHandler(this.buttonYourPicturesBrowse_Click);
@@ -124,9 +133,10 @@ namespace WinFormsMatchingGame
             // labelPictureDataGrid
             // 
             this.labelPictureDataGrid.AutoSize = true;
-            this.labelPictureDataGrid.Location = new System.Drawing.Point(69, 333);
+            this.labelPictureDataGrid.Location = new System.Drawing.Point(69, 410);
             this.labelPictureDataGrid.Name = "labelPictureDataGrid";
             this.labelPictureDataGrid.Size = new System.Drawing.Size(564, 30);
+            this.labelPictureDataGrid.TabIndex = 6;
             this.labelPictureDataGrid.Text = "Your Pictures &Details. (Columns marked with * are required.)";
             // 
             // dataGridViewPictureData
@@ -141,7 +151,7 @@ namespace WinFormsMatchingGame
             this.ColumnCardFileName,
             this.ColumnName,
             this.ColumnDescription});
-            this.dataGridViewPictureData.Location = new System.Drawing.Point(69, 371);
+            this.dataGridViewPictureData.Location = new System.Drawing.Point(69, 448);
             this.dataGridViewPictureData.MultiSelect = false;
             this.dataGridViewPictureData.Name = "dataGridViewPictureData";
             this.dataGridViewPictureData.RowHeadersVisible = false;
@@ -150,6 +160,7 @@ namespace WinFormsMatchingGame
             this.dataGridViewPictureData.ShowCellToolTips = false;
             this.dataGridViewPictureData.Size = new System.Drawing.Size(773, 199);
             this.dataGridViewPictureData.StandardTab = true;
+            this.dataGridViewPictureData.TabIndex = 7;
             // 
             // FileFullPath
             // 
@@ -178,11 +189,32 @@ namespace WinFormsMatchingGame
             this.ColumnDescription.MinimumWidth = 9;
             this.ColumnDescription.Name = "ColumnDescription";
             // 
+            // buttonImport
+            // 
+            this.buttonImport.Location = new System.Drawing.Point(127, 668);
+            this.buttonImport.Name = "buttonImport";
+            this.buttonImport.Size = new System.Drawing.Size(350, 40);
+            this.buttonImport.TabIndex = 8;
+            this.buttonImport.Text = "&Import Names and Descriptions";
+            this.buttonImport.UseVisualStyleBackColor = true;
+            this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
+            // 
+            // buttonExport
+            // 
+            this.buttonExport.Location = new System.Drawing.Point(492, 668);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(350, 40);
+            this.buttonExport.TabIndex = 9;
+            this.buttonExport.Text = "&Export Names and Descriptions";
+            this.buttonExport.UseVisualStyleBackColor = true;
+            this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
+            // 
             // buttonSaveClose
             // 
-            this.buttonSaveClose.Location = new System.Drawing.Point(515, 637);
+            this.buttonSaveClose.Location = new System.Drawing.Point(548, 819);
             this.buttonSaveClose.Name = "buttonSaveClose";
             this.buttonSaveClose.Size = new System.Drawing.Size(199, 40);
+            this.buttonSaveClose.TabIndex = 2;
             this.buttonSaveClose.Text = "&Save and Close";
             this.buttonSaveClose.UseVisualStyleBackColor = true;
             this.buttonSaveClose.Click += new System.EventHandler(this.buttonSaveClose_Click);
@@ -190,19 +222,32 @@ namespace WinFormsMatchingGame
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(724, 637);
+            this.buttonCancel.Location = new System.Drawing.Point(764, 819);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(131, 40);
+            this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "&Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // checkBoxAutoExportDetailsOnSave
+            // 
+            this.checkBoxAutoExportDetailsOnSave.AutoSize = true;
+            this.checkBoxAutoExportDetailsOnSave.Location = new System.Drawing.Point(29, 765);
+            this.checkBoxAutoExportDetailsOnSave.Name = "checkBoxAutoExportDetailsOnSave";
+            this.checkBoxAutoExportDetailsOnSave.Size = new System.Drawing.Size(865, 34);
+            this.checkBoxAutoExportDetailsOnSave.TabIndex = 4;
+            this.checkBoxAutoExportDetailsOnSave.Text = "E&xport accessible names and descriptions to the file \"MatchingPictureDetails.txt" +
+    "\" on save.";
+            this.checkBoxAutoExportDetailsOnSave.UseVisualStyleBackColor = true;
             // 
             // GameSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(883, 689);
+            this.ClientSize = new System.Drawing.Size(914, 878);
+            this.Controls.Add(this.checkBoxAutoExportDetailsOnSave);
             this.Controls.Add(this.groupBoxCardPictures);
             this.Controls.Add(this.buttonSaveClose);
             this.Controls.Add(this.buttonCancel);
@@ -216,6 +261,7 @@ namespace WinFormsMatchingGame
             this.groupBoxCardPictures.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPictureData)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -236,5 +282,8 @@ namespace WinFormsMatchingGame
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCardFileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
+        private System.Windows.Forms.Button buttonImport;
+        private System.Windows.Forms.Button buttonExport;
+        private System.Windows.Forms.CheckBox checkBoxAutoExportDetailsOnSave;
     }
 }

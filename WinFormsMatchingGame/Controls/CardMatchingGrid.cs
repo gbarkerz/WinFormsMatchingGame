@@ -80,23 +80,14 @@ namespace WinFormsMatchingGame.Controls
             }
         }
 
-        // Todo: Is overriding the OnKeyDown/OnKeyUp really the most appropriate 
+        // Todo: Is overriding the OnKeyDown really the most appropriate 
         // way of changing the behavior of Enter when focus is on the grid?
         protected override void OnKeyDown(KeyEventArgs e)
-        {
-            // Take no action in response to Enter KeyDown.
-            if (e.KeyValue != 13)
-            {
-                base.OnKeyDown(e);
-            }
-        }
-
-        protected override void OnKeyUp(KeyEventArgs e)
         {
             // Enter KeyDown results in any unmatched cards being turned back.
             if (e.KeyValue != 13)
             {
-                base.OnKeyUp(e);
+                base.OnKeyDown(e);
             }
             else
             {

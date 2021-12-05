@@ -312,11 +312,83 @@ namespace WinFormsMatchingGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export Picture Names and Descriptions.
+        /// </summary>
+        internal static string ExportDlgTitle {
+            get {
+                return ResourceManager.GetString("ExportDlgTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please load 8 pictures before exporting their names and descriptions..
+        /// </summary>
+        internal static string ExportWarning {
+            get {
+                return ResourceManager.GetString("ExportWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Face down.
         /// </summary>
         internal static string FaceDown {
             get {
                 return ResourceManager.GetString("FaceDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Picture Names and Descriptions.
+        /// </summary>
+        internal static string ImportDlgTitle {
+            get {
+                return ResourceManager.GetString("ImportDlgTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MatchingPictureDetails.
+        /// </summary>
+        internal static string ImportExportDefaultFileName {
+            get {
+                return ResourceManager.GetString("ImportExportDefaultFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please load 8 pictures before importing their names and descriptions..
+        /// </summary>
+        internal static string ImportWarning {
+            get {
+                return ResourceManager.GetString("ImportWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide 8 named pictures in the Your Picture Details table..
+        /// </summary>
+        internal static string PictureNamesWarning {
+            get {
+                return ResourceManager.GetString("PictureNamesWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to lose the changes made to the settings?.
+        /// </summary>
+        internal static string SettingsChangeWarning {
+            get {
+                return ResourceManager.GetString("SettingsChangeWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matching Game Settings.
+        /// </summary>
+        internal static string SettingsTitle {
+            get {
+                return ResourceManager.GetString("SettingsTitle", resourceCulture);
             }
         }
         

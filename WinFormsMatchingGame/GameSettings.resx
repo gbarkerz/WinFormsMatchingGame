@@ -57,6 +57,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="labelYourPicturesInstructions.Text" xml:space="preserve">
+    <value>Please select a &amp;folder that contains exactly 8 pictures. The pictures must be located 
+beneath your Pictures folder, and the picture format needs to be JPG, PNG, or BMP.
+If a file called "MatchingPictureDetails.txt" is in the selected folder, then the accessible
+names and descriptions for the pictures will automatically be loaded from that file.</value>
+  </data>
   <metadata name="FileFullPath.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using WinFormsMatchingGame.Properties;
 
 namespace WinFormsMatchingGame
 {
@@ -59,6 +60,8 @@ namespace WinFormsMatchingGame
                     }
                 }
             }
+
+            checkBoxAutoExportDetailsOnSave.Checked = Settings.Default.AutoExportDetailsOnSave;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -75,8 +78,8 @@ namespace WinFormsMatchingGame
             {
                 var result = MessageBox.Show(
                     this,
-                    "Do you want to lose the changes made to the settings?",
-                    "Matching Game Settings",
+                    Resources.ResourceManager.GetString("SettingsChangeWarning"),
+                    Resources.ResourceManager.GetString("SettingsTitle"),
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
                 if (result != DialogResult.Yes)
@@ -99,6 +102,12 @@ namespace WinFormsMatchingGame
 
             if (!settingsAreChanged)
             {
+                settingsAreChanged = (Settings.Default.AutoExportDetailsOnSave !=
+                                        checkBoxAutoExportDetailsOnSave.Checked);
+            }
+
+            if (!settingsAreChanged)
+            {
                 for (int i = 0; i < cardPairCount; i++)
                 {
                     string settingName = "Card" + (i + 1) + "Path";
@@ -113,9 +122,10 @@ namespace WinFormsMatchingGame
 
                     if (!settingsAreChanged)
                     {
+                        var description = GetPictureDescription(i);
+
                         settingName = "Card" + (i + 1) + "Description";
-                        settingsAreChanged = (Settings.Default[settingName] !=
-                                                dataGridViewPictureData.Rows[i].Cells[3].Value);
+                        settingsAreChanged = (Settings.Default[settingName].ToString() != description);
                     }
 
                     if (settingsAreChanged)
@@ -171,8 +181,8 @@ namespace WinFormsMatchingGame
 
                         MessageBox.Show(
                             this,
-                            "Please provide 8 named pictures in the Your Picture Details table.",
-                            "Matching Game Settings",
+                            Resources.ResourceManager.GetString("PictureNamesWarning"),
+                            Resources.ResourceManager.GetString("SettingsTitle"),
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
 
@@ -216,10 +226,31 @@ namespace WinFormsMatchingGame
                 Settings.Default[settingName] = dataGridViewPictureData.Rows[i].Cells[2].Value;
 
                 settingName = "Card" + (i + 1) + "Description";
-                Settings.Default[settingName] = dataGridViewPictureData.Rows[i].Cells[3].Value;
+                var description = GetPictureDescription(i);
+                Settings.Default[settingName] = description;
             }
 
+            Settings.Default.AutoExportDetailsOnSave = checkBoxAutoExportDetailsOnSave.Checked;
+
             Settings.Default.Save();
+
+            if (Settings.Default.AutoExportDetailsOnSave)
+            {
+                if (dataGridViewPictureData.Rows.Count > 0)
+                {
+                    FileInfo fileInfo = new FileInfo(dataGridViewPictureData.Rows[0].Cells[0].Value.ToString());
+                    string exportFile = fileInfo.DirectoryName + "\\" +
+                        Resources.ResourceManager.GetString("ImportExportDefaultFileName") +
+                        ".txt";
+
+                    StreamWriter streamWriter = null;
+                    if ((streamWriter = new StreamWriter(exportFile)) != null)
+                    {
+                        ExportDetails(streamWriter);
+                        streamWriter.Close();
+                    }
+                }
+            }
         }
 
         // Only enable the Your Pictures controls when appropriate.
@@ -263,6 +294,157 @@ namespace WinFormsMatchingGame
                         dataGridViewPictureData.Rows.Add(files[i].FullName);
                         dataGridViewPictureData.Rows[i].Cells[1].Value = files[i].Name;
                     }
+
+                    // Load up accessible details if we can find them in the folder.
+                    string importFile = folderBrowserDialog.SelectedPath + "\\" +
+                        Resources.ResourceManager.GetString("ImportExportDefaultFileName") +
+                        ".txt";
+                    StreamReader streamReader = null;
+                    if ((streamReader = new StreamReader(importFile)) != null)
+                    {
+                        string content = null;
+                        while ((content = streamReader.ReadLine()) != null)
+                        {
+                            SetNameDescription(content);
+                        }
+
+                        streamReader.Close();
+                    }
+                }
+            }
+        }
+
+        private void buttonExport_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewPictureData.Rows.Count < cardPairCount)
+            {
+                MessageBox.Show(
+                    this,
+                    Resources.ResourceManager.GetString("ExportWarning"),
+                    Resources.ResourceManager.GetString("SettingsTitle"),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            var saveDlg = new SaveFileDialog();
+            saveDlg.Title = Resources.ResourceManager.GetString("ExportDlgTitle");
+            saveDlg.FileName = Resources.ResourceManager.GetString("MatchingPictureDetails");
+            saveDlg.DefaultExt = "txt";
+            saveDlg.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveDlg.FilterIndex = 1;
+            saveDlg.OverwritePrompt = true;
+
+            FileInfo fileInfo = new FileInfo(dataGridViewPictureData.Rows[0].Cells[0].Value.ToString());
+            saveDlg.InitialDirectory = fileInfo.DirectoryName;
+
+            DialogResult result = saveDlg.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                Stream stream = null;
+                if ((stream = saveDlg.OpenFile()) != null)
+                {
+                    var streamWriter = new StreamWriter(stream);
+                    ExportDetails(streamWriter);
+                    streamWriter.Close();
+                }
+            }
+        }
+
+        private void ExportDetails(StreamWriter streamWriter)
+        {
+            string fullContent = "";
+
+            for (int i = 0; i < cardPairCount; i++)
+            {
+                var fileName = dataGridViewPictureData.Rows[i].Cells[1].Value.ToString();
+                var name = dataGridViewPictureData.Rows[i].Cells[2].Value.ToString();
+
+                string description = GetPictureDescription(i);
+
+                fullContent += fileName + "\t" + name + "\t" + description + "\r\n";
+            }
+
+            streamWriter.Write(fullContent);
+        }
+
+        private string GetPictureDescription(int rowIndex)
+        {
+            string description = "";
+            if ((dataGridViewPictureData.Rows[rowIndex].Cells[3] != null) &&
+                (dataGridViewPictureData.Rows[rowIndex].Cells[3].Value != null))
+            {
+                description = dataGridViewPictureData.Rows[rowIndex].Cells[3].Value.ToString();
+            }
+
+            return description;
+        }
+
+        private void buttonImport_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewPictureData.Rows.Count < cardPairCount)
+            {
+                MessageBox.Show(
+                    this,
+                    Resources.ResourceManager.GetString("ImportWarning"),
+                    Resources.ResourceManager.GetString("SettingsTitle"),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            var openDlg = new OpenFileDialog();
+            openDlg.Title = Resources.ResourceManager.GetString("ImportDlgTitle");
+            openDlg.FileName = Resources.ResourceManager.GetString("MatchingPictureDetails");
+            openDlg.DefaultExt = "txt";
+            openDlg.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openDlg.FilterIndex = 1;
+
+            FileInfo fileInfo = new FileInfo(dataGridViewPictureData.Rows[0].Cells[0].Value.ToString());
+            openDlg.InitialDirectory = fileInfo.DirectoryName;
+
+            DialogResult result = openDlg.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                Stream stream = null;
+                if ((stream = openDlg.OpenFile()) != null)
+                {
+                    var streamReader = new StreamReader(stream);
+
+                    string content = null;
+                    while ((content = streamReader.ReadLine()) != null)
+                    {
+                        SetNameDescription(content);
+                    }
+
+                    streamReader.Close();
+                }
+            }
+        }
+
+        // Note that no feedback is presented to the player if the picture details
+        // don't match the current list of loaded pictures.
+        private void SetNameDescription(string content)
+        {
+            var fileNameDelimiter = content.IndexOf('\t');
+            string fileName = content.Substring(0, fileNameDelimiter);
+
+            for (int i = 0; i < cardPairCount; i++)
+            {
+                if (fileName == dataGridViewPictureData.Rows[i].Cells[1].Value.ToString())
+                {
+                    string details = content.Substring(fileNameDelimiter + 1);
+
+                    var nameDelimiter = details.IndexOf('\t');
+                    string name = details.Substring(0, nameDelimiter);
+                    string description = details.Substring(nameDelimiter + 1);
+
+                    dataGridViewPictureData.Rows[i].Cells[2].Value = name;
+                    dataGridViewPictureData.Rows[i].Cells[3].Value = description;
+
+                    break;
                 }
             }
         }

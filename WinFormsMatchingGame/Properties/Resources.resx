@@ -199,8 +199,32 @@
   <data name="DefaultCard8Name" xml:space="preserve">
     <value>Hampsfell Hospice</value>
   </data>
+  <data name="ExportDlgTitle" xml:space="preserve">
+    <value>Export Picture Names and Descriptions</value>
+  </data>
+  <data name="ExportWarning" xml:space="preserve">
+    <value>Please load 8 pictures before exporting their names and descriptions.</value>
+  </data>
   <data name="FaceDown" xml:space="preserve">
     <value>Face down</value>
+  </data>
+  <data name="ImportDlgTitle" xml:space="preserve">
+    <value>Import Picture Names and Descriptions</value>
+  </data>
+  <data name="ImportExportDefaultFileName" xml:space="preserve">
+    <value>MatchingPictureDetails</value>
+  </data>
+  <data name="ImportWarning" xml:space="preserve">
+    <value>Please load 8 pictures before importing their names and descriptions.</value>
+  </data>
+  <data name="PictureNamesWarning" xml:space="preserve">
+    <value>Please provide 8 named pictures in the Your Picture Details table.</value>
+  </data>
+  <data name="SettingsChangeWarning" xml:space="preserve">
+    <value>Do you want to lose the changes made to the settings?</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Matching Game Settings</value>
   </data>
   <data name="ThatsAMatch" xml:space="preserve">
     <value>That's a match!</value>

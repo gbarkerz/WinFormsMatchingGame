@@ -334,5 +334,17 @@ namespace WinFormsMatchingGame {
                 this["Card8Description"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AutoExportDetailsOnSave {
+            get {
+                return ((bool)(this["AutoExportDetailsOnSave"]));
+            }
+            set {
+                this["AutoExportDetailsOnSave"] = value;
+            }
+        }
     }
 }

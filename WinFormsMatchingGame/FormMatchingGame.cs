@@ -12,7 +12,15 @@ using WinFormsMatchingGame.Properties;
 // Add a message when attempt to turn up a card when 2 unmatched cards are already up.
 //  This is more helpful than nothing happening in that situation.
 // Move the Restart action to a menu with F5 shortcut.
-
+//
+// Notes:
+// - When fixing up the UIA order, do remember to remove old TabIndex settings, 
+//    otherwise tab order might still be broken.
+//
+// Todo:
+// - Make DPI aware.
+// - Add app icon.
+// - Update store icons.
 
 // For details on this app, please read the ReadMe file included in the app's VS solution.
 namespace WinFormsMatchingGame
