@@ -233,10 +233,10 @@ namespace WinFormsMatchingGame
             // checkBoxAutoExportDetailsOnSave
             // 
             this.checkBoxAutoExportDetailsOnSave.AutoSize = true;
-            this.checkBoxAutoExportDetailsOnSave.Location = new System.Drawing.Point(12, 617);
+            this.checkBoxAutoExportDetailsOnSave.Location = new System.Drawing.Point(16, 616);
             this.checkBoxAutoExportDetailsOnSave.Name = "checkBoxAutoExportDetailsOnSave";
             this.checkBoxAutoExportDetailsOnSave.Size = new System.Drawing.Size(701, 29);
-            this.checkBoxAutoExportDetailsOnSave.TabIndex = 4;
+            this.checkBoxAutoExportDetailsOnSave.TabIndex = 1;
             this.checkBoxAutoExportDetailsOnSave.Text = "E&xport names and descriptions to the file \"MatchingGamePictureDetails.txt\" on sa" +
     "ve.";
             this.checkBoxAutoExportDetailsOnSave.UseVisualStyleBackColor = true;
@@ -247,8 +247,8 @@ namespace WinFormsMatchingGame
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(1002, 712);
-            this.Controls.Add(this.checkBoxAutoExportDetailsOnSave);
             this.Controls.Add(this.groupBoxCardPictures);
+            this.Controls.Add(this.checkBoxAutoExportDetailsOnSave);
             this.Controls.Add(this.buttonSaveClose);
             this.Controls.Add(this.buttonCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
