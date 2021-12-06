@@ -50,13 +50,13 @@ namespace WinFormsMatchingGame
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelCardGrid.Location = new System.Drawing.Point(11, 33);
             this.panelCardGrid.Name = "panelCardGrid";
-            this.panelCardGrid.Size = new System.Drawing.Size(981, 577);
+            this.panelCardGrid.Size = new System.Drawing.Size(757, 539);
             this.panelCardGrid.TabIndex = 0;
             // 
             // buttonTryAgain
             // 
-            this.buttonTryAgain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonTryAgain.Location = new System.Drawing.Point(728, 676);
+            this.buttonTryAgain.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonTryAgain.Location = new System.Drawing.Point(397, 684);
             this.buttonTryAgain.Name = "buttonTryAgain";
             this.buttonTryAgain.Size = new System.Drawing.Size(257, 48);
             this.buttonTryAgain.TabIndex = 3;
@@ -73,7 +73,7 @@ namespace WinFormsMatchingGame
             this.toolsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1002, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(778, 33);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -126,10 +126,10 @@ namespace WinFormsMatchingGame
             // 
             // buttonTurnCardUp
             // 
-            this.buttonTurnCardUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonTurnCardUp.Location = new System.Drawing.Point(524, 676);
+            this.buttonTurnCardUp.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonTurnCardUp.Location = new System.Drawing.Point(122, 684);
             this.buttonTurnCardUp.Name = "buttonTurnCardUp";
-            this.buttonTurnCardUp.Size = new System.Drawing.Size(199, 48);
+            this.buttonTurnCardUp.Size = new System.Drawing.Size(257, 48);
             this.buttonTurnCardUp.TabIndex = 2;
             this.buttonTurnCardUp.Text = "Turn selected card &up";
             this.buttonTurnCardUp.UseVisualStyleBackColor = true;
@@ -139,25 +139,26 @@ namespace WinFormsMatchingGame
             // 
             this.labelKeyboardUseInstructions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelKeyboardUseInstructions.AutoSize = true;
-            this.labelKeyboardUseInstructions.Location = new System.Drawing.Point(12, 623);
+            this.labelKeyboardUseInstructions.Location = new System.Drawing.Point(12, 594);
             this.labelKeyboardUseInstructions.Name = "labelKeyboardUseInstructions";
-            this.labelKeyboardUseInstructions.Size = new System.Drawing.Size(742, 50);
+            this.labelKeyboardUseInstructions.Size = new System.Drawing.Size(582, 75);
             this.labelKeyboardUseInstructions.TabIndex = 1;
-            this.labelKeyboardUseInstructions.Text = "Press the arrow keys to move around the card grid. Press Space to turn up the sel" +
-    "ected card.\r\nPress Enter to turns all unmatched cards back over.";
+            this.labelKeyboardUseInstructions.Text = "Keyboard instructions: \r\nPress the arrow keys to move around the card grid.  Pres" +
+    "s Space to turn\r\nup the selected card. Press Enter to turns all unmatched cards " +
+    "back over.";
             // 
             // FormMatchingGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1002, 735);
+            this.ClientSize = new System.Drawing.Size(778, 744);
             this.Controls.Add(this.panelCardGrid);
             this.Controls.Add(this.labelKeyboardUseInstructions);
             this.Controls.Add(this.buttonTurnCardUp);
             this.Controls.Add(this.buttonTryAgain);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(1024, 768);
+            this.MinimumSize = new System.Drawing.Size(640, 640);
             this.Name = "FormMatchingGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Card Matching Game V1.1";

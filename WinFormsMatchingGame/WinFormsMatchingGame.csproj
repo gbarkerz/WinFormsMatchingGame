@@ -8,6 +8,7 @@
     <AssemblyName>NorthernEnglandMatchingGame</AssemblyName>
     <Product>Northern England Matching Game</Product>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
