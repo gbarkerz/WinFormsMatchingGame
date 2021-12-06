@@ -352,12 +352,19 @@ namespace WinFormsMatchingGame
             DialogResult result = saveDlg.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                Stream stream = null;
-                if ((stream = saveDlg.OpenFile()) != null)
+                try
                 {
-                    var streamWriter = new StreamWriter(stream);
-                    ExportDetails(streamWriter);
-                    streamWriter.Close();
+                    Stream stream = null;
+                    if ((stream = saveDlg.OpenFile()) != null)
+                    {
+                        var streamWriter = new StreamWriter(stream);
+                        ExportDetails(streamWriter);
+                        streamWriter.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
                 }
             }
         }
