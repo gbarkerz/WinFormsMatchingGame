@@ -141,11 +141,11 @@ namespace WinFormsMatchingGame
             this.labelKeyboardUseInstructions.AutoSize = true;
             this.labelKeyboardUseInstructions.Location = new System.Drawing.Point(12, 594);
             this.labelKeyboardUseInstructions.Name = "labelKeyboardUseInstructions";
-            this.labelKeyboardUseInstructions.Size = new System.Drawing.Size(582, 75);
+            this.labelKeyboardUseInstructions.Size = new System.Drawing.Size(579, 75);
             this.labelKeyboardUseInstructions.TabIndex = 1;
             this.labelKeyboardUseInstructions.Text = "Keyboard instructions: \r\nPress the arrow keys to move around the card grid.  Pres" +
-    "s Space to turn\r\nup the selected card. Press Enter to turns all unmatched cards " +
-    "back over.";
+    "s Space to turn\r\nup the selected card. Press Enter to turn all unmatched cards b" +
+    "ack over.";
             // 
             // FormMatchingGame
             // 
