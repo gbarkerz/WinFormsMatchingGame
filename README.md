@@ -22,6 +22,7 @@ The following image shows the game showing two pairs of matched cards and one pa
 
 From Version 1.1 of the game, players can select one set of their own 8 pictures to be used. Each picture must be accompanied by a name, and optionally a description, for players using screen readers to access.
 
+In the latest version of the game, players can import and export the accessible names and descriptions associated with a set of pictures. By default, the accessible names and descriptions supplied get saved to a file called "MatchingGamePictureDetails.txt" in the same folder that contains the pictures. 
 
 The following image shows the Settings window in the game, with pictures and text relating to the planets of the Solar System.
 
@@ -34,8 +35,6 @@ The following image shows the Settings window in the game, with pictures and tex
 **Keyboard**
 
 Tab key presses move keyboard focus between the grid and the buttons shown in the app. To move keyboard focus between the cards inside the grid, use the arrow keys. To turn two unmatched cards back over, either press Alt+B or the Enter key.
-
-It is recognized that the app needs work to explain to a player exactly how the game can be played with the keyboard. For example, there is no information in the game related to pressing the Enter key while keyboard focus is on a card in the grid.
 
 &nbsp;
 
@@ -124,6 +123,24 @@ I couldn't find a way to have cells which are required, be exposed through UIA a
 I couldn't find a way to change the width of columns using only the keyboard.
 
 As I understand things, the DataGridView doesn't support the HideSelection property like the ListView control does. This means the current cell in the grid looks almost identical when the grid has keyboard focus and when it doesn't. I'd say this degrades the usage of the Settings window, so I may look into adding custom code which changes the visuals for the current cell when the grid doesn't have keyboard focus.
+
+&nbsp;
+
+**Technical considerations while building the latest version of the app**
+
+A feature in a game is not helpful at all to players if the players don't know that the feature's there. In the latest version of the game, instructions for keyboard use are shown on the main app window. Also, a message now appears when a player attempts to turn up a card when two unmatched cards are already face up. Previously the app gave not response to such an attempt. The goal with all these changes has been to make it much clearer as to how to play the game, using only the UI and behaviours provided directly by the game.
+
+The Restart button has been removed, and replaced with a Restart menu item whose shortcut key is F5. This is to make the game more consistent with other apps which support the F5 key as a "Restart" action.
+
+Traditionally some desktop apps struggle with low resolution support. They may claim to have a responsive design because their main window adapts to changing resolutions. But then they also have fixed sized dialogs which don't fit at the same low resolution that's supported by the main window.
+
+Personal note: I have strong memories of the above problem when helping my aunt work at her laptop at a low screen resolution. Some dialog in an app on her laptop had a bunch of controls clipped off the bottom of the screen, and the clipping happened in such a way that it wasn't obvious that the clipping had occurred. That was a very poor customer experience.
+
+In the latest update of the game, a resolution of 1024x768 is supported by both the main window and Settings dialog. I'll continue to consider how the app might support lower resolutions still. If players prefer larger visuals to be shown in the game, a low resolution screen can be used in combination with a magnifier.
+
+&nbsp;
+
+![The game's main window and Settings dialog shown on a screen with resolution 1024x768 .](WinFormsMatchingGame/AppScreenshots/LowResolutionScreen.png)
 
 &nbsp;
 
