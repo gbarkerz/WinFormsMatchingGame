@@ -20,9 +20,9 @@ The following image shows the game showing two pairs of matched cards and one pa
 
 &nbsp;
 
-From Version 1.1 of the game, players can select one set of their own 8 pictures to be used. Each picture must be accompanied by a name, and optionally a description, for players using screen readers to access.
+From Version 1.2 of the game, players can select one set of their own 8 pictures to be used. Each picture must be accompanied by a name, and optionally a description, for players using screen readers to access.
 
-In the latest version of the game, players can import and export the accessible names and descriptions associated with a set of pictures. By default, the accessible names and descriptions supplied get saved to a file called "MatchingGamePictureDetails.txt" in the same folder that contains the pictures. 
+From Version 1.3 of the game, players can import and export the accessible names and descriptions associated with a set of pictures. By default, the accessible names and descriptions supplied get saved to a file called "MatchingGamePictureDetails.txt" in the same folder that contains the pictures. 
 
 The following image shows the Settings window in the game, with pictures and text relating to the planets of the Solar System.
 
@@ -126,9 +126,9 @@ As I understand things, the DataGridView doesn't support the HideSelection prope
 
 &nbsp;
 
-**Technical considerations while building the latest version of the app**
+**Technical considerations while building Version 1.3 of the app**
 
-A feature in a game is not helpful at all to players if the players don't know that the feature's there. In the latest version of the game, instructions for keyboard use are shown on the main app window. Also, a message now appears when a player attempts to turn up a card when two unmatched cards are already face up. Previously the app gave not response to such an attempt. The goal with all these changes has been to make it much clearer as to how to play the game, using only the UI and behaviours provided directly by the game.
+A feature in a game is not helpful at all to players if the players don't know that the feature's there. In Version 1.3 of the game, instructions for keyboard use are shown on the main app window. Also, a message now appears when a player attempts to turn up a card when two unmatched cards are already face up. Previously the app gave not response to such an attempt. The goal with all these changes has been to make it much clearer as to how to play the game, using only the UI and behaviours provided directly by the game.
 
 The Restart button has been removed, and replaced with a Restart menu item whose shortcut key is F5. This is to make the game more consistent with other apps which support the F5 key as a "Restart" action.
 
@@ -136,7 +136,7 @@ Traditionally some desktop apps struggle with low resolution support. They may c
 
 Personal note: I have strong memories of the above problem when helping my aunt work at her laptop at a low screen resolution. Some dialog in an app on her laptop had a bunch of controls clipped off the bottom of the screen, and the clipping happened in such a way that it wasn't obvious that the clipping had occurred. That was a very poor customer experience.
 
-In the latest update of the game, a resolution of 1024x768 is supported by both the main window and Settings dialog. I'll continue to consider how the app might support lower resolutions still. If players prefer larger visuals to be shown in the game, a low resolution screen can be used in combination with a magnifier.
+In Version 1.3 of the game, a resolution of 1024x768 is supported by both the main window and Settings dialog. I'll continue to consider how the app might support lower resolutions still. If players prefer larger visuals to be shown in the game, a low resolution screen can be used in combination with a magnifier.
 
 &nbsp;
 
