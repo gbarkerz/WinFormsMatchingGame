@@ -235,8 +235,7 @@ namespace WinFormsMatchingGame
 
             Settings.Default.Save();
 
-            if (Settings.Default.UseYourPictures &&
-                Settings.Default.AutoExportDetailsOnSave)
+            if (Settings.Default.AutoExportDetailsOnSave)
             {
                 if (dataGridViewPictureData.Rows.Count > 0)
                 {
