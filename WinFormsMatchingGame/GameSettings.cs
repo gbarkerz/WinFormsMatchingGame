@@ -459,6 +459,14 @@ namespace WinFormsMatchingGame
         private void SetNameDescription(string content)
         {
             var fileNameDelimiter = content.IndexOf('\t');
+
+            // Account for the string containing no tabs at all.
+            if (fileNameDelimiter == -1)
+            {
+                // There is no Name, so do nothing here.
+                return;
+            }
+
             string fileName = content.Substring(0, fileNameDelimiter);
 
             for (int i = 0; i < cardPairCount; i++)
@@ -468,8 +476,21 @@ namespace WinFormsMatchingGame
                     string details = content.Substring(fileNameDelimiter + 1);
 
                     var nameDelimiter = details.IndexOf('\t');
-                    string name = details.Substring(0, nameDelimiter);
-                    string description = details.Substring(nameDelimiter + 1);
+
+                    string name = "";
+                    string description = "";
+
+                    // Account for the string containing no tab following the Name.
+                    if (nameDelimiter != -1)
+                    {
+                        name = details.Substring(0, nameDelimiter);
+                        description = details.Substring(nameDelimiter + 1);
+                    }
+                    else
+                    {
+                        // Leave the description empty.
+                        name = details;
+                    }
 
                     dataGridViewPictureData.Rows[i].Cells[2].Value = name;
                     dataGridViewPictureData.Rows[i].Cells[3].Value = description;
