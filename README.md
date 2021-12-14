@@ -161,7 +161,15 @@ For other technical accessibility resources relating to WinForms and other Windo
 The app's available at the Microsoft Store for people who aren't set up to build the app themselves. To run this app, following the steps below. This exe will only run on a 64-bit version of Windows.
 
 1. Download the app from the Microsoft store at [Accessible Matching Game](https://www.microsoft.com/store/apps/9P6KHLZJF7C7).
-2. If .NET 5 is not yet installed on your computer, you will be prompted to install it when the app is run. The required version is .NET 5 for x64 Windows Desktop.
+2. If .NET 5 is not yet installed on your computer, you will be prompted to install it when the app is run. The required version is .NET 5 for x64 Windows Desktop and its download link is [.NET 5 for x64 Desktop](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-5.0.12-windows-x64-installer).
+
+&nbsp;
+
+**Known Issues**
+
+&nbsp;
+
+If an image shown on a card contains some transparency, then the card's graphics get messed up if the mouse is used to resize the main window. Minimizing and restoring the main window gets the card's graphics looking right again.
 
 &nbsp;
 
