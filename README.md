@@ -167,8 +167,6 @@ The app's available at the Microsoft Store for people who aren't set up to build
 
 **Known Issues**
 
-&nbsp;
-
 If an image shown on a card contains some transparency, then the card's graphics get messed up if the mouse is used to resize the main window. Minimizing and restoring the main window gets the card's graphics looking right again.
 
 &nbsp;
