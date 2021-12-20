@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace WinFormsSquaresGame.Controls
@@ -9,6 +10,7 @@ namespace WinFormsSquaresGame.Controls
     {
         public List<Square> SquareList { get; set; }
         private int moveCount = 0;
+        private Bitmap backgroundPicture;
 
         public SquaresGrid()
         {
@@ -158,12 +160,21 @@ namespace WinFormsSquaresGame.Controls
             Rectangle rectBitmap = new Rectangle();
             Rectangle rectCellImage = new Rectangle();
 
-            var card = GetSquareFromRowColumn(e.RowIndex, e.ColumnIndex);
-            var index = ((GridDimensions * e.RowIndex) + e.ColumnIndex);
-            bmp = SquareList[index].Image;
+            var finalWidth = 0;
+            var finalHeight = 0;
 
-            if (bmp != null)
+            var square = GetSquareFromRowColumn(e.RowIndex, e.ColumnIndex);
+            if (square.TargetIndex == 15)
             {
+                return;
+            }
+
+            var index = ((GridDimensions * e.RowIndex) + e.ColumnIndex);
+
+            if (backgroundPicture == null)
+            {
+                bmp = SquareList[index].Image;
+
                 rectBitmap = new Rectangle(0, 0, bmp.Width, bmp.Height);
 
                 double ratio = Math.Max(
@@ -171,9 +182,30 @@ namespace WinFormsSquaresGame.Controls
                     (double)rectBitmap.Height / (double)e.CellBounds.Height);
 
                 // Bring in the image a few pixels from the border.
-                var finalWidth = (int)(rectBitmap.Width / ratio) - 6;
-                var finalHeight = (int)(rectBitmap.Height / ratio) - 6;
+                finalWidth = (int)(rectBitmap.Width / ratio) - 6;
+                finalHeight = (int)(rectBitmap.Height / ratio) - 6;
+            }
+            else
+            {
+                bmp = backgroundPicture;
 
+                int width = backgroundPicture.Width / GridDimensions;
+                int height = backgroundPicture.Height / GridDimensions;
+
+                int squareColumnIndex = square.TargetIndex % GridDimensions;
+                int squareRowIndex = square.TargetIndex / GridDimensions;
+
+                int left = squareColumnIndex * width;
+                int top = squareRowIndex * height;
+
+                rectBitmap = new Rectangle(left, top, width, height);
+
+                finalWidth = e.CellBounds.Width - 6;
+                finalHeight = e.CellBounds.Height - 6;
+            }
+
+            if (bmp != null)
+            {
                 rectCellImage = new Rectangle(
                     e.CellBounds.Left + ((e.CellBounds.Width - finalWidth) / 2),
                     e.CellBounds.Top + ((e.CellBounds.Height - finalHeight) / 2),
@@ -263,6 +295,13 @@ namespace WinFormsSquaresGame.Controls
             }
 
             return gridCanBeSolved;
+        }
+
+        public void SetBackgroundPicture(FileInfo fileInfo)
+        {
+            backgroundPicture = new Bitmap(fileInfo.FullName);
+
+            this.Refresh();
         }
     }
 }

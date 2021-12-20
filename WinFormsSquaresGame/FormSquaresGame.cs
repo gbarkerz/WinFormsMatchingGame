@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using WinFormsSquaresGame.Controls;
 using WinFormsSquaresGame.Properties;
@@ -160,6 +161,25 @@ namespace WinFormsSquaresGame
         private void restartToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             this.squaresGrid.ResetGrid();
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            ShowSettingsDialog();
+        }
+
+        private void ShowSettingsDialog()
+        {
+            var gameSettings = new GameSettings(this);
+            if (gameSettings.ShowDialog(this) != DialogResult.Cancel)
+            {
+                
+            }
+        }
+
+        public void SetBackgroundPicture(FileInfo fileInfo)
+        {
+            this.squaresGrid.SetBackgroundPicture(fileInfo);
         }
     }
 

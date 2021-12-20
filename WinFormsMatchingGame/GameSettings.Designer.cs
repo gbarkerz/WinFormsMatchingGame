@@ -256,7 +256,7 @@ namespace WinFormsMatchingGame
             this.MinimizeBox = false;
             this.Name = "GameSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "GameSettings";
+            this.Text = "Game Settings";
             this.groupBoxCardPictures.ResumeLayout(false);
             this.groupBoxCardPictures.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPictureData)).EndInit();
