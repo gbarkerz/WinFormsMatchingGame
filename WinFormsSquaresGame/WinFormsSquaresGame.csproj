@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Square1.png" />
+    <None Remove="Resources\Square10.png" />
+    <None Remove="Resources\Square11.png" />
+    <None Remove="Resources\Square12.png" />
+    <None Remove="Resources\Square13.png" />
+    <None Remove="Resources\Square14.png" />
+    <None Remove="Resources\Square15.png" />
+    <None Remove="Resources\Square2.png" />
+    <None Remove="Resources\Square3.png" />
+    <None Remove="Resources\Square4.png" />
+    <None Remove="Resources\Square5.png" />
+    <None Remove="Resources\Square6.png" />
+    <None Remove="Resources\Square7.png" />
+    <None Remove="Resources\Square8.png" />
+    <None Remove="Resources\Square9.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Square1.png" />
+    <EmbeddedResource Include="Resources\Square10.png" />
+    <EmbeddedResource Include="Resources\Square11.png" />
+    <EmbeddedResource Include="Resources\Square12.png" />
+    <EmbeddedResource Include="Resources\Square13.png" />
+    <EmbeddedResource Include="Resources\Square14.png" />
+    <EmbeddedResource Include="Resources\Square15.png" />
+    <EmbeddedResource Include="Resources\Square2.png" />
+    <EmbeddedResource Include="Resources\Square3.png" />
+    <EmbeddedResource Include="Resources\Square4.png" />
+    <EmbeddedResource Include="Resources\Square5.png" />
+    <EmbeddedResource Include="Resources\Square6.png" />
+    <EmbeddedResource Include="Resources\Square7.png" />
+    <EmbeddedResource Include="Resources\Square8.png" />
+    <EmbeddedResource Include="Resources\Square9.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
