@@ -18,7 +18,7 @@ The following image shows the numbered squares jumbled when the game starts.
 
 &nbsp;
 
-![The WinFormsSquaresGame showing jumbled squares with numbers on the squares.](WinFormsSquaresGame/Screenshots/NumbersJumbled.png)
+![The WinFormsSquaresGame showing jumbled squares with numbers on the squares.](Screenshots/NumbersJumbled.png)
 
 &nbsp;
 
@@ -26,7 +26,7 @@ The following image shows the numbered squares arranged in the sorted order.
 
 &nbsp;
 
-![The WinFormsSquaresGame showing ordered squares with numbers on the squares.](WinFormsSquaresGame/Screenshots/NumbersOrdered.png)
+![The WinFormsSquaresGame showing ordered squares with numbers on the squares.](Screenshots/NumbersOrdered.png)
 
 &nbsp;
 
@@ -36,7 +36,7 @@ The following image shows the numbered squares jumbled when the game starts, wit
 
 &nbsp;
 
-![The WinFormsSquaresGame showing jumbled squares with numbers and pictures on the squares.](WinFormsSquaresGame/Screenshots/PicturesJumbled.png)
+![The WinFormsSquaresGame showing jumbled squares with numbers and pictures on the squares.](Screenshots/PicturesJumbled.png)
 
 &nbsp;
 
@@ -44,7 +44,7 @@ The following image shows the numbered squares with a picture selected arranged 
 
 &nbsp;
 
-![The WinFormsSquaresGame showing ordered squares with numbers and pictures on the squares.](WinFormsSquaresGame/Screenshots/PicturesOrdered.png)
+![The WinFormsSquaresGame showing ordered squares with numbers and pictures on the squares.](Screenshots/PicturesOrdered.png)
 
 &nbsp;
 
@@ -68,7 +68,7 @@ The following image shows the Accessibility Insights for Windows tool reporting 
 
 &nbsp;
 
-![The Accessibility Insights for Windows tool reporting the Windows UI Automation (UIA) hierarchy of the jumbled squares in the grid.](WinFormsSquaresGame/Screenshots/PicturesJumbledUIA.png)
+![The Accessibility Insights for Windows tool reporting the Windows UI Automation (UIA) hierarchy of the jumbled squares in the grid.](Screenshots/PicturesJumbledUIA.png)
 
 &nbsp;
 
@@ -76,7 +76,7 @@ The following image shows the Accessibility Insights for Windows tool reporting 
 
 &nbsp;
 
-![The Accessibility Insights for Windows tool reporting the Windows UI Automation (UIA) hierarchy of the ordered squares in the grid.](WinFormsSquaresGame/Screenshots/PicturesOrderedUIA.png)
+![The Accessibility Insights for Windows tool reporting the Windows UI Automation (UIA) hierarchy of the ordered squares in the grid.](Screenshots/PicturesOrderedUIA.png)
 
 &nbsp;
 
