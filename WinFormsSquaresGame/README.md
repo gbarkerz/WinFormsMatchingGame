@@ -50,7 +50,7 @@ The following image shows the numbered squares with a picture selected arranged 
 
 **Keyboard**
 
-Press the arrow keys to move keyb oard focus around the grid. Press Space to move a square into the adjacent empty square.
+Press the arrow keys to move keyboard focus around the grid. Press Space to move a square into the adjacent empty square.
 
 &nbsp;
 
