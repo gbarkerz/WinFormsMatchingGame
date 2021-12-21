@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
+using System.Windows.Forms.Automation;
+using WinFormsSquaresGame.Properties;
 
 namespace WinFormsSquaresGame.Controls
 {
@@ -17,6 +19,9 @@ namespace WinFormsSquaresGame.Controls
             CellClick += DataGridView_CellClick;
             SizeChanged += Grid_SizeChanged;
             CellPainting += Grid_CellPainting;
+
+            // The grid's accessible name is also set when the background picture is set.
+            this.AccessibilityObject.Name = Resources.ResourceManager.GetString("SquaresGrid");
 
             LoadSettings();
         }
@@ -33,41 +38,50 @@ namespace WinFormsSquaresGame.Controls
         {
             Square adjacentSquare = null;
             int emptySquareIndex = -1;
+            string direction = "";
 
             // Is the empty square adjacent to this square?
             if (e.ColumnIndex > 0)
             {
                 adjacentSquare = GetSquareFromRowColumn(e.RowIndex, e.ColumnIndex - 1);
-                if (adjacentSquare.Image == null)
+                if (adjacentSquare.TargetIndex == EmptySquareTargetIndex)
                 {
                     emptySquareIndex = GetSquareIndexFromRowColumn(e.RowIndex, e.ColumnIndex - 1);
+                    
+                    direction = Resources.ResourceManager.GetString("Left");
                 }
             }
 
             if ((emptySquareIndex == -1) && (e.RowIndex > 0))
             {
                 adjacentSquare = GetSquareFromRowColumn(e.RowIndex - 1, e.ColumnIndex);
-                if (adjacentSquare.Image == null)
+                if (adjacentSquare.TargetIndex == EmptySquareTargetIndex)
                 {
                     emptySquareIndex = GetSquareIndexFromRowColumn(e.RowIndex - 1, e.ColumnIndex);
+
+                    direction = Resources.ResourceManager.GetString("Up");
                 }
             }
 
             if ((emptySquareIndex == -1) && (e.ColumnIndex < GridDimensions - 1))
             {
                 adjacentSquare = GetSquareFromRowColumn(e.RowIndex, e.ColumnIndex + 1);
-                if (adjacentSquare.Image == null)
+                if (adjacentSquare.TargetIndex == EmptySquareTargetIndex)
                 {
                     emptySquareIndex = GetSquareIndexFromRowColumn(e.RowIndex, e.ColumnIndex + 1);
+
+                    direction = Resources.ResourceManager.GetString("Right");
                 }
             }
 
             if ((emptySquareIndex == -1) && (e.RowIndex < GridDimensions - 1))
             {
                 adjacentSquare = GetSquareFromRowColumn(e.RowIndex + 1, e.ColumnIndex);
-                if (adjacentSquare.Image == null)
+                if (adjacentSquare.TargetIndex == EmptySquareTargetIndex)
                 {
                     emptySquareIndex = GetSquareIndexFromRowColumn(e.RowIndex + 1, e.ColumnIndex);
+
+                    direction = Resources.ResourceManager.GetString("Down");
                 }
             }
 
@@ -103,6 +117,17 @@ namespace WinFormsSquaresGame.Controls
                         ResetGrid();
                     }
                 }
+                else
+                {
+                    string announcement = Resources.ResourceManager.GetString("Moved") + 
+                        " " + clickedSquare.Name + " " + direction + ".";
+                    AnnounceAction(announcement);
+                }
+            }
+            else
+            {
+                string announcement = Resources.ResourceManager.GetString("NoMovePossible");
+                AnnounceAction(announcement);
             }
         }
 
@@ -163,12 +188,12 @@ namespace WinFormsSquaresGame.Controls
 
         private void Grid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            int pictureOffset = 4;
+            int pictureOffset = 6;
             int showNumberScale = 4 - this.NumberSizeIndex;
 
             // If this is the empty square, we don;t need to do any custom painting here.
             var square = GetSquareFromRowColumn(e.RowIndex, e.ColumnIndex);
-            if (square.TargetIndex == 15)
+            if (square.TargetIndex == EmptySquareTargetIndex)
             {
                 return;
             }
@@ -187,9 +212,9 @@ namespace WinFormsSquaresGame.Controls
                 {
                     // We'll just be showing a number at the top left corner of the square.
                     rectClip = new Rectangle(
-                        e.CellBounds.Location.X + 4, e.CellBounds.Location.Y + 4,
-                        Math.Min(e.CellBounds.Width - 8, e.CellBounds.Size.Width / showNumberScale),
-                        Math.Min(e.CellBounds.Height - 8, e.CellBounds.Size.Height / showNumberScale));
+                        e.CellBounds.Location.X + pictureOffset, e.CellBounds.Location.Y + pictureOffset,
+                        Math.Min(e.CellBounds.Width - (2 * pictureOffset), e.CellBounds.Size.Width / showNumberScale),
+                        Math.Min(e.CellBounds.Height - (2 * pictureOffset), e.CellBounds.Size.Height / showNumberScale));
                 }
 
                 e.Graphics.ExcludeClip(new Region(rectClip));
@@ -202,11 +227,22 @@ namespace WinFormsSquaresGame.Controls
             {
                 e.Graphics.Clip = new Region();
 
+                var rectNumber = new Rectangle();
+
+                if (ShowNumbers)
+                {
+                    rectNumber = new Rectangle(
+                        e.CellBounds.Location.X + pictureOffset, e.CellBounds.Location.Y + pictureOffset,
+                        Math.Min(e.CellBounds.Width - (2 * pictureOffset), e.CellBounds.Size.Width / showNumberScale),
+                        Math.Min(e.CellBounds.Height - (2 * pictureOffset), e.CellBounds.Size.Height / showNumberScale));
+                }
+
                 // Do we have a background picture to paint?
                 if (ShowPicture && (backgroundPicture != null))
                 {
-                    // Todo: Set another clip region to exclude painting the image where
+                    // Set another clip region to exclude painting the image where
                     // a square number will lie over it.
+                    e.Graphics.ExcludeClip(new Region(rectNumber));
 
                     int width = backgroundPicture.Width / GridDimensions;
                     int height = backgroundPicture.Height / GridDimensions;
@@ -220,23 +256,20 @@ namespace WinFormsSquaresGame.Controls
                     Rectangle rectBitmap = new Rectangle(left, top, width, height);
 
                     Rectangle rectCellImage = e.CellBounds;
-                    rectCellImage.Inflate(-4, -4);
+                    rectCellImage.Inflate(-pictureOffset, -pictureOffset);
 
                     // Now paint the image in the cell.
                     e.Graphics.DrawImage(backgroundPicture,
                         rectCellImage,
                         rectBitmap,
                         GraphicsUnit.Pixel);
+
+                    e.Graphics.Clip = new Region();
                 }
 
                 if (ShowNumbers)
                 {
-                    var rect = new Rectangle(
-                        e.CellBounds.Location.X + 4, e.CellBounds.Location.Y + 4,
-                        Math.Min(e.CellBounds.Width - 8, e.CellBounds.Size.Width / showNumberScale),
-                        Math.Min(e.CellBounds.Height - 8, e.CellBounds.Size.Height / showNumberScale));
-
-                    e.Graphics.FillRectangle(SystemBrushes.Control, rect);
+                    e.Graphics.FillRectangle(SystemBrushes.Control, rectNumber);
 
                     int fontHeight = this.Font.FontFamily.GetEmHeight(FontStyle.Regular);
                     int lineSpacing = this.Font.FontFamily.GetLineSpacing(FontStyle.Regular);
@@ -251,7 +284,7 @@ namespace WinFormsSquaresGame.Controls
                         (square.TargetIndex + 1).ToString(),
                         font,
                         SystemBrushes.ControlText,
-                        rect,
+                        rectNumber,
                         format);
                 }
             }
@@ -290,7 +323,7 @@ namespace WinFormsSquaresGame.Controls
 
             for (int i = 0; i < this.SquareList.Count; i++)
             {
-                if (this.SquareList[i].TargetIndex == 15)
+                if (this.SquareList[i].TargetIndex == EmptySquareTargetIndex)
                 {
                     // The empty square row is one-based.
                     emptySquareRow = (i / GridDimensions) + 1;
@@ -300,7 +333,7 @@ namespace WinFormsSquaresGame.Controls
 
                 for (int j = i + 1; j < this.SquareList.Count; j++)
                 {
-                    if ((this.SquareList[j].TargetIndex != 15) &&
+                    if ((this.SquareList[j].TargetIndex != EmptySquareTargetIndex) &&
                         (this.SquareList[i].TargetIndex > this.SquareList[j].TargetIndex))
                     {
                         parity++;
@@ -380,16 +413,47 @@ namespace WinFormsSquaresGame.Controls
                 {
                     this.backgroundPictureFullName = value;
 
+                    string accessibleName = Resources.ResourceManager.GetString("SquaresGrid");
+
                     if (!string.IsNullOrWhiteSpace(this.backgroundPictureFullName))
                     {
                         this.backgroundPicture = new Bitmap(this.backgroundPictureFullName);
+
+                        accessibleName += " showing " +
+                            Path.GetFileNameWithoutExtension(this.backgroundPictureFullName);
+
                         this.Refresh();
                     }
+
+                    this.AccessibilityObject.Name = accessibleName;
                 }
                 catch (Exception)
                 {
                     this.backgroundPictureFullName = "";
                 }
+            }
+        }
+
+        private int EmptySquareTargetIndex
+        {
+            get
+            {
+                // The empty square should always end up in the bottom right corner of the grid.
+                return this.SquareList.Count - 1;
+            }
+        }
+
+        public void AnnounceAction(string announcement)
+        {
+            MethodInfo raiseMethod = typeof(AccessibleObject).GetMethod("RaiseAutomationNotification");
+            if (raiseMethod != null)
+            {
+                raiseMethod.Invoke(
+                    this.AccessibilityObject,
+                    new object[3] {
+                        AutomationNotificationKind.ActionCompleted,
+                        AutomationNotificationProcessing.All,
+                        announcement });
             }
         }
     }

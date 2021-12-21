@@ -86,7 +86,6 @@ namespace WinFormsSquaresGame
                 this.squaresGrid.BackgroundPictureFullName = openFileDialog.FileName;
 
                 Settings1.Default.BackgroundPicture = openFileDialog.FileName;
-
             }
         }
     }

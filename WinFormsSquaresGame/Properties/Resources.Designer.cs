@@ -205,6 +205,51 @@ namespace WinFormsSquaresGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to down.
+        /// </summary>
+        internal static string Down {
+            get {
+                return ResourceManager.GetString("Down", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to left.
+        /// </summary>
+        internal static string Left {
+            get {
+                return ResourceManager.GetString("Left", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moved.
+        /// </summary>
+        internal static string Moved {
+            get {
+                return ResourceManager.GetString("Moved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No move possible..
+        /// </summary>
+        internal static string NoMovePossible {
+            get {
+                return ResourceManager.GetString("NoMovePossible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to right.
+        /// </summary>
+        internal static string Right {
+            get {
+                return ResourceManager.GetString("Right", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Square1 {
@@ -360,6 +405,15 @@ namespace WinFormsSquaresGame.Properties {
         internal static string SquaresGrid {
             get {
                 return ResourceManager.GetString("SquaresGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to up.
+        /// </summary>
+        internal static string Up {
+            get {
+                return ResourceManager.GetString("Up", resourceCulture);
             }
         }
     }

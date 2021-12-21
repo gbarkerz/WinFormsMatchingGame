@@ -53,6 +53,7 @@ namespace WinFormsMatchingGame
             cardMatchingGrid.AllowUserToAddRows = false;
             cardMatchingGrid.Dock = DockStyle.Fill;
             cardMatchingGrid.ShowCellToolTips = false;
+            cardMatchingGrid.MultiSelect = false;
 
             // Make sure the grid itself has an accessible name.
             cardMatchingGrid.AccessibilityObject.Name = Resources.ResourceManager.GetString("CardsForMatching");

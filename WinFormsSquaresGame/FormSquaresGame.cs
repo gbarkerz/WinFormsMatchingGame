@@ -31,9 +31,7 @@ namespace WinFormsSquaresGame
             squaresGrid.AllowUserToAddRows = false;
             squaresGrid.Dock = DockStyle.Fill;
             squaresGrid.ShowCellToolTips = false;
-
-            // Make sure the grid itself has an accessible name.
-            squaresGrid.AccessibilityObject.Name = Resources.ResourceManager.GetString("SquaresGrid");
+            squaresGrid.MultiSelect = false;
 
             // Don't have Tab presses move keyboard focus between cells in the grid.
             squaresGrid.StandardTab = true;
@@ -73,83 +71,67 @@ namespace WinFormsSquaresGame
                     new Square {
                         TargetIndex = 0,
                         Name = resManager.GetString("DefaultSquare1Name"),
-                        Description = resManager.GetString("DefaultSquare1Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square1) },
+                        Description = resManager.GetString("DefaultSquare1Description") },
                     new Square {
                         TargetIndex = 1,
                         Name = resManager.GetString("DefaultSquare2Name"),
-                        Description = resManager.GetString("DefaultSquare2Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square2) },
+                        Description = resManager.GetString("DefaultSquare2Description") },
                     new Square {
                         TargetIndex = 2,
                         Name = resManager.GetString("DefaultSquare3Name"),
-                        Description = resManager.GetString("DefaultSquare3Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square3) },
+                        Description = resManager.GetString("DefaultSquare3Description") },
                     new Square {
                         TargetIndex = 3,
                         Name = resManager.GetString("DefaultSquare4Name"),
-                        Description = resManager.GetString("DefaultSquare4Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square4) },
+                        Description = resManager.GetString("DefaultSquare4Description") },
                     new Square {
                         TargetIndex = 4,
                         Name = resManager.GetString("DefaultSquare5Name"),
-                        Description = resManager.GetString("DefaultSquare5Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square5) },
+                        Description = resManager.GetString("DefaultSquare5Description") },
                     new Square {
                         TargetIndex = 5,
                         Name = resManager.GetString("DefaultSquare6Name"),
-                        Description = resManager.GetString("DefaultSquare6Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square6) },
+                        Description = resManager.GetString("DefaultSquare6Description") },
                     new Square {
                         TargetIndex = 6,
                         Name = resManager.GetString("DefaultSquare7Name"),
-                        Description = resManager.GetString("DefaultSquare7Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square7) },
+                        Description = resManager.GetString("DefaultSquare7Description") },
                     new Square {
                         TargetIndex = 7,
                         Name = resManager.GetString("DefaultSquare8Name"),
-                        Description = resManager.GetString("DefaultSquare8Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square8) },
+                        Description = resManager.GetString("DefaultSquare8Description") },
                     new Square {
                         TargetIndex = 8,
                         Name = resManager.GetString("DefaultSquare9Name"),
-                        Description = resManager.GetString("DefaultSquare9Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square9) },
+                        Description = resManager.GetString("DefaultSquare9Description") },
                     new Square {
                         TargetIndex = 9,
                         Name = resManager.GetString("DefaultSquare10Name"),
-                        Description = resManager.GetString("DefaultSquare10Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square10) },
+                        Description = resManager.GetString("DefaultSquare10Description") },
                     new Square {
                         TargetIndex = 10,
                         Name = resManager.GetString("DefaultSquare11Name"),
-                        Description = resManager.GetString("DefaultSquare11Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square11) },
+                        Description = resManager.GetString("DefaultSquare11Description") },
                     new Square {
                         TargetIndex = 11,
                         Name = resManager.GetString("DefaultSquare12Name"),
-                        Description = resManager.GetString("DefaultSquare12Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square12) },
+                        Description = resManager.GetString("DefaultSquare12Description") },
                     new Square {
                         TargetIndex = 12,
                         Name = resManager.GetString("DefaultSquare13Name"),
-                        Description = resManager.GetString("DefaultSquare13Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square13) },
+                        Description = resManager.GetString("DefaultSquare13Description") },
                     new Square {
                         TargetIndex = 13,
                         Name = resManager.GetString("DefaultSquare14Name"),
-                        Description = resManager.GetString("DefaultSquare14Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square14) },
-                    new Square {
+                        Description = resManager.GetString("DefaultSquare14Description") },
+                   new Square {
                         TargetIndex = 14,
                         Name = resManager.GetString("DefaultSquare15Name"),
-                        Description = resManager.GetString("DefaultSquare15Description"),
-                        Image = new Bitmap(WinFormsSquaresGame.Properties.Resources.Square15) },
+                        Description = resManager.GetString("DefaultSquare15Description") },
                     new Square {
                         TargetIndex = 15,
                         Name = resManager.GetString("DefaultSquareEmpty"),
-                        Description = resManager.GetString("DefaultSquareEmptyDescription"),
-                        Image = null },
+                        Description = resManager.GetString("DefaultSquareEmptyDescription") }
                 };
         }
 
@@ -171,10 +153,9 @@ namespace WinFormsSquaresGame
         private void ShowSettingsDialog()
         {
             var gameSettings = new GameSettings(this.squaresGrid);
-            if (gameSettings.ShowDialog(this) != DialogResult.Cancel)
-            {
-                
-            }
+
+            // All changes are applied while the Settings window is up.
+            gameSettings.ShowDialog(this);
         }
 
         private void buttonClose_Click(object sender, System.EventArgs e)
