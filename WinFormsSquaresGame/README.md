@@ -8,9 +8,9 @@ The goals of this app are to (1) demonstrate some considerations and implementat
 
 **Playing the game**
 
-The game is based on a square sliding game, where squares in a grid of squares are rearranged to form an ordered sequence in the grid.
+The game is based on a square sliding game, where squares in a grid of squares are rearranged by the player to form an ordered sequence in the grid.
 
-When the game is run, a 4x4 grid of squares appears, with 15 of those squares occupied with an movable element, and 1 square being empty. When a card is clicked, if it is adjacent to the empty square, the clicked square moves into the empty square. The space where the clicked square was then becomes the empty square. The aim is to arrange all the squares in a sorted order, leaving the empty square in the boot right corner of the grid.
+When the game is run, a 4x4 grid of squares appears, with 15 of those squares occupied with an movable element, and 1 square being empty. When a square is clicked, if it is adjacent to the empty square, the clicked square moves into the empty square. The space where the clicked square was then becomes the empty square. The aim is to arrange all the squares in a sorted order, leaving the empty square in the bottom right corner of the grid.
 
 If the game setting to have numbers shown on the square is on, then a number is shown in the top left corner of the squares. The sorted order is for the numbers to start at 1, and increase from let to right and top to bottom. 
 
@@ -18,7 +18,7 @@ The following image shows the numbered squares jumbled when the game starts.
 
 &nbsp;
 
-![The WinFormsSquaresGame showing jumbled squares with numbers on the squares.](WinFormsMatchingGame/WinFormsSquaresGame/Screenshots/NumbersJumbled.png)
+![The WinFormsSquaresGame showing jumbled squares with numbers on the squares.](WinFormsSquaresGame/Screenshots/NumbersJumbled.png)
 
 &nbsp;
 
@@ -26,17 +26,17 @@ The following image shows the numbered squares arranged in the sorted order.
 
 &nbsp;
 
-![The WinFormsSquaresGame showing ordered squares with numbers on the squares.](WinFormsMatchingGame/WinFormsSquaresGame/Screenshots/NumbersOrdered.png)
+![The WinFormsSquaresGame showing ordered squares with numbers on the squares.](WinFormsSquaresGame/Screenshots/NumbersOrdered.png)
 
 &nbsp;
 
-The Settings window can be used to toggled the visibility of the numbers on the squares, and also change the size of numbers. Also, players can select a picture to be shown on all the squares in the grid. When the squares are ordered, the picture appears in its true state.
+The Settings window can be used to toggle the visibility of the numbers on the squares, and also change the size of the numbers shown. Also, players can select a picture to be shown on all the squares in the grid. When the squares are ordered, the picture appears in its true state.
 
 The following image shows the numbered squares jumbled when the game starts, with a picture selected.
 
 &nbsp;
 
-![The WinFormsSquaresGame showing jumbled squares with numbers and pictures on the squares.](WinFormsMatchingGame/WinFormsSquaresGame/Screenshots/PicturesJumbled.png)
+![The WinFormsSquaresGame showing jumbled squares with numbers and pictures on the squares.](WinFormsSquaresGame/Screenshots/PicturesJumbled.png)
 
 &nbsp;
 
@@ -44,31 +44,31 @@ The following image shows the numbered squares with a picture selected arranged 
 
 &nbsp;
 
-![The WinFormsSquaresGame showing ordered squares with numbers and pictures on the squares.](WinFormsMatchingGame/WinFormsSquaresGame/Screenshots/PicturesOrdered.png)
+![The WinFormsSquaresGame showing ordered squares with numbers and pictures on the squares.](WinFormsSquaresGame/Screenshots/PicturesOrdered.png)
 
 &nbsp;
 
 **Keyboard**
 
-Press the arrow keys to move around the grid. Press Space to move a square into the adjacent empty square.
+Press the arrow keys to move keyb oard focus around the grid. Press Space to move a square into the adjacent empty square.
 
 &nbsp;
 
 **Speech**
 
-To click one of the cards shown in the app using speech input, say "Click" followed by the number of the square.
+To click one of the squares shown in the app using speech input, say "Click" followed by the number of the square.
 
 &nbsp;
 
 **Technical notes**
 
-The accessible names of the squares is the numbers that the square will have when in its ordered state.
+The accessible name of a square is same as the number shown on the square.
 
 The following image shows the Accessibility Insights for Windows tool reporting the Windows UI Automation (UIA) hierarchy of the jumbled squares in the grid.
 
 &nbsp;
 
-![The Accessibility Insights for Windows tool reporting the Windows UI Automation (UIA) hierarchy of the jumbled squares in the grid.](WinFormsMatchingGame/WinFormsSquaresGame/Screenshots/PicturesJumbledUIA.png)
+![The Accessibility Insights for Windows tool reporting the Windows UI Automation (UIA) hierarchy of the jumbled squares in the grid.](WinFormsSquaresGame/Screenshots/PicturesJumbledUIA.png)
 
 &nbsp;
 
@@ -76,7 +76,7 @@ The following image shows the Accessibility Insights for Windows tool reporting 
 
 &nbsp;
 
-![The Accessibility Insights for Windows tool reporting the Windows UI Automation (UIA) hierarchy of the ordered squares in the grid.](WinFormsMatchingGame/WinFormsSquaresGame/Screenshots/PicturesOrderedUIA.png)
+![The Accessibility Insights for Windows tool reporting the Windows UI Automation (UIA) hierarchy of the ordered squares in the grid.](WinFormsSquaresGame/Screenshots/PicturesOrderedUIA.png)
 
 &nbsp;
 
