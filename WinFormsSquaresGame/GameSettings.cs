@@ -22,6 +22,11 @@ namespace WinFormsSquaresGame
             InitializeComponent();
         }
 
+        private void checkBoxShowNumbers_CheckedChanged(object sender, EventArgs e)
+        {
+            this.formSquaresGame.ShowNumbers = (sender as CheckBox).Checked;
+        }
+
         private void checkBoxShowPicture_CheckedChanged(object sender, EventArgs e)
         {
             buttonBrowse.Enabled = (sender as CheckBox).Checked;

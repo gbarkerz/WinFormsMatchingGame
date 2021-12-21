@@ -181,6 +181,20 @@ namespace WinFormsSquaresGame
         {
             this.squaresGrid.SetBackgroundPicture(fileInfo);
         }
+
+        public bool ShowNumbers 
+        {
+            get
+            {
+                return this.squaresGrid.ShowNumbers;
+            }            
+            set
+            {
+                this.squaresGrid.ShowNumbers = value;
+
+                this.squaresGrid.Refresh();
+            }
+        }
     }
 
     public class DataGridViewButtonColumnMatchingGame : DataGridViewButtonColumn

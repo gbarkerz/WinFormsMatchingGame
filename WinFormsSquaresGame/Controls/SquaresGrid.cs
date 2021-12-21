@@ -173,17 +173,17 @@ namespace WinFormsSquaresGame.Controls
 
             if (backgroundPicture == null)
             {
-                bmp = SquareList[index].Image;
+                //bmp = SquareList[index].Image;
 
-                rectBitmap = new Rectangle(0, 0, bmp.Width, bmp.Height);
+                //rectBitmap = new Rectangle(0, 0, bmp.Width, bmp.Height);
 
-                double ratio = Math.Max(
-                    (double)rectBitmap.Width / (double)e.CellBounds.Width,
-                    (double)rectBitmap.Height / (double)e.CellBounds.Height);
+                //double ratio = Math.Max(
+                //    (double)rectBitmap.Width / (double)e.CellBounds.Width,
+                //    (double)rectBitmap.Height / (double)e.CellBounds.Height);
 
-                // Bring in the image a few pixels from the border.
-                finalWidth = (int)(rectBitmap.Width / ratio) - 6;
-                finalHeight = (int)(rectBitmap.Height / ratio) - 6;
+                //// Bring in the image a few pixels from the border.
+                //finalWidth = (int)(rectBitmap.Width / ratio) - 6;
+                //finalHeight = (int)(rectBitmap.Height / ratio) - 6;
             }
             else
             {
@@ -212,7 +212,7 @@ namespace WinFormsSquaresGame.Controls
                     finalWidth,
                     finalHeight);
 
-                e.Graphics.ExcludeClip(new Region(rectCellImage));
+                //e.Graphics.ExcludeClip(new Region(rectCellImage));
             }
 
             // Now paint everything but the cell image if there is one.
@@ -227,6 +227,35 @@ namespace WinFormsSquaresGame.Controls
                     rectCellImage,
                     rectBitmap,
                     GraphicsUnit.Pixel);
+            }
+            //else
+            {
+                if (ShowNumbers)
+                {
+                    int factor = 3;
+
+                    var rect = new Rectangle(
+                        e.CellBounds.Location.X + 4, e.CellBounds.Location.Y + 4, 
+                        e.CellBounds.Size.Width / factor, e.CellBounds.Size.Height / factor);
+
+                    e.Graphics.FillRectangle(SystemBrushes.Control, rect);
+
+                    int fontHeight = this.Font.FontFamily.GetEmHeight(FontStyle.Regular);
+                    int lineSpacing = this.Font.FontFamily.GetLineSpacing(FontStyle.Regular);
+                    var targetHeight = (e.CellBounds.Height * fontHeight) / (factor * lineSpacing);
+                    var font = new Font(this.Font.FontFamily, targetHeight, GraphicsUnit.Pixel);
+
+                    StringFormat format = new StringFormat();
+                    format.LineAlignment = StringAlignment.Center;
+                    format.Alignment = StringAlignment.Center;
+
+                    e.Graphics.DrawString(
+                        (square.TargetIndex + 1).ToString(),
+                        font,
+                        SystemBrushes.ControlText,
+                        rect,
+                        format);
+                }
             }
 
             e.Handled = true;
@@ -303,5 +332,7 @@ namespace WinFormsSquaresGame.Controls
 
             this.Refresh();
         }
+
+        public bool ShowNumbers { get; set; }
     }
 }
