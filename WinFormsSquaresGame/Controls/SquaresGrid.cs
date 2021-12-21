@@ -95,7 +95,7 @@ namespace WinFormsSquaresGame.Controls
                         this,
                         "Congratulations! You won the game in " + moveCount +
                         " goes.\r\n\r\nWould you like another game?",
-                        "Accessible Matching Game",
+                        "Accessible Squares Game",
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question);
                     if (answer == DialogResult.Yes)

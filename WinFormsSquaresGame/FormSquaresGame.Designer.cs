@@ -37,6 +37,8 @@ namespace WinFormsSquaresGame
             this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelKeyboardInstructions = new System.Windows.Forms.Label();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +49,7 @@ namespace WinFormsSquaresGame
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelSquaresGrid.Location = new System.Drawing.Point(13, 42);
             this.panelSquaresGrid.Name = "panelSquaresGrid";
-            this.panelSquaresGrid.Size = new System.Drawing.Size(643, 555);
+            this.panelSquaresGrid.Size = new System.Drawing.Size(643, 476);
             this.panelSquaresGrid.TabIndex = 0;
             // 
             // menuStrip1
@@ -105,18 +107,43 @@ namespace WinFormsSquaresGame
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(178, 34);
             this.settingsToolStripMenuItem.Text = "&Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // labelKeyboardInstructions
+            // 
+            this.labelKeyboardInstructions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelKeyboardInstructions.AutoSize = true;
+            this.labelKeyboardInstructions.Location = new System.Drawing.Point(13, 522);
+            this.labelKeyboardInstructions.Name = "labelKeyboardInstructions";
+            this.labelKeyboardInstructions.Size = new System.Drawing.Size(503, 75);
+            this.labelKeyboardInstructions.TabIndex = 2;
+            this.labelKeyboardInstructions.Text = "Keyboard instructions:\r\nPress the arrow keys to move around the grid. Press Space" +
+    " to \r\nmove a square into the adjacent empty square.";
+            // 
+            // buttonClose
+            // 
+            this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClose.Location = new System.Drawing.Point(543, 587);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(112, 34);
+            this.buttonClose.TabIndex = 3;
+            this.buttonClose.Text = "&Close";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // FormSquaresGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 609);
+            this.ClientSize = new System.Drawing.Size(668, 633);
+            this.Controls.Add(this.buttonClose);
+            this.Controls.Add(this.labelKeyboardInstructions);
             this.Controls.Add(this.panelSquaresGrid);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(640, 480);
             this.Name = "FormSquaresGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Accessible Squares Game";
@@ -137,6 +164,8 @@ namespace WinFormsSquaresGame
         private System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.Label labelKeyboardInstructions;
+        private System.Windows.Forms.Button buttonClose;
     }
 }
 

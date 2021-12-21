@@ -40,10 +40,10 @@ namespace WinFormsSquaresGame
 
             // The game currently only shows a 4x4 grid of cards.
 
-            squaresGrid.Columns.Add(new DataGridViewButtonColumnMatchingGame());
-            squaresGrid.Columns.Add(new DataGridViewButtonColumnMatchingGame());
-            squaresGrid.Columns.Add(new DataGridViewButtonColumnMatchingGame());
-            squaresGrid.Columns.Add(new DataGridViewButtonColumnMatchingGame());
+            squaresGrid.Columns.Add(new DataGridViewButtonColumnSquaresGame());
+            squaresGrid.Columns.Add(new DataGridViewButtonColumnSquaresGame());
+            squaresGrid.Columns.Add(new DataGridViewButtonColumnSquaresGame());
+            squaresGrid.Columns.Add(new DataGridViewButtonColumnSquaresGame());
 
             squaresGrid.Rows.Add();
             squaresGrid.Rows.Add();
@@ -177,66 +177,15 @@ namespace WinFormsSquaresGame
             }
         }
 
-        //public bool ShowNumbers
-        //{
-        //    get
-        //    {
-        //        return this.squaresGrid.ShowNumbers;
-        //    }
-        //    set
-        //    {
-        //        this.squaresGrid.ShowNumbers = value;
-
-        //        this.squaresGrid.Refresh();
-        //    }
-        //}
-
-        //public int NumberSizeIndex
-        //{
-        //    get
-        //    {
-        //        return this.squaresGrid.NumberSizeIndex;
-        //    }
-        //    set
-        //    {
-        //        this.squaresGrid.NumberSizeIndex = value;
-
-        //        this.squaresGrid.Refresh();
-        //    }
-        //}
-
-        //public bool ShowPicture
-        //{
-        //    get
-        //    {
-        //        return this.squaresGrid.ShowPicture;
-        //    }
-        //    set
-        //    {
-        //        this.squaresGrid.ShowPicture = value;
-
-        //        this.squaresGrid.Refresh();
-        //    }
-        //}
-
-        //public string BackgroundPicture
-        //{
-        //    get
-        //    {
-        //        return this.squaresGrid.BackgroundPicture;
-        //    }
-        //    set
-        //    {
-        //        this.squaresGrid.BackgroundPicture = value;
-
-        //        this.squaresGrid.Refresh();
-        //    }
-        //}
+        private void buttonClose_Click(object sender, System.EventArgs e)
+        {
+            this.Close();
+        }
     }
 
-    public class DataGridViewButtonColumnMatchingGame : DataGridViewButtonColumn
+    public class DataGridViewButtonColumnSquaresGame : DataGridViewButtonColumn
     {
-        public DataGridViewButtonColumnMatchingGame()
+        public DataGridViewButtonColumnSquaresGame()
         {
             this.CellTemplate = new DataGridViewButtonCellSquaresGame();
         }
