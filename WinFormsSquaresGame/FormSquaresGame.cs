@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using WinFormsSquaresGame.Controls;
 using WinFormsSquaresGame.Properties;
+
+// Todo: Make keyboard focus more visible in the grid.
 
 namespace WinFormsSquaresGame
 {
