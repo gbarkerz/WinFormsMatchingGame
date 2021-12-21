@@ -153,96 +153,82 @@ namespace WinFormsSquaresGame.Controls
 
         private void Grid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            // Set up clip regions below in order to prevent the image in the cell 
-            // from flashing when the cell is repainted.
+            int showNumberScale = 3;
+            int pictureOffset = 4;
 
-            Bitmap bmp = null;
-            Rectangle rectBitmap = new Rectangle();
-            Rectangle rectCellImage = new Rectangle();
-
-            var finalWidth = 0;
-            var finalHeight = 0;
-
+            // If this is the empty square, we don;t need to do any custom painting here.
             var square = GetSquareFromRowColumn(e.RowIndex, e.ColumnIndex);
             if (square.TargetIndex == 15)
             {
                 return;
             }
 
-            var index = ((GridDimensions * e.RowIndex) + e.ColumnIndex);
-
-            if (backgroundPicture == null)
+            // Set up a clip region to cover where we expect to draw our own content.
+            if (ShowNumbers || (backgroundPicture != null))
             {
-                //bmp = SquareList[index].Image;
+                Rectangle rectClip = e.CellBounds;
 
-                //rectBitmap = new Rectangle(0, 0, bmp.Width, bmp.Height);
+                if (backgroundPicture != null)
+                {
+                    // We'll be filling most of the cell with a picture.
+                    rectClip.Inflate(-pictureOffset, -pictureOffset);
+                }
+                else if (ShowNumbers)
+                {
+                    // We'll just be showing a number at the top left corner of the square.
+                    rectClip = new Rectangle(
+                        e.CellBounds.Location.X + 4, e.CellBounds.Location.Y + 4,
+                        e.CellBounds.Size.Width / showNumberScale, e.CellBounds.Size.Height / showNumberScale);
+                }
 
-                //double ratio = Math.Max(
-                //    (double)rectBitmap.Width / (double)e.CellBounds.Width,
-                //    (double)rectBitmap.Height / (double)e.CellBounds.Height);
-
-                //// Bring in the image a few pixels from the border.
-                //finalWidth = (int)(rectBitmap.Width / ratio) - 6;
-                //finalHeight = (int)(rectBitmap.Height / ratio) - 6;
-            }
-            else
-            {
-                bmp = backgroundPicture;
-
-                int width = backgroundPicture.Width / GridDimensions;
-                int height = backgroundPicture.Height / GridDimensions;
-
-                int squareColumnIndex = square.TargetIndex % GridDimensions;
-                int squareRowIndex = square.TargetIndex / GridDimensions;
-
-                int left = squareColumnIndex * width;
-                int top = squareRowIndex * height;
-
-                rectBitmap = new Rectangle(left, top, width, height);
-
-                finalWidth = e.CellBounds.Width - 6;
-                finalHeight = e.CellBounds.Height - 6;
+                e.Graphics.ExcludeClip(new Region(rectClip));
             }
 
-            if (bmp != null)
-            {
-                rectCellImage = new Rectangle(
-                    e.CellBounds.Left + ((e.CellBounds.Width - finalWidth) / 2),
-                    e.CellBounds.Top + ((e.CellBounds.Height - finalHeight) / 2),
-                    finalWidth,
-                    finalHeight);
-
-                //e.Graphics.ExcludeClip(new Region(rectCellImage));
-            }
-
-            // Now paint everything but the cell image if there is one.
+            // Now paint everything but our own content.
             e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
-            if (bmp != null)
+            if (ShowNumbers || (backgroundPicture != null))
             {
                 e.Graphics.Clip = new Region();
 
-                // Now paint the image in the cell.
-                e.Graphics.DrawImage(bmp,
-                    rectCellImage,
-                    rectBitmap,
-                    GraphicsUnit.Pixel);
-            }
-            //else
-            {
+                // Do we have a background picture to paint?
+                if (backgroundPicture != null)
+                {
+                    // Todo: Set another clip region to exclude painting the image where
+                    // a square number will lie over it.
+
+                    int width = backgroundPicture.Width / GridDimensions;
+                    int height = backgroundPicture.Height / GridDimensions;
+
+                    int squareColumnIndex = square.TargetIndex % GridDimensions;
+                    int squareRowIndex = square.TargetIndex / GridDimensions;
+
+                    int left = squareColumnIndex * width;
+                    int top = squareRowIndex * height;
+
+                    Rectangle rectBitmap = new Rectangle(left, top, width, height);
+
+                    Rectangle rectCellImage = e.CellBounds;
+                    rectCellImage.Inflate(-4, -4);
+
+                    // Now paint the image in the cell.
+                    e.Graphics.DrawImage(backgroundPicture,
+                        rectCellImage,
+                        rectBitmap,
+                        GraphicsUnit.Pixel);
+                }
+
                 if (ShowNumbers)
                 {
-                    int factor = 3;
-
                     var rect = new Rectangle(
-                        e.CellBounds.Location.X + 4, e.CellBounds.Location.Y + 4, 
-                        e.CellBounds.Size.Width / factor, e.CellBounds.Size.Height / factor);
+                        e.CellBounds.Location.X + 4, e.CellBounds.Location.Y + 4,
+                        e.CellBounds.Size.Width / showNumberScale, e.CellBounds.Size.Height / showNumberScale);
 
                     e.Graphics.FillRectangle(SystemBrushes.Control, rect);
 
                     int fontHeight = this.Font.FontFamily.GetEmHeight(FontStyle.Regular);
                     int lineSpacing = this.Font.FontFamily.GetLineSpacing(FontStyle.Regular);
-                    var targetHeight = (e.CellBounds.Height * fontHeight) / (factor * lineSpacing);
+                    var targetHeight = (e.CellBounds.Height * fontHeight) / (showNumberScale * lineSpacing);
                     var font = new Font(this.Font.FontFamily, targetHeight, GraphicsUnit.Pixel);
 
                     StringFormat format = new StringFormat();
