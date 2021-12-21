@@ -20,6 +20,8 @@ namespace WinFormsSquaresGame
             this.formSquaresGame = formSquaresGame;
 
             InitializeComponent();
+
+            this.comboBoxNumberSize.SelectedIndex = 0;
         }
 
         private void checkBoxShowNumbers_CheckedChanged(object sender, EventArgs e)
@@ -53,6 +55,16 @@ namespace WinFormsSquaresGame
 
                 this.formSquaresGame.SetBackgroundPicture(fileInfo);
             }
+        }
+
+        private void groupBoxSquareContents_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxNumberSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.formSquaresGame.SetNumberSize((sender as ComboBox).SelectedIndex);
         }
     }
 }

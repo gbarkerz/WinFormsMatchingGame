@@ -11,6 +11,7 @@ namespace WinFormsSquaresGame.Controls
         public List<Square> SquareList { get; set; }
         private int moveCount = 0;
         private Bitmap backgroundPicture;
+        private int numberSizeIndex = 1;
 
         public SquaresGrid()
         {
@@ -153,8 +154,8 @@ namespace WinFormsSquaresGame.Controls
 
         private void Grid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            int showNumberScale = 3;
             int pictureOffset = 4;
+            int showNumberScale = 4 - this.numberSizeIndex;
 
             // If this is the empty square, we don;t need to do any custom painting here.
             var square = GetSquareFromRowColumn(e.RowIndex, e.ColumnIndex);
@@ -178,7 +179,8 @@ namespace WinFormsSquaresGame.Controls
                     // We'll just be showing a number at the top left corner of the square.
                     rectClip = new Rectangle(
                         e.CellBounds.Location.X + 4, e.CellBounds.Location.Y + 4,
-                        e.CellBounds.Size.Width / showNumberScale, e.CellBounds.Size.Height / showNumberScale);
+                        Math.Min(e.CellBounds.Width - 8, e.CellBounds.Size.Width / showNumberScale),
+                        Math.Min(e.CellBounds.Height - 8, e.CellBounds.Size.Height / showNumberScale));
                 }
 
                 e.Graphics.ExcludeClip(new Region(rectClip));
@@ -222,7 +224,8 @@ namespace WinFormsSquaresGame.Controls
                 {
                     var rect = new Rectangle(
                         e.CellBounds.Location.X + 4, e.CellBounds.Location.Y + 4,
-                        e.CellBounds.Size.Width / showNumberScale, e.CellBounds.Size.Height / showNumberScale);
+                        Math.Min(e.CellBounds.Width - 8, e.CellBounds.Size.Width / showNumberScale),
+                        Math.Min(e.CellBounds.Height - 8, e.CellBounds.Size.Height / showNumberScale));
 
                     e.Graphics.FillRectangle(SystemBrushes.Control, rect);
 
@@ -315,6 +318,13 @@ namespace WinFormsSquaresGame.Controls
         public void SetBackgroundPicture(FileInfo fileInfo)
         {
             backgroundPicture = new Bitmap(fileInfo.FullName);
+
+            this.Refresh();
+        }
+
+        public void SetNumberSize(int sizeIndex)
+        {
+            this.numberSizeIndex = sizeIndex;
 
             this.Refresh();
         }

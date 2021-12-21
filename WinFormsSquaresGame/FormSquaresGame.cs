@@ -182,6 +182,11 @@ namespace WinFormsSquaresGame
             this.squaresGrid.SetBackgroundPicture(fileInfo);
         }
 
+        public void SetNumberSize(int sizeIndex)
+        {
+            this.squaresGrid.SetNumberSize(sizeIndex);
+        }
+
         public bool ShowNumbers 
         {
             get
