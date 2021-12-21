@@ -170,36 +170,68 @@ namespace WinFormsSquaresGame
 
         private void ShowSettingsDialog()
         {
-            var gameSettings = new GameSettings(this);
+            var gameSettings = new GameSettings(this.squaresGrid);
             if (gameSettings.ShowDialog(this) != DialogResult.Cancel)
             {
                 
             }
         }
 
-        public void SetBackgroundPicture(FileInfo fileInfo)
-        {
-            this.squaresGrid.SetBackgroundPicture(fileInfo);
-        }
+        //public bool ShowNumbers
+        //{
+        //    get
+        //    {
+        //        return this.squaresGrid.ShowNumbers;
+        //    }
+        //    set
+        //    {
+        //        this.squaresGrid.ShowNumbers = value;
 
-        public void SetNumberSize(int sizeIndex)
-        {
-            this.squaresGrid.SetNumberSize(sizeIndex);
-        }
+        //        this.squaresGrid.Refresh();
+        //    }
+        //}
 
-        public bool ShowNumbers 
-        {
-            get
-            {
-                return this.squaresGrid.ShowNumbers;
-            }            
-            set
-            {
-                this.squaresGrid.ShowNumbers = value;
+        //public int NumberSizeIndex
+        //{
+        //    get
+        //    {
+        //        return this.squaresGrid.NumberSizeIndex;
+        //    }
+        //    set
+        //    {
+        //        this.squaresGrid.NumberSizeIndex = value;
 
-                this.squaresGrid.Refresh();
-            }
-        }
+        //        this.squaresGrid.Refresh();
+        //    }
+        //}
+
+        //public bool ShowPicture
+        //{
+        //    get
+        //    {
+        //        return this.squaresGrid.ShowPicture;
+        //    }
+        //    set
+        //    {
+        //        this.squaresGrid.ShowPicture = value;
+
+        //        this.squaresGrid.Refresh();
+        //    }
+        //}
+
+        //public string BackgroundPicture
+        //{
+        //    get
+        //    {
+        //        return this.squaresGrid.BackgroundPicture;
+        //    }
+        //    set
+        //    {
+        //        this.squaresGrid.BackgroundPicture = value;
+
+        //        this.squaresGrid.Refresh();
+        //    }
+        //}
     }
 
     public class DataGridViewButtonColumnMatchingGame : DataGridViewButtonColumn

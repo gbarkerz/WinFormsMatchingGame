@@ -1,23 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
 namespace WinFormsSquaresGame.Controls
 {
-    class SquaresGrid : DataGridView
+    public class SquaresGrid : DataGridView
     {
         public List<Square> SquareList { get; set; }
         private int moveCount = 0;
-        private Bitmap backgroundPicture;
-        private int numberSizeIndex = 1;
 
         public SquaresGrid()
         {
             CellClick += DataGridView_CellClick;
             SizeChanged += Grid_SizeChanged;
             CellPainting += Grid_CellPainting;
+
+            LoadSettings();
+        }
+
+        private void LoadSettings()
+        {
+            this.ShowNumbers = Settings1.Default.ShowNumbers;
+            this.NumberSizeIndex = Settings1.Default.NumberSizeIndex;
+            this.ShowPicture = Settings1.Default.ShowPicture;
+            this.BackgroundPictureFullName = Settings1.Default.BackgroundPicture;
         }
 
         private void DataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -155,7 +164,7 @@ namespace WinFormsSquaresGame.Controls
         private void Grid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             int pictureOffset = 4;
-            int showNumberScale = 4 - this.numberSizeIndex;
+            int showNumberScale = 4 - this.NumberSizeIndex;
 
             // If this is the empty square, we don;t need to do any custom painting here.
             var square = GetSquareFromRowColumn(e.RowIndex, e.ColumnIndex);
@@ -165,11 +174,11 @@ namespace WinFormsSquaresGame.Controls
             }
 
             // Set up a clip region to cover where we expect to draw our own content.
-            if (ShowNumbers || (backgroundPicture != null))
+            if (ShowNumbers || (ShowPicture && (backgroundPicture != null)))
             {
                 Rectangle rectClip = e.CellBounds;
 
-                if (backgroundPicture != null)
+                if (ShowPicture && (backgroundPicture != null))
                 {
                     // We'll be filling most of the cell with a picture.
                     rectClip.Inflate(-pictureOffset, -pictureOffset);
@@ -189,12 +198,12 @@ namespace WinFormsSquaresGame.Controls
             // Now paint everything but our own content.
             e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
-            if (ShowNumbers || (backgroundPicture != null))
+            if (ShowNumbers || (ShowPicture && (backgroundPicture != null)))
             {
                 e.Graphics.Clip = new Region();
 
                 // Do we have a background picture to paint?
-                if (backgroundPicture != null)
+                if (ShowPicture && (backgroundPicture != null))
                 {
                     // Todo: Set another clip region to exclude painting the image where
                     // a square number will lie over it.
@@ -291,7 +300,7 @@ namespace WinFormsSquaresGame.Controls
 
                 for (int j = i + 1; j < this.SquareList.Count; j++)
                 {
-                    if ((this.SquareList[j].TargetIndex != 15) && 
+                    if ((this.SquareList[j].TargetIndex != 15) &&
                         (this.SquareList[i].TargetIndex > this.SquareList[j].TargetIndex))
                     {
                         parity++;
@@ -315,20 +324,73 @@ namespace WinFormsSquaresGame.Controls
             return gridCanBeSolved;
         }
 
-        public void SetBackgroundPicture(FileInfo fileInfo)
-        {
-            backgroundPicture = new Bitmap(fileInfo.FullName);
-
-            this.Refresh();
+        private bool showNumbers;
+        public bool ShowNumbers 
+        { 
+            get
+            {
+                return showNumbers;
+            }
+            set
+            {
+                showNumbers = value;
+                this.Refresh();
+            }
         }
 
-        public void SetNumberSize(int sizeIndex)
+        private int numberSizeIndex;
+        public int NumberSizeIndex
         {
-            this.numberSizeIndex = sizeIndex;
-
-            this.Refresh();
+            get
+            {
+                return numberSizeIndex;
+            }
+            set
+            {
+                numberSizeIndex = value;
+                this.Refresh();
+            }
         }
 
-        public bool ShowNumbers { get; set; }
+        private bool showPicture;
+        public bool ShowPicture
+        {
+            get
+            {
+                return showPicture;
+            }
+            set
+            {
+                showPicture = value;
+                this.Refresh();
+            }
+        }
+
+        private Bitmap backgroundPicture;
+        private string backgroundPictureFullName;
+        public string BackgroundPictureFullName
+        {
+            get
+            {
+                return backgroundPictureFullName;
+            }
+            set
+            {
+                try
+                {
+                    this.backgroundPictureFullName = value;
+
+                    if (!string.IsNullOrWhiteSpace(this.backgroundPictureFullName))
+                    {
+                        this.backgroundPicture = new Bitmap(this.backgroundPictureFullName);
+                        this.Refresh();
+                    }
+                }
+                catch (Exception)
+                {
+                    this.backgroundPictureFullName = "";
+                }
+            }
+        }
     }
 }
