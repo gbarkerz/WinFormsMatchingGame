@@ -279,6 +279,8 @@ namespace WinFormsSquaresGame.Controls
                     StringFormat format = new StringFormat();
                     format.LineAlignment = StringAlignment.Center;
                     format.Alignment = StringAlignment.Center;
+                    format.FormatFlags = StringFormatFlags.NoWrap;
+                    format.Trimming = StringTrimming.None;
 
                     e.Graphics.DrawString(
                         (square.TargetIndex + 1).ToString(),
