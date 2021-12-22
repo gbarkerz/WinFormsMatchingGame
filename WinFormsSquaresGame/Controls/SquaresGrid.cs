@@ -47,7 +47,8 @@ namespace WinFormsSquaresGame.Controls
                 if (adjacentSquare.TargetIndex == EmptySquareTargetIndex)
                 {
                     emptySquareIndex = GetSquareIndexFromRowColumn(e.RowIndex, e.ColumnIndex - 1);
-                    
+                    this.InvalidateCell(this.Rows[e.RowIndex].Cells[e.ColumnIndex - 1]);
+
                     direction = Resources.ResourceManager.GetString("Left");
                 }
             }
@@ -58,6 +59,7 @@ namespace WinFormsSquaresGame.Controls
                 if (adjacentSquare.TargetIndex == EmptySquareTargetIndex)
                 {
                     emptySquareIndex = GetSquareIndexFromRowColumn(e.RowIndex - 1, e.ColumnIndex);
+                    this.InvalidateCell(this.Rows[e.RowIndex - 1].Cells[e.ColumnIndex]);
 
                     direction = Resources.ResourceManager.GetString("Up");
                 }
@@ -69,6 +71,7 @@ namespace WinFormsSquaresGame.Controls
                 if (adjacentSquare.TargetIndex == EmptySquareTargetIndex)
                 {
                     emptySquareIndex = GetSquareIndexFromRowColumn(e.RowIndex, e.ColumnIndex + 1);
+                    this.InvalidateCell(this.Rows[e.RowIndex].Cells[e.ColumnIndex + 1]);
 
                     direction = Resources.ResourceManager.GetString("Right");
                 }
@@ -80,6 +83,7 @@ namespace WinFormsSquaresGame.Controls
                 if (adjacentSquare.TargetIndex == EmptySquareTargetIndex)
                 {
                     emptySquareIndex = GetSquareIndexFromRowColumn(e.RowIndex + 1, e.ColumnIndex);
+                    this.InvalidateCell(this.Rows[e.RowIndex + 1].Cells[e.ColumnIndex]);
 
                     direction = Resources.ResourceManager.GetString("Down");
                 }
@@ -98,8 +102,9 @@ namespace WinFormsSquaresGame.Controls
                 this.SquareList[emptySquareIndex] = clickedSquare;
                 this.SquareList[clickedSquareIndex] = emptySquare;
 
-                // Todo: Only refresh the two affected squares, not the whole grid.
-                this.Refresh();
+                // Only refresh the two affected squares.
+                this.InvalidateCell(this.Rows[e.RowIndex].Cells[e.ColumnIndex]);
+                this.Update();
 
                 // Has the game been won?
                 if (GameIsWon())
