@@ -146,7 +146,7 @@ namespace WinFormsSquaresGame
             this.MinimumSize = new System.Drawing.Size(640, 480);
             this.Name = "FormSquaresGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Accessible Squares Game";
+            this.Text = "Accessible Squares Game V1.0";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
