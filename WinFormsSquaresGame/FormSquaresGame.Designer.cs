@@ -44,17 +44,6 @@ namespace WinFormsSquaresGame
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelSquaresGrid
-            // 
-            this.panelSquaresGrid.AccessibleName = "Squares grid container";
-            this.panelSquaresGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelSquaresGrid.Location = new System.Drawing.Point(13, 42);
-            this.panelSquaresGrid.Name = "panelSquaresGrid";
-            this.panelSquaresGrid.Size = new System.Drawing.Size(643, 476);
-            this.panelSquaresGrid.TabIndex = 0;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.AccessibleName = "Main";
@@ -67,8 +56,19 @@ namespace WinFormsSquaresGame
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(668, 33);
-            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // panelSquaresGrid
+            // 
+            this.panelSquaresGrid.AccessibleName = "Squares grid container";
+            this.panelSquaresGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelSquaresGrid.Location = new System.Drawing.Point(13, 42);
+            this.panelSquaresGrid.Name = "panelSquaresGrid";
+            this.panelSquaresGrid.Size = new System.Drawing.Size(643, 476);
+            this.panelSquaresGrid.TabIndex = 1;
             // 
             // fileToolStripMenuItem
             // 
