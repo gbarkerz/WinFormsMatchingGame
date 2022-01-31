@@ -58,7 +58,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="labelKeyboardInstructions.Text" xml:space="preserve">
-    <value>Press the arrow keys to move around  the grid. 
+    <value>Press the arrow keys to move around the grid. 
 
 Press Space to move a square into the adjacent empty square. 
 
@@ -66,7 +66,10 @@ Press F1 to show this Help window.
 
 Press F2 to show the Settings window, where you can specify whether the
 squares show numbers, and specify the size of those numbers. You can 
-also specific whether a picture should be shown on the squares.
+also specify whether a picture should be shown on the squares.
+
+The Settings window also provides an option to have a press of the Enter
+key move a square into the adjacent empty square.
 
 Press F5 to restart a game.
 </value>

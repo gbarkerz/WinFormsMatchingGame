@@ -39,7 +39,7 @@ namespace WinFormsSquaresGame
             // buttonClose
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClose.Location = new System.Drawing.Point(534, 386);
+            this.buttonClose.Location = new System.Drawing.Point(534, 431);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(112, 34);
             this.buttonClose.TabIndex = 0;
@@ -52,7 +52,7 @@ namespace WinFormsSquaresGame
             this.groupBoxKeyboardInstructions.Controls.Add(this.labelKeyboardInstructions);
             this.groupBoxKeyboardInstructions.Location = new System.Drawing.Point(13, 13);
             this.groupBoxKeyboardInstructions.Name = "groupBoxKeyboardInstructions";
-            this.groupBoxKeyboardInstructions.Size = new System.Drawing.Size(631, 347);
+            this.groupBoxKeyboardInstructions.Size = new System.Drawing.Size(631, 401);
             this.groupBoxKeyboardInstructions.TabIndex = 1;
             this.groupBoxKeyboardInstructions.TabStop = false;
             this.groupBoxKeyboardInstructions.Text = "Keyboard Instructions";
@@ -60,9 +60,9 @@ namespace WinFormsSquaresGame
             // labelKeyboardInstructions
             // 
             this.labelKeyboardInstructions.AutoSize = true;
-            this.labelKeyboardInstructions.Location = new System.Drawing.Point(30, 47);
+            this.labelKeyboardInstructions.Location = new System.Drawing.Point(19, 37);
             this.labelKeyboardInstructions.Name = "labelKeyboardInstructions";
-            this.labelKeyboardInstructions.Size = new System.Drawing.Size(593, 275);
+            this.labelKeyboardInstructions.Size = new System.Drawing.Size(593, 350);
             this.labelKeyboardInstructions.TabIndex = 0;
             this.labelKeyboardInstructions.Text = resources.GetString("labelKeyboardInstructions.Text");
             // 
@@ -71,7 +71,7 @@ namespace WinFormsSquaresGame
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
-            this.ClientSize = new System.Drawing.Size(658, 432);
+            this.ClientSize = new System.Drawing.Size(658, 477);
             this.Controls.Add(this.groupBoxKeyboardInstructions);
             this.Controls.Add(this.buttonClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
