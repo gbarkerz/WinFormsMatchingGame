@@ -32,58 +32,64 @@ namespace WinFormsSquaresGame.Controls
             this.NumberSizeIndex = Settings1.Default.NumberSizeIndex;
             this.ShowPicture = Settings1.Default.ShowPicture;
             this.BackgroundPictureFullName = Settings1.Default.BackgroundPicture;
+            this.ClickSquareOnEnterPress = Settings1.Default.ClickSquareOnEnterPress;
         }
 
         private void DataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ClickCell(e.RowIndex, e.ColumnIndex);
+        }
+
+        private void ClickCell(int rowIndex, int columnIndex)
         {
             Square adjacentSquare = null;
             int emptySquareIndex = -1;
             string direction = "";
 
             // Is the empty square adjacent to this square?
-            if (e.ColumnIndex > 0)
+            if (columnIndex > 0)
             {
-                adjacentSquare = GetSquareFromRowColumn(e.RowIndex, e.ColumnIndex - 1);
+                adjacentSquare = GetSquareFromRowColumn(rowIndex, columnIndex - 1);
                 if (adjacentSquare.TargetIndex == EmptySquareTargetIndex)
                 {
-                    emptySquareIndex = GetSquareIndexFromRowColumn(e.RowIndex, e.ColumnIndex - 1);
-                    this.InvalidateCell(this.Rows[e.RowIndex].Cells[e.ColumnIndex - 1]);
+                    emptySquareIndex = GetSquareIndexFromRowColumn(rowIndex, columnIndex - 1);
+                    this.InvalidateCell(this.Rows[rowIndex].Cells[columnIndex - 1]);
 
                     direction = Resources.ResourceManager.GetString("Left");
                 }
             }
 
-            if ((emptySquareIndex == -1) && (e.RowIndex > 0))
+            if ((emptySquareIndex == -1) && (rowIndex > 0))
             {
-                adjacentSquare = GetSquareFromRowColumn(e.RowIndex - 1, e.ColumnIndex);
+                adjacentSquare = GetSquareFromRowColumn(rowIndex - 1, columnIndex);
                 if (adjacentSquare.TargetIndex == EmptySquareTargetIndex)
                 {
-                    emptySquareIndex = GetSquareIndexFromRowColumn(e.RowIndex - 1, e.ColumnIndex);
-                    this.InvalidateCell(this.Rows[e.RowIndex - 1].Cells[e.ColumnIndex]);
+                    emptySquareIndex = GetSquareIndexFromRowColumn(rowIndex - 1, columnIndex);
+                    this.InvalidateCell(this.Rows[rowIndex - 1].Cells[columnIndex]);
 
                     direction = Resources.ResourceManager.GetString("Up");
                 }
             }
 
-            if ((emptySquareIndex == -1) && (e.ColumnIndex < GridDimensions - 1))
+            if ((emptySquareIndex == -1) && (columnIndex < GridDimensions - 1))
             {
-                adjacentSquare = GetSquareFromRowColumn(e.RowIndex, e.ColumnIndex + 1);
+                adjacentSquare = GetSquareFromRowColumn(rowIndex, columnIndex + 1);
                 if (adjacentSquare.TargetIndex == EmptySquareTargetIndex)
                 {
-                    emptySquareIndex = GetSquareIndexFromRowColumn(e.RowIndex, e.ColumnIndex + 1);
-                    this.InvalidateCell(this.Rows[e.RowIndex].Cells[e.ColumnIndex + 1]);
+                    emptySquareIndex = GetSquareIndexFromRowColumn(rowIndex, columnIndex + 1);
+                    this.InvalidateCell(this.Rows[rowIndex].Cells[columnIndex + 1]);
 
                     direction = Resources.ResourceManager.GetString("Right");
                 }
             }
 
-            if ((emptySquareIndex == -1) && (e.RowIndex < GridDimensions - 1))
+            if ((emptySquareIndex == -1) && (rowIndex < GridDimensions - 1))
             {
-                adjacentSquare = GetSquareFromRowColumn(e.RowIndex + 1, e.ColumnIndex);
+                adjacentSquare = GetSquareFromRowColumn(rowIndex + 1, columnIndex);
                 if (adjacentSquare.TargetIndex == EmptySquareTargetIndex)
                 {
-                    emptySquareIndex = GetSquareIndexFromRowColumn(e.RowIndex + 1, e.ColumnIndex);
-                    this.InvalidateCell(this.Rows[e.RowIndex + 1].Cells[e.ColumnIndex]);
+                    emptySquareIndex = GetSquareIndexFromRowColumn(rowIndex + 1, columnIndex);
+                    this.InvalidateCell(this.Rows[rowIndex + 1].Cells[columnIndex]);
 
                     direction = Resources.ResourceManager.GetString("Down");
                 }
@@ -96,14 +102,14 @@ namespace WinFormsSquaresGame.Controls
 
                 var emptySquare = this.SquareList[emptySquareIndex];
 
-                var clickedSquareIndex = GetSquareIndexFromRowColumn(e.RowIndex, e.ColumnIndex);
+                var clickedSquareIndex = GetSquareIndexFromRowColumn(rowIndex, columnIndex);
                 var clickedSquare = this.SquareList[clickedSquareIndex];
 
                 this.SquareList[emptySquareIndex] = clickedSquare;
                 this.SquareList[clickedSquareIndex] = emptySquare;
 
                 // Only refresh the two affected squares.
-                this.InvalidateCell(this.Rows[e.RowIndex].Cells[e.ColumnIndex]);
+                this.InvalidateCell(this.Rows[rowIndex].Cells[columnIndex]);
                 this.Update();
 
                 // Has the game been won?
@@ -441,6 +447,19 @@ namespace WinFormsSquaresGame.Controls
             }
         }
 
+        private bool clickSquareOnEnterPress;
+        public bool ClickSquareOnEnterPress
+        {
+            get
+            {
+                return clickSquareOnEnterPress;
+            }
+            set
+            {
+                clickSquareOnEnterPress = value;
+            }
+        }
+
         private int EmptySquareTargetIndex
         {
             get
@@ -462,6 +481,27 @@ namespace WinFormsSquaresGame.Controls
                         AutomationNotificationProcessing.All,
                         announcement });
             }
+        }
+
+        // Todo: Is overriding the OnKeyDown really the most appropriate 
+        // way of changing the behavior of Enter when focus is on the grid?
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            // Should we click a square in response to a press of the Enter key?
+            if (e.KeyValue == 13)
+            {
+                if (this.ClickSquareOnEnterPress && (this.SelectedCells.Count > 0))
+                {
+                    var cell = this.SelectedCells[0];
+                    ClickCell(cell.RowIndex, cell.ColumnIndex);
+                }
+            }
+            else
+            {
+                base.OnKeyDown(e);
+            }
+
+            e.Handled = true;
         }
     }
 }

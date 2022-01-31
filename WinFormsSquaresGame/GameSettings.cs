@@ -45,29 +45,31 @@ namespace WinFormsSquaresGame
             {
                 labelPicture.Text = this.squaresGrid.BackgroundPictureFullName;
             }
+
+            checkBoxClickSquareOnEnterPress.Checked = this.squaresGrid.ClickSquareOnEnterPress;
         }
 
         private void checkBoxShowNumbers_CheckedChanged(object sender, EventArgs e)
         {
-            var checkBox = (sender as CheckBox);
+            var checkBoxShowNumbers = (sender as CheckBox);
 
-            this.squaresGrid.ShowNumbers = checkBox.Checked;
-            Settings1.Default.NumberSizeIndex = comboBoxNumberSize.SelectedIndex;
+            this.squaresGrid.ShowNumbers = checkBoxShowNumbers.Checked;
+            Settings1.Default.ShowNumbers = checkBoxShowNumbers.Checked;
         }
 
         private void comboBoxNumberSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var comboBox = (sender as ComboBox);
+            var comboBoxNumberSize = (sender as ComboBox);
 
-            this.squaresGrid.NumberSizeIndex = comboBox.SelectedIndex;
-            Settings1.Default.NumberSizeIndex = comboBox.SelectedIndex;
+            this.squaresGrid.NumberSizeIndex = comboBoxNumberSize.SelectedIndex;
+            Settings1.Default.NumberSizeIndex = comboBoxNumberSize.SelectedIndex;
         }
 
         private void checkBoxShowPicture_CheckedChanged(object sender, EventArgs e)
         {
-            var checkBox = (sender as CheckBox);
+            var checkBoxShowPicture = (sender as CheckBox);
 
-            this.squaresGrid.ShowPicture = checkBox.Checked;
+            this.squaresGrid.ShowPicture = checkBoxShowPicture.Checked;
             Settings1.Default.ShowPicture = checkBoxShowPicture.Checked;
         }
 
@@ -87,6 +89,14 @@ namespace WinFormsSquaresGame
 
                 Settings1.Default.BackgroundPicture = openFileDialog.FileName;
             }
+        }
+
+        private void checkBoxClickSquareOnEnterPress_CheckedChanged(object sender, EventArgs e)
+        {
+            var checkBoxClickSquareOnEnterPress = (sender as CheckBox);
+
+            this.squaresGrid.ClickSquareOnEnterPress = checkBoxClickSquareOnEnterPress.Checked;
+            Settings1.Default.ClickSquareOnEnterPress = checkBoxClickSquareOnEnterPress.Checked;
         }
     }
 }

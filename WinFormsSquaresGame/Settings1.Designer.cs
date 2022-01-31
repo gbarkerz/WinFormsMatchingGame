@@ -70,5 +70,17 @@ namespace WinFormsSquaresGame {
                 this["BackgroundPicture"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ClickSquareOnEnterPress {
+            get {
+                return ((bool)(this["ClickSquareOnEnterPress"]));
+            }
+            set {
+                this["ClickSquareOnEnterPress"] = value;
+            }
+        }
     }
 }
