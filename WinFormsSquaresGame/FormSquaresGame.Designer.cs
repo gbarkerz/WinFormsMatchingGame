@@ -44,6 +44,7 @@ namespace WinFormsSquaresGame
             // 
             // panelSquaresGrid
             // 
+            this.panelSquaresGrid.AccessibleName = "Squares grid container";
             this.panelSquaresGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -54,6 +55,7 @@ namespace WinFormsSquaresGame
             // 
             // menuStrip1
             // 
+            this.menuStrip1.AccessibleName = "Main";
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
@@ -138,10 +140,10 @@ namespace WinFormsSquaresGame
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(668, 633);
-            this.Controls.Add(this.buttonClose);
-            this.Controls.Add(this.labelKeyboardInstructions);
-            this.Controls.Add(this.panelSquaresGrid);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.panelSquaresGrid);
+            this.Controls.Add(this.labelKeyboardInstructions);
+            this.Controls.Add(this.buttonClose);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(640, 480);
             this.Name = "FormSquaresGame";
