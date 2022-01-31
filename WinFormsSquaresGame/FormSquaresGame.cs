@@ -150,6 +150,12 @@ namespace WinFormsSquaresGame
             ShowSettingsDialog();
         }
 
+        private void viewHelpToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            var helpForm = new HelpForm();
+            helpForm.ShowDialog(this);
+        }
+
         private void ShowSettingsDialog()
         {
             var gameSettings = new GameSettings(this.squaresGrid);

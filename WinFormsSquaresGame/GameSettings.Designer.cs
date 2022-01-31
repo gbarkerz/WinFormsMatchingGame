@@ -35,9 +35,9 @@ namespace WinFormsSquaresGame
             this.labelPicture = new System.Windows.Forms.Label();
             this.checkBoxShowNumbers = new System.Windows.Forms.CheckBox();
             this.groupBoxSquareContents = new System.Windows.Forms.GroupBox();
+            this.labelInstructions = new System.Windows.Forms.Label();
             this.labelNumberSizeLabel = new System.Windows.Forms.Label();
             this.comboBoxNumberSize = new System.Windows.Forms.ComboBox();
-            this.labelInstructions = new System.Windows.Forms.Label();
             this.groupBoxSquareContents.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,6 +109,17 @@ namespace WinFormsSquaresGame
             this.groupBoxSquareContents.TabStop = false;
             this.groupBoxSquareContents.Text = "Square &content";
             // 
+            // labelInstructions
+            // 
+            this.labelInstructions.AutoSize = true;
+            this.labelInstructions.Location = new System.Drawing.Point(18, 41);
+            this.labelInstructions.Name = "labelInstructions";
+            this.labelInstructions.Size = new System.Drawing.Size(690, 50);
+            this.labelInstructions.TabIndex = 6;
+            this.labelInstructions.Text = "Please specify what you would like to appear inside the squares shown in the grid" +
+    ". \r\nAs you change your selection here, the grid will be refreshed to reflect you" +
+    "r selections.";
+            // 
             // labelNumberSizeLabel
             // 
             this.labelNumberSizeLabel.AutoSize = true;
@@ -133,21 +144,11 @@ namespace WinFormsSquaresGame
             this.comboBoxNumberSize.TabIndex = 2;
             this.comboBoxNumberSize.SelectedIndexChanged += new System.EventHandler(this.comboBoxNumberSize_SelectedIndexChanged);
             // 
-            // labelInstructions
-            // 
-            this.labelInstructions.AutoSize = true;
-            this.labelInstructions.Location = new System.Drawing.Point(18, 41);
-            this.labelInstructions.Name = "labelInstructions";
-            this.labelInstructions.Size = new System.Drawing.Size(690, 50);
-            this.labelInstructions.TabIndex = 6;
-            this.labelInstructions.Text = "Please specify what you would like to appear inside the squares shown in the grid" +
-    ". \r\nAs you change your selection here, the grid will be refreshed to reflect you" +
-    "r selections.";
-            // 
             // GameSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonClose;
             this.ClientSize = new System.Drawing.Size(746, 385);
             this.Controls.Add(this.groupBoxSquareContents);
             this.Controls.Add(this.buttonClose);
@@ -156,7 +157,7 @@ namespace WinFormsSquaresGame
             this.MinimizeBox = false;
             this.Name = "GameSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Game Settings";
+            this.Text = "Squares Game Settings";
             this.groupBoxSquareContents.ResumeLayout(false);
             this.groupBoxSquareContents.PerformLayout();
             this.ResumeLayout(false);
