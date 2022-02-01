@@ -202,10 +202,25 @@ namespace WinFormsSquaresGame.Controls
             int pictureOffset = 6;
             int showNumberScale = 4 - this.NumberSizeIndex;
 
-            // If this is the empty square, we don;t need to do any custom painting here.
+            // Is this the empty square?
             var square = GetSquareFromRowColumn(e.RowIndex, e.ColumnIndex);
             if (square.TargetIndex == EmptySquareTargetIndex)
             {
+                // Fill most of the empty square with a system colour that suggests the square
+                // is not interactable. So first paint everything but these custom visuals.
+                Rectangle rectClip = e.CellBounds;
+                rectClip.Inflate(-pictureOffset, -pictureOffset);
+
+                // Paint everything but our own content.
+                e.Graphics.ExcludeClip(new Region(rectClip));
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                e.Graphics.Clip = new Region();
+
+                // Now fill with the system colour.
+                e.Graphics.FillRectangle(SystemBrushes.GrayText, rectClip);
+
+                e.Handled = true;
+
                 return;
             }
 
