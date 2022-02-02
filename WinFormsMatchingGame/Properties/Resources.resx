@@ -220,6 +220,9 @@
   <data name="ImportWarning" xml:space="preserve">
     <value>Please load 8 pictures before importing their names and descriptions.</value>
   </data>
+  <data name="Matched" xml:space="preserve">
+    <value>Matched</value>
+  </data>
   <data name="PictureNamesWarning" xml:space="preserve">
     <value>Please provide 8 named pictures in the Your Picture Details table.</value>
   </data>

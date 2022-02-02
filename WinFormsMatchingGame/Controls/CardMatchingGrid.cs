@@ -382,11 +382,14 @@ namespace WinFormsMatchingGame.Controls
                     var card = (this.Owner.DataGridView as CardMatchingGrid).GetCardFromRowColumn(
                                     button.RowIndex, button.ColumnIndex);
 
+                    var cardMatchedStatus = card.Matched ?
+                        Resources.ResourceManager.GetString("Matched") + " " : "";
+
                     var CardCurrentlyShowing = card.FaceUp ?
                         card.Name :
                         Resources.ResourceManager.GetString("FaceDown");
 
-                    var cardFullName = cardNamePrefix + ", " + CardCurrentlyShowing;
+                    var cardFullName = cardMatchedStatus + cardNamePrefix + ", " + CardCurrentlyShowing;
 
                     return cardFullName;
                 }

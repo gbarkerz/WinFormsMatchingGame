@@ -258,6 +258,12 @@ namespace WinFormsMatchingGame
             RestartGame();
         }
 
+        private void viewHelpToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            var helpForm = new HelpForm();
+            helpForm.ShowDialog(this);
+        }
+
         private void RestartGame()
         {
             // We might be showing a different set of cards now.

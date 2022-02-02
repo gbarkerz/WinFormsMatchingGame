@@ -376,6 +376,15 @@ namespace WinFormsMatchingGame.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Matched.
+        /// </summary>
+        internal static string Matched {
+            get {
+                return ResourceManager.GetString("Matched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please provide 8 named pictures in the Your Picture Details table..
         /// </summary>
         internal static string PictureNamesWarning {
