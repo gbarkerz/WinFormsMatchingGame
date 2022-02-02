@@ -161,7 +161,7 @@ namespace WinFormsMatchingGame
             this.MinimumSize = new System.Drawing.Size(640, 640);
             this.Name = "FormMatchingGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Card Matching Game V1.3";
+            this.Text = "Card Matching Game V1.4";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

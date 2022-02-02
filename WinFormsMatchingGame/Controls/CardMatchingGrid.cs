@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Media;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Windows.Forms.Automation;
@@ -16,11 +18,29 @@ namespace WinFormsMatchingGame.Controls
 
         public List<Card> CardList { get; set; }
 
+        private SoundPlayer soundPlayer = null;
+
+        // Pick two sounds that seems unlikely to be occurring in the background during the typical
+        // playing of the game. Assume that there are no copyright issues with playing a .wav file
+        // in \Windows\Media, given that the following page shows sample code doing just that. 
+        // https://docs.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-play-a-sound-from-a-windows-form?view=netframeworkdesktop-4.8
+        private string soundPathMatch = @"C:\Windows\Media\Windows Unlock.wav";
+        private string soundPathNotMatch = @"C:\Windows\Media\Windows Default.wav";
+
         public CardMatchingGrid()
         {
             CellClick += DataGridView_CellClick;
             SizeChanged += Grid_SizeChanged;
             CellPainting += CardMatchingGrid_CellPainting;
+
+            try
+            {
+                soundPlayer = new SoundPlayer();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("CardMatchingGrid: Failed to load SoundPlayer, " + ex.Message);
+            }
         }
 
         public void Shuffle()
@@ -148,6 +168,11 @@ namespace WinFormsMatchingGame.Controls
                     firstCardInMatchAttempt = null;
                     secondCardInMatchAttempt = null;
 
+                    if (Settings.Default.PlaySoundOnMatch)
+                    {
+                        PlayCardMatchSound(true);
+                    }
+
                     // Has the game been won?
                     if (GameIsWon())
                     {
@@ -167,6 +192,22 @@ namespace WinFormsMatchingGame.Controls
                         }
                     }
                 }
+                else
+                {
+                    if (Settings.Default.PlaySoundOnNotMatch)
+                    {
+                        PlayCardMatchSound(false);
+                    }
+                }
+            }
+        }
+
+        private void PlayCardMatchSound(bool cardsMatch)
+        {
+            if (soundPlayer != null)
+            {
+                soundPlayer.SoundLocation = (cardsMatch ? soundPathMatch : soundPathNotMatch);
+                soundPlayer.Play();
             }
         }
 

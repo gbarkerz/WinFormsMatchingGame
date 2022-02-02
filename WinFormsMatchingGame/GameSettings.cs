@@ -63,6 +63,9 @@ namespace WinFormsMatchingGame
             }
 
             checkBoxAutoExportDetailsOnSave.Checked = Settings.Default.AutoExportDetailsOnSave;
+
+            checkBoxPlaySoundOnMatch.Checked = Settings.Default.PlaySoundOnMatch;
+            checkBoxPlaySoundOnNotMatch.Checked = Settings.Default.PlaySoundOnNotMatch;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -111,29 +114,44 @@ namespace WinFormsMatchingGame
             {
                 for (int i = 0; i < cardPairCount; i++)
                 {
-                    string settingName = "Card" + (i + 1) + "Path";
-                    settingsAreChanged = (Settings.Default[settingName] !=
-                                            dataGridViewPictureData.Rows[i].Cells[0].Value);
-                    if (!settingsAreChanged)
+                    if (dataGridViewPictureData.Rows.Count > i)
                     {
-                        settingName = "Card" + (i + 1) + "Name";
+                        string settingName = "Card" + (i + 1) + "Path";
                         settingsAreChanged = (Settings.Default[settingName] !=
-                                                dataGridViewPictureData.Rows[i].Cells[2].Value);
-                    }
+                                                dataGridViewPictureData.Rows[i].Cells[0].Value);
+                        if (!settingsAreChanged)
+                        {
+                            settingName = "Card" + (i + 1) + "Name";
+                            settingsAreChanged = (Settings.Default[settingName] !=
+                                                    dataGridViewPictureData.Rows[i].Cells[2].Value);
+                        }
 
-                    if (!settingsAreChanged)
-                    {
-                        var description = GetPictureDescription(i);
+                        if (!settingsAreChanged)
+                        {
+                            var description = GetPictureDescription(i);
 
-                        settingName = "Card" + (i + 1) + "Description";
-                        settingsAreChanged = (Settings.Default[settingName].ToString() != description);
-                    }
+                            settingName = "Card" + (i + 1) + "Description";
+                            settingsAreChanged = (Settings.Default[settingName].ToString() != description);
+                        }
 
-                    if (settingsAreChanged)
-                    {
-                        break;
+                        if (settingsAreChanged)
+                        {
+                            break;
+                        }
                     }
                 }
+            }
+
+            if (!settingsAreChanged)
+            {
+                settingsAreChanged = (Settings.Default.PlaySoundOnMatch !=
+                                        checkBoxPlaySoundOnMatch.Checked);
+            }
+
+            if (!settingsAreChanged)
+            {
+                settingsAreChanged = (Settings.Default.PlaySoundOnNotMatch !=
+                                        checkBoxPlaySoundOnNotMatch.Checked);
             }
 
             return settingsAreChanged;
@@ -220,18 +238,24 @@ namespace WinFormsMatchingGame
 
             for (int i = 0; i < cardPairCount; i++)
             {
-                string settingName = "Card" + (i + 1) + "Path";
-                Settings.Default[settingName] = dataGridViewPictureData.Rows[i].Cells[0].Value;
+                if (dataGridViewPictureData.Rows.Count > i)
+                {
+                    string settingName = "Card" + (i + 1) + "Path";
+                    Settings.Default[settingName] = dataGridViewPictureData.Rows[i].Cells[0].Value;
 
-                settingName = "Card" + (i + 1) + "Name";
-                Settings.Default[settingName] = dataGridViewPictureData.Rows[i].Cells[2].Value;
+                    settingName = "Card" + (i + 1) + "Name";
+                    Settings.Default[settingName] = dataGridViewPictureData.Rows[i].Cells[2].Value;
 
-                settingName = "Card" + (i + 1) + "Description";
-                var description = GetPictureDescription(i);
-                Settings.Default[settingName] = description;
+                    settingName = "Card" + (i + 1) + "Description";
+                    var description = GetPictureDescription(i);
+                    Settings.Default[settingName] = description;
+                }
             }
 
             Settings.Default.AutoExportDetailsOnSave = checkBoxAutoExportDetailsOnSave.Checked;
+
+            Settings.Default.PlaySoundOnMatch = checkBoxPlaySoundOnMatch.Checked;
+            Settings.Default.PlaySoundOnNotMatch = checkBoxPlaySoundOnNotMatch.Checked;
 
             Settings.Default.Save();
 

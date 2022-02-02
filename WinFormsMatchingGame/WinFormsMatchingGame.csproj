@@ -5,10 +5,12 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <Authors>Guy Barker</Authors>
-    <AssemblyName>NorthernEnglandMatchingGame</AssemblyName>
-    <Product>Northern England Matching Game</Product>
+    <AssemblyName>AccessibleMatchingGame</AssemblyName>
+    <Product>Accessible Matching Game</Product>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>AppIcon.ico</ApplicationIcon>
+    <Version>1.4.0</Version>
+    <PackageId>AccessibleMatchingGame</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

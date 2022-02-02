@@ -346,5 +346,29 @@ namespace WinFormsMatchingGame {
                 this["AutoExportDetailsOnSave"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PlaySoundOnMatch {
+            get {
+                return ((bool)(this["PlaySoundOnMatch"]));
+            }
+            set {
+                this["PlaySoundOnMatch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PlaySoundOnNotMatch {
+            get {
+                return ((bool)(this["PlaySoundOnNotMatch"]));
+            }
+            set {
+                this["PlaySoundOnNotMatch"] = value;
+            }
+        }
     }
 }
