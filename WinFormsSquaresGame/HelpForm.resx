@@ -64,18 +64,22 @@ Press Space to move a square into the adjacent empty square.
 
 Press F1 to show this Help window. 
 
-Press F2 to show the Settings window, where you can specify whether the 
-squares show numbers, and specify the size of those numbers. You can 
-also specify whether a picture should be shown on the squares. 
+Press F2 to show the Settings window, where you can specify whether the squares show numbers, and specify 
+the size of those numbers. You can also specify whether a picture should be shown on the squares. 
 
-The Settings window also provides an option to have a press of the Enter 
-key move a square into the adjacent empty square. 
+The Settings window also provides an option to have a press of the Enter key move a square into the adjacent 
+empty square. 
 
 Press F5 to restart a game. </value>
   </data>
   <data name="labelScreenReaderNotes.Text" xml:space="preserve">
-    <value>When a screen reader moves to a square in the grid, it announces that the 
-square is a button. For example, when moving to square number 13, it will
-announce: "13 button", along with row and column related details.</value>
+    <value>When a screen reader moves to a square in the grid, it announces that the square is a button. For example, when 
+moving to square number 13, it will announce: "13 button", along with row and column related details.</value>
+  </data>
+  <data name="labelGoal.Text" xml:space="preserve">
+    <value>When the game is run, a 4x4 grid of squares appears, with 15 of those squares occupied with an movable element, 
+and 1 square being empty. When a square is clicked, if it is adjacent to the empty square, the clicked square moves 
+into the empty square. The space where the clicked square was then becomes the empty square. The aim is to arrange 
+all the squares in a sorted order, leaving the empty square in the bottom right corner of the grid.</value>
   </data>
 </root>

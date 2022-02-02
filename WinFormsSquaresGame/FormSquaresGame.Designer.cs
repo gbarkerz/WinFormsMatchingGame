@@ -44,6 +44,17 @@ namespace WinFormsSquaresGame
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
+            // panelSquaresGrid
+            // 
+            this.panelSquaresGrid.AccessibleName = "Squares grid container";
+            this.panelSquaresGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelSquaresGrid.Location = new System.Drawing.Point(8, 42);
+            this.panelSquaresGrid.Name = "panelSquaresGrid";
+            this.panelSquaresGrid.Size = new System.Drawing.Size(651, 476);
+            this.panelSquaresGrid.TabIndex = 1;
+            // 
             // menuStrip1
             // 
             this.menuStrip1.AccessibleName = "Main";
@@ -58,17 +69,6 @@ namespace WinFormsSquaresGame
             this.menuStrip1.Size = new System.Drawing.Size(668, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // panelSquaresGrid
-            // 
-            this.panelSquaresGrid.AccessibleName = "Squares grid container";
-            this.panelSquaresGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelSquaresGrid.Location = new System.Drawing.Point(13, 42);
-            this.panelSquaresGrid.Name = "panelSquaresGrid";
-            this.panelSquaresGrid.Size = new System.Drawing.Size(643, 476);
-            this.panelSquaresGrid.TabIndex = 1;
             // 
             // fileToolStripMenuItem
             // 
@@ -97,7 +97,7 @@ namespace WinFormsSquaresGame
             // 
             this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
             this.restartToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.restartToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.restartToolStripMenuItem.Size = new System.Drawing.Size(199, 34);
             this.restartToolStripMenuItem.Text = "&Restart";
             this.restartToolStripMenuItem.Click += new System.EventHandler(this.restartToolStripMenuItem_Click);
             // 
@@ -113,7 +113,7 @@ namespace WinFormsSquaresGame
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(209, 34);
             this.settingsToolStripMenuItem.Text = "&Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
@@ -138,18 +138,18 @@ namespace WinFormsSquaresGame
             // 
             this.labelKeyboardInstructions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelKeyboardInstructions.AutoSize = true;
-            this.labelKeyboardInstructions.Location = new System.Drawing.Point(13, 522);
+            this.labelKeyboardInstructions.Location = new System.Drawing.Point(7, 522);
             this.labelKeyboardInstructions.Name = "labelKeyboardInstructions";
-            this.labelKeyboardInstructions.Size = new System.Drawing.Size(518, 75);
+            this.labelKeyboardInstructions.Size = new System.Drawing.Size(493, 75);
             this.labelKeyboardInstructions.TabIndex = 2;
             this.labelKeyboardInstructions.Text = "Keyboard instructions: Press the arrow keys to move around \r\nthe grid. Press Spac" +
-    "e to move a square into the adjacent empty \r\nsquare. Press F1 to learn about key" +
-    "board shortcuts.";
+    "e to move a square into the adjacent \r\nempty square. Press F1 to learn more abou" +
+    "t the game.";
             // 
             // buttonClose
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClose.Location = new System.Drawing.Point(543, 587);
+            this.buttonClose.Location = new System.Drawing.Point(549, 592);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(112, 34);
             this.buttonClose.TabIndex = 3;
