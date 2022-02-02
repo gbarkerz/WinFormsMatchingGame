@@ -92,7 +92,7 @@ namespace WinFormsMatchingGame
             // labelGoal
             // 
             this.labelGoal.AutoSize = true;
-            this.labelGoal.Location = new System.Drawing.Point(13, 13);
+            this.labelGoal.Location = new System.Drawing.Point(13, 10);
             this.labelGoal.Name = "labelGoal";
             this.labelGoal.Size = new System.Drawing.Size(959, 125);
             this.labelGoal.TabIndex = 3;
@@ -102,6 +102,7 @@ namespace WinFormsMatchingGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonClose;
             this.ClientSize = new System.Drawing.Size(978, 684);
             this.Controls.Add(this.labelGoal);
             this.Controls.Add(this.groupBoxScreenReader);

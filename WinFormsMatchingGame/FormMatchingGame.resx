@@ -60,4 +60,9 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="labelKeyboardUseInstructions.Text" xml:space="preserve">
+    <value>Keyboard instructions: Press the arrow keys to move around the card grid.  
+Press Space to turn up the selected card. Press Enter to turn all unmatched 
+cards back over. Press F1 to learn more about the game.</value>
+  </data>
 </root>

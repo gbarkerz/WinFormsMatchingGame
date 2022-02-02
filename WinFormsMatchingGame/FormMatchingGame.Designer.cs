@@ -29,6 +29,7 @@ namespace WinFormsMatchingGame
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMatchingGame));
             this.panelCardGrid = new System.Windows.Forms.Panel();
             this.buttonTryAgain = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -38,10 +39,10 @@ namespace WinFormsMatchingGame
             this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonTurnCardUp = new System.Windows.Forms.Button();
-            this.labelKeyboardUseInstructions = new System.Windows.Forms.Label();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonTurnCardUp = new System.Windows.Forms.Button();
+            this.labelKeyboardUseInstructions = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,7 +109,7 @@ namespace WinFormsMatchingGame
             this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
             this.restartToolStripMenuItem.ShortcutKeyDisplayString = "F5";
             this.restartToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.restartToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.restartToolStripMenuItem.Size = new System.Drawing.Size(199, 34);
             this.restartToolStripMenuItem.Text = "&Restart";
             this.restartToolStripMenuItem.Click += new System.EventHandler(this.restartToolStripMenuItem_Click);
             // 
@@ -124,9 +125,26 @@ namespace WinFormsMatchingGame
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(209, 34);
             this.settingsToolStripMenuItem.Text = "&Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewHelpToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
+            this.helpToolStripMenuItem.Text = "&Help";
+            // 
+            // viewHelpToolStripMenuItem
+            // 
+            this.viewHelpToolStripMenuItem.Name = "viewHelpToolStripMenuItem";
+            this.viewHelpToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(224, 34);
+            this.viewHelpToolStripMenuItem.Text = "&View Help";
+            this.viewHelpToolStripMenuItem.Click += new System.EventHandler(this.viewHelpToolStripMenuItem_Click);
             // 
             // buttonTurnCardUp
             // 
@@ -143,30 +161,11 @@ namespace WinFormsMatchingGame
             // 
             this.labelKeyboardUseInstructions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelKeyboardUseInstructions.AutoSize = true;
-            this.labelKeyboardUseInstructions.Location = new System.Drawing.Point(12, 594);
+            this.labelKeyboardUseInstructions.Location = new System.Drawing.Point(12, 587);
             this.labelKeyboardUseInstructions.Name = "labelKeyboardUseInstructions";
-            this.labelKeyboardUseInstructions.Size = new System.Drawing.Size(579, 75);
+            this.labelKeyboardUseInstructions.Size = new System.Drawing.Size(608, 75);
             this.labelKeyboardUseInstructions.TabIndex = 1;
-            this.labelKeyboardUseInstructions.Text = "Keyboard instructions: \r\nPress the arrow keys to move around the card grid.  Pres" +
-    "s Space to turn\r\nup the selected card. Press Enter to turn all unmatched cards b" +
-    "ack over.";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewHelpToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
-            this.helpToolStripMenuItem.Text = "&Help";
-            // 
-            // viewHelpToolStripMenuItem
-            // 
-            this.viewHelpToolStripMenuItem.Name = "viewHelpToolStripMenuItem";
-            this.viewHelpToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.viewHelpToolStripMenuItem.Text = "&View Help";
-            this.viewHelpToolStripMenuItem.Click += new System.EventHandler(this.viewHelpToolStripMenuItem_Click);
+            this.labelKeyboardUseInstructions.Text = resources.GetString("labelKeyboardUseInstructions.Text");
             // 
             // FormMatchingGame
             // 
