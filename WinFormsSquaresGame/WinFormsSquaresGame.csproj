@@ -6,6 +6,8 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>AppIcon.ico</ApplicationIcon>
+    <Version>1.2.0</Version>
+    <PackageTags></PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
